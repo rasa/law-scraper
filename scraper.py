@@ -1,10 +1,14 @@
-""" @TODO """
+"""
+Copyright (c) 2022, Ross Smith II
+SPDX-License-Identifier: MIT
+"""
 
 import glob
 import json
 import logging
 import os
 import re
+import shutil
 import sys
 import time
 from PyPDF2 import PdfFileMerger, PdfFileReader
@@ -23,7 +27,7 @@ SECTION_NAMES = ["DIVISION", "PART", "TITLE", "CHAPTER", "ARTICLE"]
 
 # pylint: disable=R0902
 class LawScraper:
-    """@TODO"""
+    """doc me"""
 
     def __init__(self):
         """class initializer"""
@@ -67,7 +71,7 @@ class LawScraper:
         webdriver.remote.remote_connection.LOGGER.setLevel(logging.CRITICAL)
 
     def append_pdf(self, url, title):
-        """@TODO"""
+        """doc me"""
         prefix = self.get_prefix(title)
         logging.debug("prefix=%s title=%s", prefix, title)
 
@@ -108,12 +112,12 @@ class LawScraper:
 
     @staticmethod
     def get_num_pages(pdf):
-        """@TODO"""
+        """doc me"""
         reader = PdfFileReader(open(pdf, "rb"), strict=False)
         return reader.getNumPages()
 
     def get_pdf(self, url, title):
-        """@TODO"""
+        """doc me"""
         logging.debug("Retrieving %s", url)
         self.driver.get(url)
 
@@ -126,12 +130,12 @@ class LawScraper:
 
     @staticmethod
     def get_prefix(title):
-        """@TODO"""
+        """doc me"""
         parts = re.split(r"\s+", title)
         return parts[0]
 
     def get_section_numbers(self, url):
-        """@TODO"""
+        """doc me"""
         rv = {}
         for section in SECTION_NAMES:
             num = self.parse_url_for_id(r"%s=([\d.]+)" % section.lower(), url)
@@ -142,7 +146,7 @@ class LawScraper:
         return rv
 
     def get_section_titles(self, url):
-        """@TODO"""
+        """doc me"""
         if url:
             logging.debug("Retrieving %s", url)
             self.driver.get(url)
@@ -161,7 +165,7 @@ class LawScraper:
 
     @staticmethod
     def normalize(path):
-        """@TODO"""
+        """doc me"""
         path = path.replace(" - ", "-")
         path = re.sub(r"\. ", " ", path)
         # Invalid characters on windows
@@ -172,7 +176,7 @@ class LawScraper:
 
     @staticmethod
     def parse_url_for_id(regex, url):
-        """@TODO"""
+        """doc me"""
         m = re.search(regex, url)
         if m is None:
             return ""
@@ -180,7 +184,7 @@ class LawScraper:
 
     # pylint: disable=R0915
     def save_pdf(self, prefix):
-        """@TODO"""
+        """doc me"""
 
         n = 0
         name = prefix
@@ -203,21 +207,22 @@ class LawScraper:
                     logging.debug("Saving %s", html)
                     with open(html, "w") as fh:
                         fh.write(inner_html)
-                    cmd = (
-                        'tidy -config config.tidy --write-back yes "%s"' % html
-                    )  # noqa
-                    os.system(cmd)
-                    with open(html, "r+") as fh:
-                        html_data = fh.read()
-                        html_data = re.sub(
-                            r"h6.c7 {float: left",
-                            "h6.c7 {display: inline; font-size: 100%",
-                            html_data,
-                        )
-                        html_data = re.sub(r" href=\"[^\"]*\"", "", html_data)
-                        fh.seek(0)
-                        fh.write(html_data)
-                        fh.truncate()
+                    if shutil.which("tidy"):
+                        cmd = (
+                            'tidy -config config.tidy --write-back yes "%s"' % html
+                        )  # noqa
+                        os.system(cmd)
+                        with open(html, "r+") as fh:
+                            html_data = fh.read()
+                            html_data = re.sub(
+                                r"h6.c7 {float: left",
+                                "h6.c7 {display: inline; font-size: 100%",
+                                html_data,
+                            )
+                            html_data = re.sub(r" href=\"[^\"]*\"", "", html_data)
+                            fh.seek(0)
+                            fh.write(html_data)
+                            fh.truncate()
         except Exception as exc:
             logging.warning("Cannot save %s: %s", html, str(exc))
 
@@ -259,7 +264,7 @@ class LawScraper:
         return pdf
 
     def set_output_name(self, url, title, ext=".pdf"):
-        """@TODO"""
+        """doc me"""
         numbers = self.get_section_numbers(url)
         self.output_pdf = "pdf/%s_division-%s_%s%s" % (
             self.toc_code.lower(),
@@ -271,12 +276,12 @@ class LawScraper:
 
     @staticmethod
     def usage():
-        """@TODO"""
+        """doc me"""
         print("Usage: %s division part" % sys.argv[0], file=sys.stderr)
         sys.exit(1)
 
     def xpath(self, xpath):
-        """@TODO"""
+        """doc me"""
         try:
             elem = self.driver.find_element_by_xpath(xpath)
             return elem.text
@@ -284,7 +289,7 @@ class LawScraper:
             return ""
 
     def main(self):
-        """@TODO"""
+        """doc me"""
         if not self.division or not self.part:
             self.usage()
         if not os.path.isdir("html"):
@@ -318,7 +323,7 @@ class LawScraper:
         return 1
 
     def get_urls(self, skip_first):
-        """@TODO"""
+        """doc me"""
         urls = []
 
         expandedbranchcodesid_xpath = (
@@ -350,7 +355,7 @@ class LawScraper:
         return urls
 
     def get_pdfs(self, urls):
-        """@TODO"""
+        """doc me"""
         merge = True
         for hsh in urls:
             url = hsh["url"]
@@ -376,7 +381,7 @@ class LawScraper:
             except Exception as exc:
                 logging.warning("Cannot remove %s: %s", pdf, str(exc))
 
-        return True
+        return merge
 
 
 def main():
