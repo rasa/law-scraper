@@ -55,7 +55,7 @@ class LawScraper:
         }
 
         prefs = {
-            "download.default_directory": self.download_dir,
+            "download.default_directory": self.downloads_dir,
             "profile.default_content_settings.popups": 0,
             "printing.print_preview_sticky_settings.appState": json.dumps(
                 appState
