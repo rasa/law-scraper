@@ -90,7 +90,7 @@ class LawScraper:
 
         if os.path.exists(self.output_pdf):
             logging.info("File already exists: %s", self.output_pdf)
-            return False
+            return True
 
         pdf = self.get_pdf(url, title)
         self.pdfs.append(pdf)
