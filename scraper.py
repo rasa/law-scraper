@@ -11,6 +11,7 @@ import re
 import shutil
 import sys
 import time
+import pdfkit
 from PyPDF2 import PdfFileMerger, PdfFileReader
 from selenium import webdriver
 
@@ -255,8 +256,13 @@ class LawScraper:
             new = ""
 
         if old == new:
-            logging.warning("No new pdf found in %s", self.downloads_dir)
-            return ""
+            if not os.path.isfile(html):
+                logging.warning("No new pdf found in %s", self.downloads_dir)
+                return False
+            pdfkit.from_file(html, pdf)
+            if not os.path.isfile(pdf):
+                logging.warning("Failed to conver %s to %s", html, pdf)
+                return False
 
         # if os.path.isfile(pdf):
         #     logging.debug("Deleting %s", pdf)
@@ -265,8 +271,9 @@ class LawScraper:
         #     except Exception:
         #         pass
 
-        logging.debug("Moving %s to %s", new, pdf)
-        os.rename(new, pdf)
+        if new and os.path.isfile(new):
+          logging.debug("Moving %s to %s", new, pdf)
+          os.rename(new, pdf)
 
         return pdf
 
