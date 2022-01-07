@@ -67,7 +67,7 @@ class LawScraper:
         options.add_argument('--headless')
         self.driver = webdriver.Chrome(options=options)
 
-        logging.root.setLevel(logging.INFO)
+        logging.root.setLevel(logging.DEBUG)
         requests_log = logging.getLogger("urllib3")
         requests_log.setLevel(logging.ERROR)
 
@@ -198,8 +198,8 @@ class LawScraper:
             n += 1
             name = "%s_%d" % (prefix, n)
 
+        html = "html/*.html" % prefix
         try:
-            html = "html/*.html" % prefix
             xpath = '//*[@id="manylawsections"]'
             elem = self.driver.find_element_by_xpath(xpath)
             if not elem:
