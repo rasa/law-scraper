@@ -55,6 +55,8 @@ class LawScraper:
         }
 
         profile = {
+            "download.default_directory": self.download_dir,
+            "profile.default_content_settings.popups": 0,
             "printing.print_preview_sticky_settings.appState": json.dumps(
                 appState
             )  # noqa
@@ -68,6 +70,7 @@ class LawScraper:
         # see https://stackoverflow.com/a/47887610/1432614
         options.add_argument('--no-sandbox')
         options.add_argument('--headless')
+        String downloadFilepath = "/path/to/download";
         self.driver = webdriver.Chrome(options=options)
 
         logging.root.setLevel(logging.DEBUG)
