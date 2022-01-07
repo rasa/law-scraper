@@ -34,6 +34,8 @@ class LawScraper:
         # pylint: disable=W0235
         super().__init__()
         self.downloads_dir = os.path.expanduser("~/Downloads")
+        if not os.path.isdir(self.downloads_dir):
+            os.mkdir(self.downloads_dir)
         self.merger = PdfFileMerger()
         self.next_page = 0
         self.output_pdf = ""
@@ -100,13 +102,15 @@ class LawScraper:
             return True
 
         pdf = self.get_pdf(url, title)
+        if not pdf:
+            return False
         self.pdfs.append(pdf)
         try:
             logging.debug("Merging %s", pdf)
             self.merger.append(pdf)
         except Exception as exc:
             logging.error("Merging %s failed: %s", pdf, str(exc))
-            sys.exit(1)
+            return False
 
         bm = self.merger.addBookmark(title, self.next_page, parent)
         self.parents[prefix] = bm
@@ -252,7 +256,7 @@ class LawScraper:
 
         if old == new:
             logging.warning("No new pdf found in %s", self.downloads_dir)
-            return False
+            return ""
 
         # if os.path.isfile(pdf):
         #     logging.debug("Deleting %s", pdf)
@@ -366,7 +370,6 @@ class LawScraper:
             logging.debug("title=%-50s url=%s", title, url)
             if not self.append_pdf(url, title):
                 merge = False
-                break
 
         if merge:
             # if os.path.exists(self.output_pdf):
