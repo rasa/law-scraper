@@ -75,6 +75,7 @@ jobs:
           path: |
             html
             pdf
+            !**/.gitignore
           
       - name: run git commit -am "scrape update [ci skip]"
         if: false
