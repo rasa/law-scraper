@@ -198,7 +198,7 @@ class LawScraper:
             n += 1
             name = "%s_%d" % (prefix, n)
 
-        html = "html/*.html" % prefix
+        html = "html/%s.html" % prefix
         try:
             xpath = '//*[@id="manylawsections"]'
             elem = self.driver.find_element_by_xpath(xpath)
