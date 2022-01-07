@@ -12,7 +12,7 @@ jobs:
   scraper:
     runs-on: ubuntu-latest
     steps:
-      - name: install tidy
+      - name: install dependencies
         run: |
             sudo apt -y update
             sudo apt -y install tidy wkhtmltopdf
@@ -66,7 +66,9 @@ jobs:
       - name: run python scraper.py 4 4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python scraper.py 4 4
+        run: |
+          python scraper.py 4 4
+          ./run.sh
 
       - name: Archive artifacts
         uses: actions/upload-artifact@v2
