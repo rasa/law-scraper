@@ -54,7 +54,7 @@ class LawScraper:
             "version": 2,
         }
 
-        profile = {
+        prefs = {
             "download.default_directory": self.download_dir,
             "profile.default_content_settings.popups": 0,
             "printing.print_preview_sticky_settings.appState": json.dumps(
@@ -63,14 +63,13 @@ class LawScraper:
         }
 
         options = webdriver.ChromeOptions()
-        options.add_experimental_option("prefs", profile)
+        options.add_experimental_option("prefs", prefs)
         options.add_argument("--kiosk-printing")
         options.add_argument("--log-level=3")
         # see https://github.com/rasa/law-scraper/runs/4740875776?check_suite_focus=true#step:8:8
         # see https://stackoverflow.com/a/47887610/1432614
         options.add_argument('--no-sandbox')
         options.add_argument('--headless')
-        String downloadFilepath = "/path/to/download";
         self.driver = webdriver.Chrome(options=options)
 
         logging.root.setLevel(logging.DEBUG)
