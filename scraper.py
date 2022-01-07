@@ -240,7 +240,7 @@ class LawScraper:
             logging.info("File already exists: %s", pdf)
             return pdf
 
-        logging.debug("Saving %s", pdf)
+        logging.debug("Generating %s (using Chrome)", pdf)
 
         mask = os.path.join(self.downloads_dir, "*.pdf")
         old = sorted(glob.iglob(mask), key=os.path.getmtime, reverse=True)
@@ -261,6 +261,7 @@ class LawScraper:
             if not os.path.isfile(html):
                 logging.warning("No new pdf found in %s", self.downloads_dir)
                 return False
+            logging.debug("Generating %s (using Pdfkit)", pdf)
             pdfkit.from_file(html, pdf)
             if not os.path.isfile(pdf):
                 logging.warning("Failed to conver %s to %s", html, pdf)
