@@ -15,7 +15,7 @@ jobs:
       - name: install tidy
         run: |
             sudo apt -y update
-            sudo apt -y install tidy
+            sudo apt -y install tidy wkhtmltopdf
 
       # https://github.com/marketplace/actions/setup-chromedriver#for-ubuntu-latest-macos-latest
       - name: setup chromedriver
