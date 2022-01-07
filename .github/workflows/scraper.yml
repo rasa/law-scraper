@@ -68,6 +68,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scraper.py 4 4
 
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: html and pdf
+          path: |
+            html
+            pdf
+          
       - name: run git commit -am "scrape update [ci skip]"
         run: |
           git config --local user.email "action@github.com"
