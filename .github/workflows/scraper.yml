@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: apt install tidy
-      - run: apt install -y tidy
+        run: apt install -y tidy
 
       - name: run actions/checkout@v2
         uses: actions/checkout@v2
