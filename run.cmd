@@ -1,3 +1,5 @@
+@echo off
+
 @rem DIVISION 1. PERSONS [38 - 86]
 for %%i in (1 2 2.5 2.52 2.53 2.55 2.57 2.6 2.7 2.9) do py scraper.py 1 %%i
 
