@@ -1,4 +1,4 @@
-    
+
 # From https://github.com/ad-m/github-push-action#example-workflow-file
 name: black
 
@@ -27,15 +27,15 @@ jobs:
 
     - name: run black
       run: |
-        black --check *.py && exit 1
-        black *.py 
+        black --check ./*.py && exit 1
+        black ./*.py
     - name: run git commit -m "black" -a
       # was:
       # git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
       # git config --local user.name "github-actions[bot]"
       run: |
         git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action" 
+        git config --local user.name "GitHub Action"
         git commit -m "black" -a
     - name: run ad-m/github-push-action@master
       uses: ad-m/github-push-action@master

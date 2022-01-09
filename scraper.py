@@ -11,7 +11,7 @@ import re
 import shutil
 import sys
 import time
-from subprocess import Popen, PIPE
+from subprocess import PIPE, Popen
 
 import pdfkit
 from PyPDF2 import PdfFileMerger, PdfFileReader
@@ -72,9 +72,7 @@ class LawScraper:
         """doc me"""
 
         appState = {
-            "recentDestinations": [
-                {"id": "Save as PDF", "origin": "local", "account": ""}
-            ],
+            "recentDestinations": [{"id": "Save as PDF", "origin": "local", "account": ""}],
             "selectedDestinationId": "Save as PDF",
             "version": 2,
         }
@@ -82,9 +80,7 @@ class LawScraper:
         prefs = {
             "download.default_directory": self.downloads_dir,
             "profile.default_content_settings.popups": 0,
-            "printing.print_preview_sticky_settings.appState": json.dumps(
-                appState
-            ),  # noqa
+            "printing.print_preview_sticky_settings.appState": json.dumps(appState),  # noqa
         }
 
         options = webdriver.ChromeOptions()
@@ -305,9 +301,7 @@ class LawScraper:
                     os.rename(new, pdf)
                     return pdf
                 except Exception as exc:
-                    logging.error(
-                        "Cannot move %s to %s: %s", new, pdf, str(exc)
-                    )  # noqa
+                    logging.error("Cannot move %s to %s: %s", new, pdf, str(exc))  # noqa
 
         if not os.path.isfile(html):
             logging.warning("No new pdf found in %s", self.downloads_dir)
@@ -365,9 +359,7 @@ class LawScraper:
         tag = tag.decode("utf-8")
         tag = re.sub(r"\s+", "", tag)
 
-        with Popen(
-            ["git", "rev-parse", "HEAD"], stdout=PIPE, stderr=PIPE
-        ) as process:  # noqa
+        with Popen(["git", "rev-parse", "HEAD"], stdout=PIPE, stderr=PIPE) as process:  # noqa
             (head_sha, _) = process.communicate()
             exit_code = process.wait()
         if exit_code != 0 or not head_sha:
@@ -506,9 +498,7 @@ class LawScraper:
         if merge:
             # if os.path.exists(self.output_pdf):
             #     os.remove(self.output_pdf)
-            logging.info(
-                "Merging %d PDFs to %s", len(self.pdfs), self.output_pdf
-            )  # noqa
+            logging.info("Merging %d PDFs to %s", len(self.pdfs), self.output_pdf)  # noqa
             if len(self.pdfs) == 1:
                 shutil.copy(self.pdfs[0], self.output_pdf)
             else:
