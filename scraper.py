@@ -59,7 +59,7 @@ class LawScraper:
             "profile.default_content_settings.popups": 0,
             "printing.print_preview_sticky_settings.appState": json.dumps(
                 appState
-            )  # noqa
+            ),  # noqa
         }
 
         options = webdriver.ChromeOptions()
@@ -68,8 +68,8 @@ class LawScraper:
         options.add_argument("--log-level=3")
         # see https://github.com/rasa/law-scraper/runs/4740875776?check_suite_focus=true#step:8:8
         # see https://stackoverflow.com/a/47887610/1432614
-        options.add_argument('--no-sandbox')
-        options.add_argument('--headless')
+        options.add_argument("--no-sandbox")
+        options.add_argument("--headless")
         self.driver = webdriver.Chrome(options=options)
 
         logging.root.setLevel(logging.DEBUG)
@@ -275,8 +275,8 @@ class LawScraper:
         #         pass
 
         if new and os.path.isfile(new):
-          logging.debug("Moving %s to %s", new, pdf)
-          os.rename(new, pdf)
+            logging.debug("Moving %s to %s", new, pdf)
+            os.rename(new, pdf)
 
         return pdf
 
