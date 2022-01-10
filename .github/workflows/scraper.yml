@@ -8,6 +8,8 @@ on:
       - master
   pull_request:
     types: [opened, synchronize, reopened]
+  release:
+    types: [published, created, edited]
   # schedule:
   #  # run at 15:23 UTC every day (8:23am PDT/UTC-7)
   #  - cron: '23 15 * * *'
@@ -17,7 +19,18 @@ on:
         description: 'Log level (debug, info, warning, error, critical)'     
         required: false
         default: 'info'
-
+      code:
+        description: 'TOC Code'     
+        required: false
+        default: 'CIV'
+      division:
+        description: 'Division'     
+        required: false
+        default: '4'
+      part:
+        description: 'Part'     
+        required: false
+        default: '4'
 jobs:
   scraper:
     runs-on: ubuntu-latest
@@ -73,12 +86,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: run python scraper.py 4 4
+      - name: run python scraper.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          (set -o posix;set)
           python scraper.py 4 4
-          ./run.sh
+          # ./run.sh
 
       - name: Archive artifacts
         uses: actions/upload-artifact@v2
