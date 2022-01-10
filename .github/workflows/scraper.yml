@@ -17,11 +17,11 @@ on:
     inputs:
       logLevel:
         description: 'Log level (debug, info, warning, error, critical)'     
-        required: false
+        required: true
         default: 'info'
       code:
         description: 'TOC Code'     
-        required: false
+        required: true
         default: 'CIV'
       division:
         description: 'Division'     
