@@ -60,6 +60,7 @@ class LawScraper:
         self.part = 1
         self.pdfs = []
         self.toc_code = DEFAULT_TOC_CODE
+        self.url = ""
 
         logging.root.setLevel(logging.INFO)
         requests_log = logging.getLogger("urllib3")
@@ -139,6 +140,15 @@ class LawScraper:
         self.next_page += self.get_num_pages(pdf)
         return RV_OK
 
+    def get(self, url):
+        """doc me"""
+        if self.url == url:
+            return True
+        self.url = url
+        logging.debug("Retrieving %s", url)
+        self.driver.get(url)
+        return True
+
     @staticmethod
     def get_num_pages(pdf):
         """doc me"""
@@ -147,8 +157,7 @@ class LawScraper:
 
     def get_pdf(self, url, title):
         """doc me"""
-        logging.debug("Retrieving %s", url)
-        self.driver.get(url)
+        self.get(url)
 
         filename = self.normalize(title)
         numbers = self.get_section_numbers(url)
@@ -181,8 +190,7 @@ class LawScraper:
     def get_section_titles(self, url):
         """doc me"""
         if url:
-            logging.debug("Retrieving %s", url)
-            self.driver.get(url)
+            self.get(url)
 
         # See https://stackoverflow.com/a/16608016/1432614
         rv = {}
@@ -444,6 +452,7 @@ class LawScraper:
         if self.driver:
             self.driver.close()
             self.driver = None
+        self.url = ""
         if rv:
             return RV_OK
         return RV_ERROR
