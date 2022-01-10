@@ -27,8 +27,8 @@ jobs:
 
     - name: run black
       run: |
-        black --check ./*.py && exit 1
-        black ./*.py
+        black --config .github/linters/.python-black --check ./*.py && exit 1
+        black --config .github/linters/.python-black ./*.py
     - name: run git commit -m "black" -a
       # was:
       # git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
