@@ -16,9 +16,16 @@ on:
   workflow_dispatch:
     inputs:
       logLevel:
-        description: 'Log level (debug, info, warning, error, critical)'     
+        description: 'Log level'     
         required: true
         default: 'info'
+        type: choice
+        options:
+        - debug
+        - info
+        - warning
+        - error
+        - critical
       code:
         description: 'TOC Code'     
         required: true
