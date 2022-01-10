@@ -233,7 +233,7 @@ class LawScraper:
                 break
             except Exception:
                 logging.warning("No element for %s found for %s", xpath, prefix)  # noqa
-                html = "err/%s.html" % prefix
+                html = "%s/%s.html" % (ERR_DIR, prefix)
                 logging.debug("Saving %s", html)
                 with open(html, "w") as fh:
                     fh.write(self.driver.page_source)
