@@ -3,10 +3,20 @@
 name: scraper
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened]
   # schedule:
-  #  # run at 15:00 UTC every day (8am PDT/UTC-7)
-  #  - cron: '0 15 * * *'
+  #  # run at 15:23 UTC every day (8:23am PDT/UTC-7)
+  #  - cron: '23 15 * * *'
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level (debug, info, warning, error, critical)'     
+        required: false
+        default: 'info'
 
 jobs:
   scraper:
