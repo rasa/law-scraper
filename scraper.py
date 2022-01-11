@@ -53,7 +53,7 @@ class LawScraper:
         self.division = None
         self.downloads_dir = os.path.expanduser("~/Downloads")
         self.driver = None
-        self.log_level = logging.INFO 
+        self.log_level = logging.INFO
         self.merger = None
         self.next_page = 0
         self.output_pdf = ""
@@ -326,9 +326,9 @@ class LawScraper:
         if not level:
             return
         if isinstance(level, str):
-           level = level.upper()
+            level = level.upper()
         logging.root.setLevel(level)
-            
+
     def set_output_name(self, url, title):
         """doc me"""
         numbers = self.get_section_numbers(url)
@@ -538,7 +538,7 @@ def main():
     scraper = LawScraper()
     scraper.set_log_level(os.getenv("INPUT_LOG_LEVEL"))
     if os.getenv("INPUT_DIVISION") is not None:
-        scraper.division = os.getenv("INPUT_DIVISION")       
+        scraper.division = os.getenv("INPUT_DIVISION")
     if os.getenv("INPUT_PART") is not None:
         scraper.part = os.getenv("INPUT_PART")
     if os.getenv("INPUT_CODE") is not None:
