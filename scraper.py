@@ -50,24 +50,22 @@ class LawScraper:
         # pylint: disable=W0235
         super().__init__()
         self.ci = os.getenv("CI") is not None
-        self.division = 1
+        self.division = None
         self.downloads_dir = os.path.expanduser("~/Downloads")
         self.driver = None
+        self.log_level = logging.INFO 
         self.merger = None
         self.next_page = 0
         self.output_pdf = ""
         self.parents = {}
-        self.part = 1
+        self.part = None
         self.pdfs = []
         self.toc_code = DEFAULT_TOC_CODE
         self.url = ""
 
-        logging.root.setLevel(logging.INFO)
+        logging.root.setLevel(self.log_level)
         requests_log = logging.getLogger("urllib3")
         requests_log.setLevel(logging.ERROR)
-
-        if not os.path.isdir(self.downloads_dir):
-            os.mkdir(self.downloads_dir)
 
     def init_driver(self):
         """doc me"""
@@ -323,6 +321,14 @@ class LawScraper:
 
         return pdf
 
+    def set_log_level(log_level):
+        """doc me"""
+        if not log_level:
+            return
+        if isinstance(level, str)
+           log_level = log_level.upper()
+        logging.root.setLevel(log_level)
+            
     def set_output_name(self, url, title):
         """doc me"""
         numbers = self.get_section_numbers(url)
@@ -346,7 +352,7 @@ class LawScraper:
         with Popen(
             ["git", "rev-list", "--tags", "--max-count=1"],
             stdout=PIPE,
-            stderr=PIPE,  # noqa
+            stderr=PIPE,
         ) as process:
             (tag_sha, _) = process.communicate()
             exit_code = process.wait()
@@ -428,6 +434,8 @@ class LawScraper:
             os.mkdir(HTML_DIR)
         if not os.path.isdir(PDF_DIR):
             os.mkdir(PDF_DIR)
+        if not os.path.isdir(self.downloads_dir):
+            os.mkdir(self.downloads_dir)
 
         division = self.division
         part = self.part
@@ -528,10 +536,17 @@ class LawScraper:
 def main():
     """doc me"""
     scraper = LawScraper()
-    if len(sys.argv) < 3:
-        scraper.usage()
-    scraper.division = sys.argv[1]
-    scraper.part = sys.argv[2]
+    scraper.set_log_level(os.getenv("INPUT_LOG_LEVEL"))
+    if os.getenv("INPUT_DIVISION") is not None:
+        scraper.division = os.getenv("INPUT_DIVISION")       
+    if os.getenv("INPUT_PART") is not None:
+        scraper.part = os.getenv("INPUT_PART")
+    if os.getenv("INPUT_CODE") is not None:
+        scraper.toc_code = os.getenv("INPUT_CODE")
+    if len(sys.argv) > 1:
+        scraper.division = sys.argv[1]
+    if len(sys.argv) > 2:
+        scraper.part = sys.argv[2]
     if len(sys.argv) > 3:
         scraper.toc_code = sys.argv[3]
     return scraper.main()
