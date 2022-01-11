@@ -321,6 +321,7 @@ class LawScraper:
 
         return pdf
 
+    @staticmethod
     def set_log_level(level):
         """doc me"""
         if not level:
