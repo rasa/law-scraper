@@ -98,8 +98,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           (set -o posix;set)
-          python scraper.py 4 4
-          # ./run.sh
+          python scraper.py ${{ github.event.inputs.division }} ${{ github.event.inputs.part }} ${{ github.event.inputs.code }}
+          # ./run.sh ${{ github.event.inputs.division }} ${{ github.event.inputs.part }} ${{ github.event.inputs.code }}
 
       - name: Archive artifacts
         uses: actions/upload-artifact@v2
