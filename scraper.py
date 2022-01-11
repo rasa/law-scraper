@@ -11,6 +11,7 @@ import re
 import shutil
 import sys
 import time
+from enum import Enum
 from subprocess import PIPE, Popen
 
 import pdfkit
@@ -32,15 +33,17 @@ MANYLAWSECTIONS_XPATH = '//*[@id="manylawsections"]'
 EXPANDEDBRANCHCODESID_XPATH = '//*[@id="expandedbranchcodesid"]'
 EXPANDEDBRANCHCODESIDA_XPATH = '//*[@id="expandedbranchcodesid"]/*/a[@href]'
 
-RV_OK = 0
-RV_OK_FILE_ALREADY_EXISTS = -1
-RV_ERROR = 1
-
 ERR_DIR = "err"
 HTML_DIR = "html"
 PDF_DIR = "pdf"
 
+class Retval(Enum):
+    """doc me"""
+    OK = 0
+    OK_FILE_ALREADY_EXISTS = -1
+    ERROR = 1
 
+    
 # pylint: disable=R0902
 class LawScraper:
     """doc me"""
@@ -119,11 +122,11 @@ class LawScraper:
 
         if os.path.exists(self.output_pdf):
             logging.info("File already exists: %s", self.output_pdf)
-            return RV_OK_FILE_ALREADY_EXISTS
+            return Retval.OK_FILE_ALREADY_EXISTS
 
         pdf = self.get_pdf(url, title)
         if not pdf:
-            return RV_ERROR
+            return Retval.ERROR
         self.pdfs.append(pdf)
         try:
             logging.debug("Merging %s", pdf)
@@ -131,12 +134,12 @@ class LawScraper:
             self.merger.append(pdf, import_bookmarks=False)
         except Exception as exc:
             logging.error("Merging %s failed: %s", pdf, str(exc))
-            return RV_ERROR
+            return Retval.ERROR
 
         bm = self.merger.addBookmark(title, self.next_page, parent)
         self.parents[prefix] = bm
         self.next_page += self.get_num_pages(pdf)
-        return RV_OK
+        return Retval.OK
 
     def get(self, url):
         """doc me"""
@@ -451,10 +454,10 @@ class LawScraper:
         skip_first = titles["PART"] != ""
         if skip_first:
             rv = self.append_pdf(url, titles["PART"])
-            if rv == RV_OK_FILE_ALREADY_EXISTS:  # file already exists
-                return RV_OK
-            if rv == RV_ERROR:  # failed to create/append pdf
-                return RV_ERROR
+            if rv == Retval.OK_FILE_ALREADY_EXISTS:
+                return Retval.OK
+            if rv == Retval.ERROR:  # failed to create/append pdf
+                return Retval.ERROR
 
         urls = self.get_urls(skip_first)
         rv = self.get_pdfs(urls)
@@ -463,8 +466,8 @@ class LawScraper:
             self.driver = None
         self.url = ""
         if rv:
-            return RV_OK
-        return RV_ERROR
+            return Retval.OK
+        return Retval.ERROR
 
     def get_urls(self, skip_first):
         """doc me"""
@@ -506,9 +509,9 @@ class LawScraper:
             title = hsh["title"]
             logging.debug("title=%-50s url=%s", title, url)
             rv = self.append_pdf(url, title)
-            if rv == RV_OK_FILE_ALREADY_EXISTS:  # file already exists
+            if rv == Retval.OK_FILE_ALREADY_EXISTS:  # file already exists
                 continue
-            if rv == RV_ERROR:  # failed to create/append pdf
+            if rv == Retval.ERROR:  # failed to create/append pdf
                 if merge:
                     logging.warning("Skipping merging as %s failed", url)
                 merge = False
