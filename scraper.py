@@ -321,13 +321,13 @@ class LawScraper:
 
         return pdf
 
-    def set_log_level(log_level):
+    def set_log_level(level):
         """doc me"""
-        if not log_level:
+        if not level:
             return
-        if isinstance(level, str)
-           log_level = log_level.upper()
-        logging.root.setLevel(log_level)
+        if isinstance(level, str):
+           level = level.upper()
+        logging.root.setLevel(level)
             
     def set_output_name(self, url, title):
         """doc me"""
