@@ -37,13 +37,15 @@ ERR_DIR = "err"
 HTML_DIR = "html"
 PDF_DIR = "pdf"
 
+
 class Retval(Enum):
     """doc me"""
+
     OK = 0
     OK_FILE_ALREADY_EXISTS = -1
     ERROR = 1
 
-    
+
 # pylint: disable=R0902
 class LawScraper:
     """doc me"""
