@@ -560,6 +560,6 @@ def main():
 
 if __name__ in ["__main__", "<run_path>"]:
     # pylint: disable=C0103
-    exitval = main()
+    exitval = int(main())
     if __name__ == "__main__":
         sys.exit(exitval)
