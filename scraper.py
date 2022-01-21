@@ -11,7 +11,7 @@ import re
 import shutil
 import sys
 import time
-from enum import Enum
+from enum import IntEnum
 from subprocess import PIPE, Popen
 
 import pdfkit
@@ -38,7 +38,7 @@ HTML_DIR = "html"
 PDF_DIR = "pdf"
 
 
-class Retval(Enum):
+class Retval(IntEnum):
     """doc me"""
 
     OK = 0
