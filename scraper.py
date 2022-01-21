@@ -8,6 +8,7 @@ import json
 import logging
 import os
 import re
+import shlex
 import shutil
 import sys
 import time
@@ -17,6 +18,7 @@ from subprocess import PIPE, Popen
 import pdfkit
 from PyPDF2 import PdfFileMerger, PdfFileReader
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 
 DEFAULT_TOC_CODE = "CIV"
 
@@ -225,6 +227,15 @@ class LawScraper:
             return ""
         return m.group(1)
 
+    @staticmethod
+    def run(cmd):
+        """doc me"""
+        args = shlex.split(cmd)
+        with Popen(args, stdout=PIPE, stderr=PIPE) as process:
+            (out, err) = process.communicate()
+            rv = process.wait()
+        return (out, err, rv)
+
     def save_html(self, prefix, html):
         """doc me"""
         if os.path.exists(html):
@@ -233,14 +244,14 @@ class LawScraper:
         while True:
             try:
                 xpath = MANYLAWSECTIONS_XPATH
-                elem = self.driver.find_element_by_xpath(xpath)
+                elem = self.driver.find_element(By.XPATH, xpath)
                 break
             except Exception:
                 pass
 
             try:
                 xpath = EXPANDEDBRANCHCODESID_XPATH
-                elem = self.driver.find_element_by_xpath(xpath)
+                elem = self.driver.find_element(By.XPATH, xpath)
                 break
             except Exception:
                 logging.warning("No element for %s found for %s", xpath, prefix)  # noqa
@@ -259,8 +270,7 @@ class LawScraper:
             if not shutil.which("tidy"):
                 return True
             logging.debug("Tidying %s", html)
-            cmd = 'tidy -config config.tidy --write-back yes "%s"' % html  # noqa
-            os.system(cmd)
+            self.run('tidy -config config.tidy --write-back yes "%s"' % html)  # noqa
             with open(html, "r+") as fh:
                 html_data = fh.read()
                 html_data = re.sub(
@@ -351,37 +361,23 @@ class LawScraper:
         """doc me"""
         print("Usage: %s division part" % sys.argv[0], file=sys.stderr)
         sys.exit(1)
-
+ 
     @staticmethod
     def version():
         """doc me"""
-        with Popen(
-            ["git", "rev-list", "--tags", "--max-count=1"],
-            stdout=PIPE,
-            stderr=PIPE,
-        ) as process:
-            (tag_sha, _) = process.communicate()
-            exit_code = process.wait()
-        if exit_code != 0 or not tag_sha:
+        (tag_sha, _, rv) = self.run("git rev-list --tags --max-count=1")
+        if rv != 0 or not tag_sha:
             return
         tag_sha = tag_sha.decode("utf-8")
         tag_sha = re.sub(r"\s+", "", tag_sha)
 
-        with Popen(
-            ["git", "describe", "--tags", tag_sha],
-            stdout=PIPE,
-            stderr=PIPE,
-        ) as process:
-            (tag, _) = process.communicate()
-            exit_code = process.wait()
-        if exit_code != 0 or not tag:
+        (tag, _, rv) = self.run("git describe --tags " + tag_sha)
+        if rv != 0 or not tag:
             return
         tag = tag.decode("utf-8")
         tag = re.sub(r"\s+", "", tag)
 
-        with Popen(["git", "rev-parse", "HEAD"], stdout=PIPE, stderr=PIPE) as process:  # noqa
-            (head_sha, _) = process.communicate()
-            exit_code = process.wait()
+        (head_sha, _, rv) = self.run("git rev-parse HEAD")
         if exit_code != 0 or not head_sha:
             return
         head_sha = head_sha.decode("utf-8")
@@ -391,24 +387,12 @@ class LawScraper:
         if head_sha != tag_sha:
             version += "+" + head_sha[:8]
 
-        with Popen(
-            ["git", "diff-index", "--quiet", "HEAD", "--"],
-            stdout=PIPE,
-            stderr=PIPE,  # noqa
-        ) as process:
-            (_, _) = process.communicate()
-            exit_code = process.wait()
-        if exit_code != 0:
+        (_, _, rv) = self.run("git diff-index --quiet HEAD --")
+        if rv != 0:
             version += "-dirty"
         else:
-            with Popen(
-                ["git", "diff-index", "--quiet", "--cached", "HEAD", "--"],
-                stdout=PIPE,
-                stderr=PIPE,
-            ) as process:
-                (_, _) = process.communicate()
-                exit_code = process.wait()
-            if exit_code != 0:
+            (_, _, rv) = self.run("git diff-index --quiet --cached HEAD --")
+            if rv != 0:
                 version += "-dirty"
 
         print("law-scraper - version %s" % version)
@@ -416,7 +400,7 @@ class LawScraper:
     def xpath(self, xpath):
         """doc me"""
         try:
-            elem = self.driver.find_element_by_xpath(xpath)
+            elem = self.driver.find_element(By.XPATH, xpath)
             return elem.text
         except Exception:
             return ""
@@ -476,7 +460,7 @@ class LawScraper:
         urls = []
 
         xpath = EXPANDEDBRANCHCODESIDA_XPATH
-        a_tags = self.driver.find_elements_by_xpath(xpath)  # noqa
+        a_tags = self.driver.find_elements(By.XPATH, xpath)  # noqa
         for a_tag in a_tags:
             if skip_first:
                 logging.debug("Skipping first entry")
