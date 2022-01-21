@@ -231,6 +231,8 @@ class LawScraper:
     def run(cmd):
         """doc me"""
         args = shlex.split(cmd)
+        if re.search(r"/\\", args[0]) is None:
+            args[0] = shutil.which(args[0])
         with Popen(args, stdout=PIPE, stderr=PIPE) as process:
             (out, err) = process.communicate()
             rv = process.wait()
