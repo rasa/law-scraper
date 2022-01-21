@@ -362,8 +362,7 @@ class LawScraper:
         print("Usage: %s division part" % sys.argv[0], file=sys.stderr)
         sys.exit(1)
  
-    @staticmethod
-    def version():
+    def version(self):
         """doc me"""
         (tag_sha, _, rv) = self.run("git rev-list --tags --max-count=1")
         if rv != 0 or not tag_sha:
