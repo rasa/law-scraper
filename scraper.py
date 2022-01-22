@@ -273,7 +273,7 @@ class LawScraper:
         with Popen(args, stdout=PIPE, stderr=PIPE) as process:
             (out, err) = process.communicate()
             rv = process.wait()
-        return (out, err, rv)
+        return (rv, out, err)
 
     def save_html(self, prefix, html):
         """doc me"""
@@ -361,10 +361,15 @@ class LawScraper:
     def tidy(self, html):
         """doc me"""
         if not self.has_tidy:
-            return True
+            return False
+
         try:
             logging.debug("Tidying %s", html)
-            self.run('tidy -config config.tidy --write-back yes "%s"' % html)  # noqa
+            tpl = self.run('tidy -config config.tidy --write-back yes "%s"' % html)  # noqa
+            if tpl[0] != 0:
+                logging.warning("Tidy returned error %s processing %s", tpl[0], html)
+                return False
+
             with open(html, "r+") as fh:
                 html_data = fh.read()
                 html_data = re.sub(
@@ -378,6 +383,9 @@ class LawScraper:
                 fh.truncate()
         except Exception as exc:
             logging.warning("Cannot tidy %s: %s", html, str(exc))
+            return False
+
+        return True
 
     @staticmethod
     def usage():
@@ -387,20 +395,20 @@ class LawScraper:
 
     def version(self):
         """doc me"""
-        (tag_sha, _, rv) = self.run("git rev-list --tags --max-count=1")
+        (rv, tag_sha, _) = self.run("git rev-list --tags --max-count=1")
         if rv != 0 or not tag_sha:
             return
         tag_sha = tag_sha.decode("utf-8")
         tag_sha = re.sub(r"\s+", "", tag_sha)
 
-        (tag, _, rv) = self.run("git describe --tags " + tag_sha)
+        (rv, tag, _) = self.run("git describe --tags " + tag_sha)
         if rv != 0 or not tag:
             return
         tag = tag.decode("utf-8")
         tag = re.sub(r"\s+", "", tag)
 
-        (head_sha, _, rv) = self.run("git rev-parse HEAD")
-        if exit_code != 0 or not head_sha:
+        (rv, head_sha, _) = self.run("git rev-parse HEAD")
+        if rv != 0 or not head_sha:
             return
         head_sha = head_sha.decode("utf-8")
         head_sha = re.sub(r"\s+", "", head_sha)
@@ -409,12 +417,12 @@ class LawScraper:
         if head_sha != tag_sha:
             version += "+" + head_sha[:8]
 
-        (_, _, rv) = self.run("git diff-index --quiet HEAD --")
-        if rv != 0:
+        tpl = self.run("git diff-index --quiet HEAD --")
+        if tpl[0] != 0:
             version += "-dirty"
         else:
-            (_, _, rv) = self.run("git diff-index --quiet --cached HEAD --")
-            if rv != 0:
+            tpl = self.run("git diff-index --quiet --cached HEAD --")
+            if tpl[0] != 0:
                 version += "-dirty"
 
         print("law-scraper - version %s" % version)
