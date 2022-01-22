@@ -325,7 +325,7 @@ class LawScraper:
 
         if self.print_pdf(pdf):
             return pdf
-            
+
         if not os.path.isfile(html):
             logging.warning("No new pdf found in %s", self.downloads_dir)
             return ""
