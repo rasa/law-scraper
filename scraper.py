@@ -60,6 +60,7 @@ class LawScraper:
         self.division = None
         self.downloads_dir = os.path.expanduser("~/Downloads")
         self.driver = None
+        self.has_tidy = shutil.which("tidy")
         self.log_level = logging.INFO
         self.merger = None
         self.next_page = 0
@@ -232,7 +233,9 @@ class LawScraper:
         """doc me"""
         args = shlex.split(cmd)
         if re.search(r"/\\", args[0]) is None:
-            args[0] = shutil.which(args[0])
+            full_path = shutil.which(args[0])
+            if full_path:
+                args[0] = full_path
         with Popen(args, stdout=PIPE, stderr=PIPE) as process:
             (out, err) = process.communicate()
             rv = process.wait()
@@ -269,21 +272,7 @@ class LawScraper:
             logging.debug("Saving %s", html)
             with open(html, "w") as fh:
                 fh.write(inner_html)
-            if not shutil.which("tidy"):
-                return True
-            logging.debug("Tidying %s", html)
-            self.run('tidy -config config.tidy --write-back yes "%s"' % html)  # noqa
-            with open(html, "r+") as fh:
-                html_data = fh.read()
-                html_data = re.sub(
-                    r"h6.c7 {float: left",
-                    "h6.c7 {display: inline; font-size: 100%",
-                    html_data,
-                )
-                html_data = re.sub(r" href=\"[^\"]*\"", "", html_data)
-                fh.seek(0)
-                fh.write(html_data)
-                fh.truncate()
+            self.tidy(html)
         except Exception as exc:
             logging.warning("Cannot save %s: %s", html, str(exc))
         return True
@@ -357,6 +346,27 @@ class LawScraper:
             self.normalize(title),
         )
         return self.output_pdf
+
+    def tidy(self, html):
+        """doc me"""
+        if not self.has_tidy:
+            return True
+        try:
+            logging.debug("Tidying %s", html)
+            self.run('tidy -config config.tidy --write-back yes "%s"' % html)  # noqa
+            with open(html, "r+") as fh:
+                html_data = fh.read()
+                html_data = re.sub(
+                    r"h6.c7 {float: left",
+                    "h6.c7 {display: inline; font-size: 100%",
+                    html_data,
+                )
+                html_data = re.sub(r" href=\"[^\"]*\"", "", html_data)
+                fh.seek(0)
+                fh.write(html_data)
+                fh.truncate()
+        except Exception as exc:
+            logging.warning("Cannot tidy %s: %s", html, str(exc))
 
     @staticmethod
     def usage():
