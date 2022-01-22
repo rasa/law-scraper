@@ -228,6 +228,40 @@ class LawScraper:
             return ""
         return m.group(1)
 
+    def print_pdf(self, pdf):
+        """doc me"""
+        if self.ci:
+            # Not working yet using headless Chrome
+            return False
+
+        logging.debug("Generating %s (using Chrome)", pdf)
+
+        mask = os.path.join(self.downloads_dir, "*.pdf")
+        old = sorted(glob.iglob(mask), key=os.path.getmtime, reverse=True)
+        if old:
+            old = old[0]
+        else:
+            old = ""
+
+        self.driver.execute_script("window.print();")
+        time.sleep(5)
+        new = sorted(glob.iglob(mask), key=os.path.getmtime, reverse=True)
+        if new:
+            new = new[0]
+        else:
+            new = ""
+
+        if old == new or not new or not os.path.isfile(new):
+            return False
+
+        logging.debug("Moving %s to %s", new, pdf)
+        try:
+            os.rename(new, pdf)
+        except Exception as exc:
+            logging.error("Cannot move %s to %s: %s", new, pdf, str(exc))  # noqa
+            return False
+        return True
+
     @staticmethod
     def run(cmd):
         """doc me"""
@@ -289,32 +323,9 @@ class LawScraper:
             logging.info("File already exists: %s", pdf)
             return pdf
 
-        if not self.ci:
-            logging.debug("Generating %s (using Chrome)", pdf)
-
-            mask = os.path.join(self.downloads_dir, "*.pdf")
-            old = sorted(glob.iglob(mask), key=os.path.getmtime, reverse=True)
-            if old:
-                old = old[0]
-            else:
-                old = ""
-
-            self.driver.execute_script("window.print();")
-            time.sleep(5)
-            new = sorted(glob.iglob(mask), key=os.path.getmtime, reverse=True)
-            if new:
-                new = new[0]
-            else:
-                new = ""
-
-            if old != new and new and os.path.isfile(new):
-                logging.debug("Moving %s to %s", new, pdf)
-                try:
-                    os.rename(new, pdf)
-                    return pdf
-                except Exception as exc:
-                    logging.error("Cannot move %s to %s: %s", new, pdf, str(exc))  # noqa
-
+        if self.print_pdf(pdf):
+            return pdf
+            
         if not os.path.isfile(html):
             logging.warning("No new pdf found in %s", self.downloads_dir)
             return ""
