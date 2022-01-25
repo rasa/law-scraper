@@ -4,8 +4,7 @@ name: scraper
 
 on:
   push:
-  #  branches:
-  #    - master
+  #  branches: [ $default-branch ]
   pull_request:
   #  types: [opened, synchronize, reopened]
   release:
