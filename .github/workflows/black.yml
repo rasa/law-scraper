@@ -27,17 +27,20 @@ jobs:
         fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
 
     - name: STEP black *.py
-      run: black --config .github/linters/.python-black --check ./*.py
+      id: black
+      run: black --config .github/linters/.python-black --check ./*.py && echo "::set-output name=changes::false" 
     - if: failure()
-      run: black --config .github/linters/.python-black ./*.py
+      run: black --config .github/linters/.python-black ./*.py && echo "::set-output name=changes::true" 
 
     - name: STEP git commit -m "black" -a
+      if: steps.black.outputs.changes == 'true'
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git commit -m "black" -a
 
     - name: STEP ad-m/github-push-action@master
+      if: steps.black.outputs.changes == 'true'
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
