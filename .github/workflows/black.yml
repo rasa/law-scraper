@@ -26,11 +26,22 @@ jobs:
         persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
         fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
 
-    - name: STEP black *.py
+    - name: STEP black --check *.py
       id: black
-      run: black --config .github/linters/.python-black --check ./*.py && echo "::set-output name=changes::false" 
-    - if: failure()
-      run: black --config .github/linters/.python-black ./*.py && echo "::set-output name=changes::true" 
+      run: |
+        files=($(find . -type f -iname "*.py"))
+        ((${#files[@]})) || { echo ERROR: No .py files found >&2 ; exit 1 ; }
+        rv=0
+        black --config .github/linters/.python-black --check "${files[@]}" || rv=$?
+        ((rv==0)) && echo "::set-output name=changes::false" && exit 0
+        ((rv==1)) && echo "::set-output name=changes::true" && exit 0
+        exit $rv
+
+    - name: STEP black *.py
+      if: steps.black.outputs.changes == 'true'
+      run: |
+        files=($(find . -type f -iname "*.py"))
+        black --config .github/linters/.python-black "${files[@]}"
 
     - name: STEP git commit -m "black" -a
       if: steps.black.outputs.changes == 'true'
