@@ -4,7 +4,7 @@ name: scraper
 
 on:
   push:
-  #  branches: [ $default-branch ]
+  #  branches: [ master, main ] # $default-branch doesn't seem to work
   pull_request:
   #  types: [opened, synchronize, reopened]
   release:
