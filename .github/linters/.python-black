@@ -1,3 +1,4 @@
+# .github/linters/.python-black
 # See https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html#configuration-format
 [tool.black]
 # default = 88
