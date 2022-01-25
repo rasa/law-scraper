@@ -9,9 +9,9 @@ name: super-linter
 
 on:
   push:
-    branches: [ $default-branch ]
+    branches: [ master, main ] # $default-branch doesn't seem to work
   pull_request:
-    branches: [ $default-branch ]
+    branches: [ master, main ] # $default-branch doesn't seem to work
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
