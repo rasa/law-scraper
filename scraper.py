@@ -365,9 +365,9 @@ class LawScraper:
 
         try:
             logging.debug("Tidying %s", html)
-            tpl = self.run('tidy -config config.tidy --write-back yes "%s"' % html)  # noqa
-            if tpl[0] != 0:
-                logging.warning("Tidy returned error %s processing %s", tpl[0], html)
+            (rv, _, err) = self.run('tidy -config config.tidy --write-back yes "%s"' % html)  # noqa
+            if rv != 0:
+                logging.warning("Tidy returned error %s processing %s: %s", rv, html, err)
                 return False
 
             with open(html, "r+") as fh:
