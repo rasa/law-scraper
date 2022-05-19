@@ -20,9 +20,10 @@ from subprocess import PIPE, Popen
 
 from typing import Any
 
-import pdfkit # type: ignore
-from PyPDF2 import PdfFileMerger, PdfFileReader # type: ignore
-from selenium import webdriver # type: ignore
+import pdfkit  # type: ignore
+from PyPDF2 import PdfFileMerger, PdfFileReader  # type: ignore
+from selenium import webdriver  # type: ignore
+
 # from selenium.webdriver import Chrome, ChromeOptions  # type: ignore
 from selenium.webdriver.common.by import By
 
@@ -63,7 +64,7 @@ class LawScraper:
         """class initializer"""
         super().__init__()
         self.ci = os.getenv("CI") is not None
-        self.division: str = ''
+        self.division: str = ""
         self.downloads_dir = os.path.expanduser("~/Downloads")
         self.driver: Any = None
         self.has_tidy = shutil.which("tidy")
@@ -165,7 +166,7 @@ class LawScraper:
     def get_num_pages(pdf: str) -> Any:
         """doc me"""
         # pylint: disable=R1732 # Consider using 'with' for resource-allocating operations (consider-using-with)
-        reader = PdfFileReader(open(pdf, "rb", encoding="utf-8"), strict=False)
+        reader = PdfFileReader(open(pdf, "rb"), strict=False)
         return reader.getNumPages()
 
     def get_pdf(self, url: str, title: str) -> str:
@@ -492,7 +493,7 @@ class LawScraper:
             return Retval.OK
         return Retval.ERROR
 
-    def get_urls(self, skip_first: bool) -> list[dict[str,str]]:
+    def get_urls(self, skip_first: bool) -> list[dict[str, str]]:
         """doc me"""
         urls = []
 
@@ -524,7 +525,7 @@ class LawScraper:
             urls.append(hsh)
         return urls
 
-    def get_pdfs(self, urls: list[dict[str,str]]) -> bool:
+    def get_pdfs(self, urls: list[dict[str, str]]) -> bool:
         """doc me"""
         merge = True
         for hsh in urls:
