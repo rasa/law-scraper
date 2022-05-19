@@ -2,6 +2,9 @@
 Copyright (c) 2022, Ross Smith II
 SPDX-License-Identifier: MIT
 """
+# pylint: disable=C0209,W0703
+# C0209: Formatting a regular string which could be a f-string (consider-using-f-string)
+# W0703: Catching too general exception Exception (broad-except)
 
 import glob
 import json
@@ -15,18 +18,21 @@ import time
 from enum import IntEnum
 from subprocess import PIPE, Popen
 
-import pdfkit
-from PyPDF2 import PdfFileMerger, PdfFileReader
-from selenium import webdriver
+from typing import Any
+
+import pdfkit # type: ignore
+from PyPDF2 import PdfFileMerger, PdfFileReader # type: ignore
+from selenium import webdriver # type: ignore
+# from selenium.webdriver import Chrome, ChromeOptions  # type: ignore
 from selenium.webdriver.common.by import By
 
 DEFAULT_TOC_CODE = "CIV"
 
-# pylint: disable=C0301
 # https://leginfo.legislature.ca.gov/faces/codes_displayexpandedbranch.xhtml?tocCode=CIV&division=1.&title=&part=1.&chapter=&article=
 
-# pylint: disable=C0301
-URL_MASK = "https://leginfo.legislature.ca.gov/faces/codes_displayexpandedbranch.xhtml?tocCode=%s&division=%s&title=&part=%s&chapter=&article="  # noqa
+# pylint: disable=C0301 # Line too long (157/132) (line-too-long)
+# E501 # Line too long (143/132) (line-too-long)
+URL_MASK = "https://leginfo.legislature.ca.gov/faces/codes_displayexpandedbranch.xhtml?tocCode=%s&division=%s&title=&part=%s&chapter=&article="  # noqa: E501
 
 SECTION_NAMES = ["DIVISION", "PART", "TITLE", "CHAPTER", "ARTICLE"]
 
@@ -48,26 +54,26 @@ class Retval(IntEnum):
     ERROR = 1
 
 
-# pylint: disable=R0902
+# pylint: disable=R0902 # Too many instance attributes (14/7) (too-many-instance-attributes)
+# pylint: disable=R0904 # Too many public methods (23/20) (too-many-public-methods)
 class LawScraper:
     """doc me"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """class initializer"""
-        # pylint: disable=W0235
         super().__init__()
         self.ci = os.getenv("CI") is not None
-        self.division = None
+        self.division: str = ''
         self.downloads_dir = os.path.expanduser("~/Downloads")
-        self.driver = None
+        self.driver: Any = None
         self.has_tidy = shutil.which("tidy")
         self.log_level = logging.INFO
-        self.merger = None
+        self.merger: Any = None
         self.next_page = 0
         self.output_pdf = ""
-        self.parents = {}
-        self.part = None
-        self.pdfs = []
+        self.parents: dict[str, Any] = {}
+        self.part: str = ""
+        self.pdfs: list[str] = []
         self.toc_code = DEFAULT_TOC_CODE
         self.url = ""
 
@@ -75,7 +81,7 @@ class LawScraper:
         requests_log = logging.getLogger("urllib3")
         requests_log.setLevel(logging.ERROR)
 
-    def init_driver(self):
+    def init_driver(self) -> None:
         """doc me"""
 
         appState = {
@@ -103,7 +109,7 @@ class LawScraper:
 
         webdriver.remote.remote_connection.LOGGER.setLevel(logging.CRITICAL)
 
-    def append_pdf(self, url, title):
+    def append_pdf(self, url: str, title: str) -> Retval:
         """doc me"""
         prefix = self.get_prefix(title)
         logging.debug("prefix=%s title=%s", prefix, title)
@@ -146,7 +152,7 @@ class LawScraper:
         self.next_page += self.get_num_pages(pdf)
         return Retval.OK
 
-    def get(self, url):
+    def get(self, url: str) -> bool:
         """doc me"""
         if self.url == url:
             return True
@@ -156,12 +162,13 @@ class LawScraper:
         return True
 
     @staticmethod
-    def get_num_pages(pdf):
+    def get_num_pages(pdf: str) -> Any:
         """doc me"""
-        reader = PdfFileReader(open(pdf, "rb"), strict=False)
+        # pylint: disable=R1732 # Consider using 'with' for resource-allocating operations (consider-using-with)
+        reader = PdfFileReader(open(pdf, "rb", encoding="utf-8"), strict=False)
         return reader.getNumPages()
 
-    def get_pdf(self, url, title):
+    def get_pdf(self, url: str, title: str) -> str:
         """doc me"""
         self.get(url)
 
@@ -177,12 +184,12 @@ class LawScraper:
         return self.save_pdf(filename)
 
     @staticmethod
-    def get_prefix(title):
+    def get_prefix(title: str) -> str:
         """doc me"""
         parts = re.split(r"\s+", title)
         return parts[0]
 
-    def get_section_numbers(self, url):
+    def get_section_numbers(self, url: str) -> dict[str, str]:
         """doc me"""
         rv = {}
         for section in SECTION_NAMES:
@@ -193,7 +200,7 @@ class LawScraper:
             rv[section] = num
         return rv
 
-    def get_section_titles(self, url):
+    def get_section_titles(self, url: str) -> dict[str, str]:
         """doc me"""
         if url:
             self.get(url)
@@ -210,7 +217,7 @@ class LawScraper:
         return rv
 
     @staticmethod
-    def normalize(path):
+    def normalize(path: str) -> str:
         """doc me"""
         path = path.replace(" - ", "-")
         path = re.sub(r"\. ", " ", path)
@@ -221,14 +228,14 @@ class LawScraper:
         return path
 
     @staticmethod
-    def parse_url_for_id(regex, url):
+    def parse_url_for_id(regex: str, url: str) -> str:
         """doc me"""
         m = re.search(regex, url)
         if m is None:
             return ""
         return m.group(1)
 
-    def print_pdf(self, pdf):
+    def print_pdf(self, pdf: str) -> bool:
         """doc me"""
         if self.ci:
             # Not working yet using headless Chrome
@@ -237,17 +244,17 @@ class LawScraper:
         logging.debug("Generating %s (using Chrome)", pdf)
 
         mask = os.path.join(self.downloads_dir, "*.pdf")
-        old = sorted(glob.iglob(mask), key=os.path.getmtime, reverse=True)
-        if old:
-            old = old[0]
+        olds = sorted(glob.iglob(mask), key=os.path.getmtime, reverse=True)
+        if olds:
+            old = olds[0]
         else:
             old = ""
 
         self.driver.execute_script("window.print();")
         time.sleep(5)
-        new = sorted(glob.iglob(mask), key=os.path.getmtime, reverse=True)
-        if new:
-            new = new[0]
+        news = sorted(glob.iglob(mask), key=os.path.getmtime, reverse=True)
+        if news:
+            new = news[0]
         else:
             new = ""
 
@@ -263,7 +270,7 @@ class LawScraper:
         return True
 
     @staticmethod
-    def run(cmd):
+    def run(cmd: str) -> tuple[int, bytes, bytes]:
         """doc me"""
         args = shlex.split(cmd)
         if re.search(r"/\\", args[0]) is None:
@@ -275,7 +282,7 @@ class LawScraper:
             rv = process.wait()
         return (rv, out, err)
 
-    def save_html(self, prefix, html):
+    def save_html(self, prefix: str, html: str) -> bool:
         """doc me"""
         if os.path.exists(html):
             return True
@@ -296,7 +303,7 @@ class LawScraper:
                 logging.warning("No element for %s found for %s", xpath, prefix)  # noqa
                 html = "%s/%s.html" % (ERR_DIR, prefix)
                 logging.debug("Saving %s", html)
-                with open(html, "w") as fh:
+                with open(html, "w", encoding="utf-8") as fh:
                     fh.write(self.driver.page_source)
                 return False
 
@@ -304,14 +311,14 @@ class LawScraper:
 
         try:
             logging.debug("Saving %s", html)
-            with open(html, "w") as fh:
+            with open(html, "w", encoding="utf-8") as fh:
                 fh.write(inner_html)
             self.tidy(html)
         except Exception as exc:
             logging.warning("Cannot save %s: %s", html, str(exc))
         return True
 
-    def save_pdf(self, prefix):
+    def save_pdf(self, prefix: str) -> str:
         """doc me"""
 
         pdf = os.path.join(self.downloads_dir, prefix + ".pdf")
@@ -339,7 +346,7 @@ class LawScraper:
         return pdf
 
     @staticmethod
-    def set_log_level(level):
+    def set_log_level(level: str) -> None:
         """doc me"""
         if not level:
             return
@@ -347,7 +354,7 @@ class LawScraper:
             level = level.upper()
         logging.root.setLevel(level)
 
-    def set_output_name(self, url, title):
+    def set_output_name(self, url: str, title: str) -> str:
         """doc me"""
         numbers = self.get_section_numbers(url)
         self.output_pdf = "%s/%s_division-%s_%s.pdf" % (
@@ -358,7 +365,7 @@ class LawScraper:
         )
         return self.output_pdf
 
-    def tidy(self, html):
+    def tidy(self, html: str) -> bool:
         """doc me"""
         if not self.has_tidy:
             return False
@@ -370,7 +377,7 @@ class LawScraper:
                 logging.warning("Tidy returned error %s processing %s: %s", rv, html, err)
                 return False
 
-            with open(html, "r+") as fh:
+            with open(html, "r+", encoding="utf-8") as fh:
                 html_data = fh.read()
                 html_data = re.sub(
                     r"h6.c7 {float: left",
@@ -388,29 +395,29 @@ class LawScraper:
         return True
 
     @staticmethod
-    def usage():
+    def usage() -> None:
         """doc me"""
         print("Usage: %s division part" % sys.argv[0], file=sys.stderr)
         sys.exit(1)
 
-    def version(self):
+    def version(self) -> None:
         """doc me"""
-        (rv, tag_sha, _) = self.run("git rev-list --tags --max-count=1")
-        if rv != 0 or not tag_sha:
+        (rv, _tag_sha, _) = self.run("git rev-list --tags --max-count=1")
+        if rv != 0 or not _tag_sha:
             return
-        tag_sha = tag_sha.decode("utf-8")
+        tag_sha = _tag_sha.decode("utf-8")
         tag_sha = re.sub(r"\s+", "", tag_sha)
 
-        (rv, tag, _) = self.run("git describe --tags " + tag_sha)
-        if rv != 0 or not tag:
+        (rv, _tag, _) = self.run("git describe --tags " + tag_sha)
+        if rv != 0 or not _tag:
             return
-        tag = tag.decode("utf-8")
+        tag = _tag.decode("utf-8")
         tag = re.sub(r"\s+", "", tag)
 
-        (rv, head_sha, _) = self.run("git rev-parse HEAD")
-        if rv != 0 or not head_sha:
+        (rv, _head_sha, _) = self.run("git rev-parse HEAD")
+        if rv != 0 or not _head_sha:
             return
-        head_sha = head_sha.decode("utf-8")
+        head_sha = _head_sha.decode("utf-8")
         head_sha = re.sub(r"\s+", "", head_sha)
 
         version = tag
@@ -427,7 +434,7 @@ class LawScraper:
 
         print("law-scraper - version %s" % version)
 
-    def xpath(self, xpath):
+    def xpath(self, xpath: str) -> Any:
         """doc me"""
         try:
             elem = self.driver.find_element(By.XPATH, xpath)
@@ -435,7 +442,7 @@ class LawScraper:
         except Exception:
             return ""
 
-    def main(self):
+    def main(self) -> Retval:
         """doc me"""
         self.version()
         if not self.toc_code or not self.division or not self.part:
@@ -476,16 +483,16 @@ class LawScraper:
                 return Retval.ERROR
 
         urls = self.get_urls(skip_first)
-        rv = self.get_pdfs(urls)
-        if self.driver:
+        retval = self.get_pdfs(urls)
+        if self.driver is not None:
             self.driver.close()
             self.driver = None
         self.url = ""
-        if rv:
+        if retval:
             return Retval.OK
         return Retval.ERROR
 
-    def get_urls(self, skip_first):
+    def get_urls(self, skip_first: bool) -> list[dict[str,str]]:
         """doc me"""
         urls = []
 
@@ -502,11 +509,11 @@ class LawScraper:
             if title == "" and chapter == "":
                 logging.debug("Skipping %s", url)
                 continue
-            title = re.split(r"\n", a_tag.text)
-            if len(title) > 1:
-                title = "%s [%s]" % (title[0], title[1])
+            title2 = re.split(r"\n", a_tag.text)
+            if len(title2) > 1:
+                title = "%s [%s]" % (title2[0], title2[1])
             else:
-                title = title[0]
+                title = title2[0]
             # see https://leginfo.legislature.ca.gov/faces/feedbackDetail.xhtml?primaryFeedbackId=prim1641760446147  # noqa
             url = re.sub(r"op_chapter=860&", "", url)
             hsh = {
@@ -517,7 +524,7 @@ class LawScraper:
             urls.append(hsh)
         return urls
 
-    def get_pdfs(self, urls):
+    def get_pdfs(self, urls: list[dict[str,str]]) -> bool:
         """doc me"""
         merge = True
         for hsh in urls:
@@ -553,16 +560,16 @@ class LawScraper:
         return merge
 
 
-def main():
+def main() -> int:
     """doc me"""
     scraper = LawScraper()
-    scraper.set_log_level(os.getenv("INPUT_LOG_LEVEL"))
+    scraper.set_log_level(str(os.getenv("INPUT_LOG_LEVEL")))
     if os.getenv("INPUT_DIVISION") is not None:
-        scraper.division = os.getenv("INPUT_DIVISION")
+        scraper.division = str(os.getenv("INPUT_DIVISION"))
     if os.getenv("INPUT_PART") is not None:
-        scraper.part = os.getenv("INPUT_PART")
+        scraper.part = str(os.getenv("INPUT_PART"))
     if os.getenv("INPUT_CODE") is not None:
-        scraper.toc_code = os.getenv("INPUT_CODE")
+        scraper.toc_code = str(os.getenv("INPUT_CODE"))
     if len(sys.argv) > 1:
         scraper.division = sys.argv[1]
     if len(sys.argv) > 2:
@@ -573,7 +580,6 @@ def main():
 
 
 if __name__ in ["__main__", "<run_path>"]:
-    # pylint: disable=C0103
     exitval = int(main())
     if __name__ == "__main__":
         sys.exit(exitval)
