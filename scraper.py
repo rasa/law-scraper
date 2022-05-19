@@ -17,14 +17,11 @@ import sys
 import time
 from enum import IntEnum
 from subprocess import PIPE, Popen
-
 from typing import Any
 
 import pdfkit  # type: ignore
 from PyPDF2 import PdfFileMerger, PdfFileReader  # type: ignore
 from selenium import webdriver  # type: ignore
-
-# from selenium.webdriver import Chrome, ChromeOptions  # type: ignore
 from selenium.webdriver.common.by import By
 
 DEFAULT_TOC_CODE = "CIV"
