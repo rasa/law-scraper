@@ -21,7 +21,7 @@ from typing import Any
 
 import pdfkit  # type: ignore
 from PyPDF2 import PdfFileMerger, PdfFileReader  # type: ignore
-from selenium import webdriver  # type: ignore
+from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 DEFAULT_TOC_CODE = "CIV"
@@ -94,7 +94,7 @@ class LawScraper:
             "printing.print_preview_sticky_settings.appState": json.dumps(appState),  # noqa
         }
 
-        options = webdriver.ChromeOptions()
+        options = webdriver.ChromeOptions()  # type: ignore
         options.add_experimental_option("prefs", prefs)
         options.add_argument("--kiosk-printing")
         options.add_argument("--log-level=3")
@@ -103,7 +103,7 @@ class LawScraper:
             # see https://stackoverflow.com/a/47887610/1432614
             options.add_argument("--no-sandbox")
             options.add_argument("--headless")
-        self.driver = webdriver.Chrome(options=options)
+        self.driver = webdriver.Chrome(options=options)  # type: ignore
 
         webdriver.remote.remote_connection.LOGGER.setLevel(logging.CRITICAL)
 
@@ -561,7 +561,8 @@ class LawScraper:
 def main() -> int:
     """doc me"""
     scraper = LawScraper()
-    scraper.set_log_level(str(os.getenv("INPUT_LOG_LEVEL")))
+    if os.getenv("INPUT_LOG_LEVEL") is not None:
+        scraper.set_log_level(str(os.getenv("INPUT_LOG_LEVEL")))
     if os.getenv("INPUT_DIVISION") is not None:
         scraper.division = str(os.getenv("INPUT_DIVISION"))
     if os.getenv("INPUT_PART") is not None:
