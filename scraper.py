@@ -46,6 +46,7 @@ PDF_DIR = "pdf"
 
 class Retval(IntEnum):
     """doc me"""
+
     OK = 0
     OK_FILE_ALREADY_EXISTS = -1
     ERROR = 1
