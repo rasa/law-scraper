@@ -20,7 +20,7 @@ from subprocess import PIPE, Popen
 from typing import Any
 
 import pdfkit  # type: ignore
-from PyPDF2 import PdfFileMerger, PdfFileReader  # type: ignore
+from PyPDF2 import PdfMerger, PdfReader  # type: ignore
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
@@ -163,7 +163,7 @@ class LawScraper:
     def get_num_pages(pdf: str) -> Any:
         """doc me"""
         # pylint: disable=R1732 # Consider using 'with' for resource-allocating operations (consider-using-with)
-        reader = PdfFileReader(open(pdf, "rb"), strict=False)
+        reader = PdfReader(open(pdf, "rb"), strict=False)
         return reader.getNumPages()
 
     def get_pdf(self, url: str, title: str) -> str:
@@ -446,7 +446,7 @@ class LawScraper:
         if not self.toc_code or not self.division or not self.part:
             self.usage()
         self.init_driver()
-        self.merger = PdfFileMerger()
+        self.merger = PdfMerger()
         logging.info(
             "Generating PDFs for code %s, division %s, part %s",
             self.toc_code.upper(),
