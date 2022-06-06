@@ -82,7 +82,7 @@ class LawScraper:
     def init_driver(self) -> None:
         """doc me"""
 
-        appState = {
+        app_state = {
             "recentDestinations": [{"id": "Save as PDF", "origin": "local", "account": ""}],
             "selectedDestinationId": "Save as PDF",
             "version": 2,
@@ -91,7 +91,7 @@ class LawScraper:
         prefs = {
             "download.default_directory": self.downloads_dir,
             "profile.default_content_settings.popups": 0,
-            "printing.print_preview_sticky_settings.appState": json.dumps(appState),  # noqa
+            "printing.print_preview_sticky_settings.appState": json.dumps(app_state),  # noqa
         }
 
         options = webdriver.ChromeOptions()  # type: ignore
@@ -578,7 +578,5 @@ def main() -> int:
     return scraper.main()
 
 
-if __name__ in ["__main__", "<run_path>"]:
-    exitval = int(main())
-    if __name__ == "__main__":
-        sys.exit(exitval)
+if __name__ == "__main__":
+    sys.exit(main())
