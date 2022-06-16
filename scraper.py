@@ -161,9 +161,9 @@ class LawScraper:
     @staticmethod
     def get_num_pages(pdf: str) -> Any:
         """doc me"""
+        # Using with causes: AttributeError: __enter__
         # XXXpylint: disable=R1732 # Consider using 'with' for resource-allocating operations (consider-using-with)
-        with PdfReader(open(pdf, "rb"), strict=False) as reader:
-            return reader.getNumPages()
+        return PdfReader(open(pdf, "rb"), strict=False).getNumPages()
 
     def get_pdf(self, url: str, title: str) -> str:
         """doc me"""
@@ -188,10 +188,10 @@ class LawScraper:
 
     def get_section_numbers(self, url: str) -> dict[str, str]:
         """doc me"""
-        rv = {}
+        rv: dict[str, str] = {}
         for section in SECTION_NAMES:
             lower = section.lower()
-            num = self.parse_url_for_id(fr"{lower}=([^&]+)", url)
+            num = self.parse_url_for_id(rf"{lower}=([^&]+)", url)
             if num:
                 if num[-1] == ".":
                     num = num[:-1]
@@ -204,7 +204,7 @@ class LawScraper:
             self.get(url)
 
         # See https://stackoverflow.com/a/16608016/1432614
-        rv = {}
+        rv: dict[str, str] = {}
         for section in SECTION_NAMES:
             xpath = CONTAINS_TEXT_XPATH % section
             result = self.xpath(xpath)
@@ -490,7 +490,7 @@ class LawScraper:
 
     def get_urls(self, skip_first: bool) -> list[dict[str, str]]:
         """doc me"""
-        urls = []
+        urls: list[dict[str, str]] = []
 
         xpath = EXPANDEDBRANCHCODESIDA_XPATH
         a_tags = self.driver.find_elements(By.XPATH, xpath)  # noqa
