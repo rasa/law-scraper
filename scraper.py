@@ -2,9 +2,8 @@
 Copyright (c) 2022, Ross Smith II
 SPDX-License-Identifier: MIT
 """
-# pylint: disable=C0209,W0703
+# pylint: disable=W0703 # Catching too general exception Exception (broad-except)
 # C0209: Formatting a regular string which could be a f-string (consider-using-f-string)
-# W0703: Catching too general exception Exception (broad-except)
 
 import glob
 import json
@@ -162,9 +161,9 @@ class LawScraper:
     @staticmethod
     def get_num_pages(pdf: str) -> Any:
         """doc me"""
-        # pylint: disable=R1732 # Consider using 'with' for resource-allocating operations (consider-using-with)
-        reader = PdfReader(open(pdf, "rb"), strict=False)
-        return reader.getNumPages()
+        # XXXpylint: disable=R1732 # Consider using 'with' for resource-allocating operations (consider-using-with)
+        with PdfReader(open(pdf, "rb"), strict=False) as reader:
+            return reader.getNumPages()
 
     def get_pdf(self, url: str, title: str) -> str:
         """doc me"""
@@ -191,7 +190,8 @@ class LawScraper:
         """doc me"""
         rv = {}
         for section in SECTION_NAMES:
-            num = self.parse_url_for_id(r"%s=([^&]+)" % section.lower(), url)
+            lower = section.lower()
+            num = self.parse_url_for_id(fr"{lower}=([^&]+)", url)
             if num:
                 if num[-1] == ".":
                     num = num[:-1]
@@ -299,7 +299,7 @@ class LawScraper:
                 break
             except Exception:
                 logging.warning("No element for %s found for %s", xpath, prefix)  # noqa
-                html = "%s/%s.html" % (ERR_DIR, prefix)
+                html = f"{ERR_DIR}/{prefix}.html"
                 logging.debug("Saving %s", html)
                 with open(html, "w", encoding="utf-8") as fh:
                     fh.write(self.driver.page_source)
@@ -321,7 +321,7 @@ class LawScraper:
 
         pdf = os.path.join(self.downloads_dir, prefix + ".pdf")
 
-        html = "%s/%s.html" % (HTML_DIR, prefix)
+        html = f"{HTML_DIR}/{prefix}.html"
         self.save_html(prefix, html)
 
         if os.path.isfile(pdf):
@@ -355,12 +355,10 @@ class LawScraper:
     def set_output_name(self, url: str, title: str) -> str:
         """doc me"""
         numbers = self.get_section_numbers(url)
-        self.output_pdf = "%s/%s_division-%s_%s.pdf" % (
-            PDF_DIR,
-            self.toc_code.lower(),
-            numbers["DIVISION"],
-            self.normalize(title),
-        )
+        toc = self.toc_code.lower()
+        div = numbers["DIVISION"]
+        ttl = self.normalize(title)
+        self.output_pdf = f"{PDF_DIR}/{toc}_division-{div}_{ttl}.pdf"
         return self.output_pdf
 
     def tidy(self, html: str) -> bool:
@@ -395,7 +393,7 @@ class LawScraper:
     @staticmethod
     def usage() -> None:
         """doc me"""
-        print("Usage: %s division part" % sys.argv[0], file=sys.stderr)
+        print(f"Usage: {sys.argv[0]} division part", file=sys.stderr)
         sys.exit(1)
 
     def version(self) -> None:
@@ -406,7 +404,7 @@ class LawScraper:
         tag_sha = _tag_sha.decode("utf-8")
         tag_sha = re.sub(r"\s+", "", tag_sha)
 
-        (rv, _tag, _) = self.run("git describe --tags " + tag_sha)
+        (rv, _tag, _) = self.run(f"git describe --tags {tag_sha}")
         if rv != 0 or not _tag:
             return
         tag = _tag.decode("utf-8")
@@ -430,7 +428,7 @@ class LawScraper:
             if tpl[0] != 0:
                 version += "-dirty"
 
-        print("law-scraper - version %s" % version)
+        print(f"law-scraper - version {version}")
 
     def xpath(self, xpath: str) -> Any:
         """doc me"""
@@ -509,7 +507,7 @@ class LawScraper:
                 continue
             title2 = re.split(r"\n", a_tag.text)
             if len(title2) > 1:
-                title = "%s [%s]" % (title2[0], title2[1])
+                title = f"{title2[0]} [{title2[1]}]"
             else:
                 title = title2[0]
             # see https://leginfo.legislature.ca.gov/faces/feedbackDetail.xhtml?primaryFeedbackId=prim1641760446147  # noqa
