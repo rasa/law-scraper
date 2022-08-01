@@ -3,7 +3,7 @@
 # From https://github.com/ad-m/github-push-action#example-workflow-file
 name: black
 
-on:
+"on":
   workflow_dispatch:
 
 jobs:
