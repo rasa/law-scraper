@@ -16,7 +16,7 @@ on:
   workflow_dispatch:
     inputs:
       log_level:
-        description: 'Log level'     
+        description: 'Log level'
         required: true
         default: 'info'
         type: choice
@@ -27,11 +27,11 @@ on:
         - error
         - critical
       code:
-        description: 'TOC Code'     
+        description: 'TOC Code'
         required: true
         default: 'CIV'
       division:
-        description: 'Division'     
+        description: 'Division'
         required: false
         default: '4'
       part:
@@ -97,17 +97,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          export INPUT_LOG_LEVEL="${{ github.event.inputs.log_level }}" 
-          export INPUT_DIVISION="${{ github.event.inputs.division }}" 
+          export INPUT_LOG_LEVEL="${{ github.event.inputs.log_level }}"
+          export INPUT_DIVISION="${{ github.event.inputs.division }}"
           export INPUT_PART="${{ github.event.inputs.part }}"
           export INPUT_CODE="${{ github.event.inputs.code }}"
-          : "${INPUT_LOG_LEVEL:=info}" 
-          : "${INPUT_DIVISION:=4}" 
-          : "${INPUT_PART:=4}" 
+          : "${INPUT_LOG_LEVEL:=info}"
+          : "${INPUT_DIVISION:=4}"
+          : "${INPUT_PART:=4}"
           : "${INPUT_CODE:=CIV}"
           (set -o posix;set)
           python scraper.py "${INPUT_DIVISION}" "${INPUT_PART}" "${INPUT_CODE}"
-          # ./run.sh 
+          # ./run.sh
 
       - name: Archive artifacts
         uses: actions/upload-artifact@v3
@@ -117,7 +117,7 @@ jobs:
             html
             pdf
             !**/.gitignore
-          
+
       - name: run git commit -am "scrape update [ci skip]"
         if: false
         run: |
