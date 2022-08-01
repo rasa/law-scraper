@@ -25,11 +25,13 @@ from selenium.webdriver.common.by import By
 
 DEFAULT_TOC_CODE = "CIV"
 
+# editorconfig-checker-disable
 # https://leginfo.legislature.ca.gov/faces/codes_displayexpandedbranch.xhtml?tocCode=CIV&division=1.&title=&part=1.&chapter=&article=
 
 # pylint: disable=C0301 # Line too long (157/132) (line-too-long)
 # E501 # Line too long (143/132) (line-too-long)
 URL_MASK = "https://leginfo.legislature.ca.gov/faces/codes_displayexpandedbranch.xhtml?tocCode=%s&division=%s&title=&part=%s&chapter=&article="  # noqa: E501
+# editorconfig-checker-enable
 
 SECTION_NAMES = ["DIVISION", "PART", "TITLE", "CHAPTER", "ARTICLE"]
 
