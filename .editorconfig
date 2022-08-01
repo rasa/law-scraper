@@ -1,0 +1,62 @@
+# .editorconfig
+# Docs: https://editorconfig.org/#file-format-details
+
+# EditorConfig (is awesome): https://editorconfig.github.io
+
+# * top-most EditorConfig file
+root = true
+
+# default style settings
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Batch files require CRLF newlines
+[*.{bat,cmd,BAT,CMD}]
+end_of_line = crlf
+
+# MSVC project files require CRLF newlines
+[*.{dsp,dsw,sln,vcproj,vcprops,DSP,DSW,SLN,VCPROJ,VCPROPS}]
+end_of_line = crlf
+
+# Google JavaScript Style Guide (https://google.github.io/styleguide/javascriptguide.xml)
+[*.js]
+max_line_length = 80
+
+[*.json]
+# indent_size = 4
+
+# Makefiles require tab indentation
+[{Makefile{,.*},makefile{,.*},GNUMakefile{,.*},*.mak,*.mk}]
+indent_size = 2
+indent_style = tab
+trim_trailing_whitespace = false
+
+[*.md]
+trim_trailing_whitespace = false
+
+# Google Python Style Guide (https://google.github.io/styleguide/pyguide.html)
+[*.py]
+indent_size = 4
+max_line_length = 132
+
+# shfmt uses these settings:
+[*.sh]
+# like -i=2
+# indent_style = space
+# indent_size = 2
+
+# shell_variant      = posix # like -ln=posix
+# binary_next_line   = true  # like -bn
+# switch_case_indent = true  # like -ci
+# space_redirects    = true  # like -sr
+# keep_padding       = true  # like -kp
+# function_next_line = true  # like -fn
+
+# Ignore the entire "vendor" directory.
+[vendor/**]
+ignore = true
