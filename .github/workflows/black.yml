@@ -1,3 +1,4 @@
+---
 # .github/workflows/black.yml
 # From https://github.com/ad-m/github-push-action#example-workflow-file
 name: black
