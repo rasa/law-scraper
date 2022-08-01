@@ -1,0 +1,21 @@
+# Docs:
+# Generate default via:
+#   pylint --rcfile /dev/null --generate-rcfile >~/.pylintrc
+
+[FORMAT]
+max-line-length=132
+max-module-lines=9999
+
+[MASTER]
+load-plugins=pylint.extensions.no_self_use
+
+[MESSAGES CONTROL]
+disable=import-error, E0401,
+  duplicate-code, R0801,
+  useless-option-value, R0022
+
+# https://pylint.pycqa.org/en/latest/user_guide/messages/message_control.html#detecting-useless-disables
+enable=useless-suppression, I0021
+
+[REPORTS]
+score=no
