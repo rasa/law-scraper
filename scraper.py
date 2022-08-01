@@ -303,8 +303,8 @@ class LawScraper:
                 logging.warning("No element for %s found for %s", xpath, prefix)  # noqa
                 html = f"{ERR_DIR}/{prefix}.html"
                 logging.debug("Saving %s", html)
-                with open(html, "w", encoding="utf-8") as fh:
-                    fh.write(self.driver.page_source)
+                with open(html, "w", encoding="utf-8") as fd:
+                    fd.write(self.driver.page_source)
                 return False
 
         inner_html = elem.get_attribute("innerHTML")
@@ -376,17 +376,17 @@ class LawScraper:
                 logging.warning("Tidy returned error %s processing %s: %s", rv, html, err)
                 return False
 
-            with open(html, "r+", encoding="utf-8") as fh:
-                html_data = fh.read()
+            with open(html, "r+", encoding="utf-8") as fd:
+                html_data = fd.read()
                 html_data = re.sub(
                     r"h6.c7 {float: left",
                     "h6.c7 {display: inline; font-size: 100%",
                     html_data,
                 )
                 html_data = re.sub(r" href=\"[^\"]*\"", "", html_data)
-                fh.seek(0)
-                fh.write(html_data)
-                fh.truncate()
+                fd.seek(0)
+                fd.write(html_data)
+                fd.truncate()
         except Exception as exc:
             logging.warning("Cannot tidy %s: %s", html, str(exc))
             return False
