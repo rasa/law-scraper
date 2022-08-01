@@ -19,3 +19,14 @@ enable=useless-suppression, I0021
 
 [REPORTS]
 score=no
+
+[BASIC]
+good-names=i,
+           j,
+           k,
+           ex,
+           Run,
+           _,
+           fd,
+           m,
+           rv
