@@ -4,7 +4,7 @@
   "IgnoreDefaults": false,
   "SpacesAftertabs": false,
   "NoColor": false,
-  "exclude": ["testfiles", "*.db"],
+  "exclude": [],
   "AllowedContentTypes": [],
   "PassedFiles": [],
   "Disable": {
