@@ -61,6 +61,7 @@ class LawScraper:
     def __init__(self) -> None:
         """class initializer"""
         super().__init__()
+        # pylint: disable=C0103 # Attribute name "ci" doesn't conform to snake_case naming style (invalid-name)
         self.ci = os.getenv("CI") is not None
         self.division: str = ""
         self.downloads_dir = os.path.expanduser("~/Downloads")
@@ -311,8 +312,8 @@ class LawScraper:
 
         try:
             logging.debug("Saving %s", html)
-            with open(html, "w", encoding="utf-8") as fh:
-                fh.write(inner_html)
+            with open(html, "w", encoding="utf-8") as fd:
+                fd.write(inner_html)
             self.tidy(html)
         except Exception as exc:
             logging.warning("Cannot save %s: %s", html, str(exc))
