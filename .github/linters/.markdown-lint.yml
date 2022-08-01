@@ -22,8 +22,8 @@ MD004: false                  # Unordered list style
 MD007:
   indent: 2                   # Unordered list indentation
 MD013:
-  # @TODO FIXME
-  # line_length: 2047           # Line length 80 is far to short
+# @TODO FIXME
+# line_length: 2047           # Line length 80 is far to short
 # @TODO FIXME
 MD018: false                  # Allow no space after hash on atx 
 # @TODO FIXME
