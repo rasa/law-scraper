@@ -146,8 +146,8 @@ class LawScraper:
             logging.error("Merging %s failed: %s", pdf, str(exc))
             return Retval.ERROR
 
-        bm = self.merger.addBookmark(title, self.next_page, parent)
-        self.parents[prefix] = bm
+        bookmark = self.merger.addBookmark(title, self.next_page, parent)
+        self.parents[prefix] = bookmark
         self.next_page += self.get_num_pages(pdf)
         return Retval.OK
 
@@ -370,7 +370,8 @@ class LawScraper:
 
         try:
             logging.debug("Tidying %s", html)
-            (rv, _, err) = self.run('tidy -config config.tidy --write-back yes "%s"' % html)  # noqa
+            cmd = f'tidy -config config.tidy --write-back yes "{html}"'
+            (rv, _, err) = self.run(cmd)
             if rv != 0:
                 logging.warning("Tidy returned error %s processing %s: %s", rv, html, err)
                 return False
