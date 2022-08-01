@@ -8,7 +8,7 @@
 # https://github.com/github/super-linter
 name: super-linter
 
-on:
+"on":
   push:
     branches: [ master, main ] # $default-branch doesn't seem to work
   pull_request:
