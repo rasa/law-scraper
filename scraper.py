@@ -15,7 +15,7 @@ import shutil
 import sys
 import time
 from enum import IntEnum
-from subprocess import PIPE, Popen
+from subprocess import PIPE, Popen  # nosec
 from typing import Any
 
 import pdfkit  # type: ignore
@@ -275,7 +275,7 @@ class LawScraper:
             full_path = shutil.which(args[0])
             if full_path:
                 args[0] = full_path
-        with Popen(args, stdout=PIPE, stderr=PIPE) as process:
+        with Popen(args, stdout=PIPE, stderr=PIPE) as process:  # nosec
             (out, err) = process.communicate()
             rv = process.wait()
         return (rv, out, err)
@@ -291,7 +291,7 @@ class LawScraper:
                 elem = self.driver.find_element(By.XPATH, xpath)
                 break
             except Exception:
-                pass
+                pass  # nosec
 
             try:
                 xpath = EXPANDEDBRANCHCODESID_XPATH
