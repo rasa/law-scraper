@@ -292,8 +292,8 @@ class LawScraper:
                 xpath = MANYLAWSECTIONS_XPATH
                 elem = self.driver.find_element(By.XPATH, xpath)
                 break
-            except Exception:
-                pass  # nosec
+            except Exception:  # nosec
+                pass
 
             try:
                 xpath = EXPANDEDBRANCHCODESID_XPATH
