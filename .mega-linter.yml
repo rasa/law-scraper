@@ -2,8 +2,9 @@
 # See all available variables at https://oxsecurity.github.io/megalinter/configuration/ and in linters documentation
 
 APPLY_FIXES: all
-DISABLE:
-  - SPELL # Uncomment to disable checks of spelling mistakes
+# DISABLE:
+#  - SPELL # Uncomment to disable checks of spelling mistakes
+SPELL_CSPELL_DISABLE_ERRORS: true
 # PRINT_ALL_FILES: false
 # SHOW_ELAPSED_TIME: true
 # EMAIL_REPORTER: false
