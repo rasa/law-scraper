@@ -96,10 +96,10 @@ jobs:
       - name: run python scraper.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          INPUT_LOG_LEVEL: ${{ github.event.inputs.log_level }}
-          INPUT_DIVISION: ${{ github.event.inputs.division }}
-          INPUT_PART: ${{ github.event.inputs.part }}
-          INPUT_CODE: ${{ github.event.inputs.code }}
+          INPUT_LOG_LEVEL: ${{ github.event.inputs.log_level || 'info' }}
+          INPUT_DIVISION: ${{ github.event.inputs.division || '4' }}
+          INPUT_PART: ${{ github.event.inputs.part || '4' }}
+          INPUT_CODE: ${{ github.event.inputs.code || 'CIV' }}
         run: |
           # export INPUT_LOG_LEVEL="${{ github.event.inputs.log_level }}"
           # export INPUT_DIVISION="${{ github.event.inputs.division }}"
