@@ -13,7 +13,7 @@ jobs:
     - name: STEP actions/setup-python@v4
       uses: actions/setup-python@v4
       with:
-        python-version: '3.9'
+        python-version: '3.10'
 
     - name: STEP pip install black
       # if: steps.cache.outputs.cache-hit != 'true'
@@ -33,7 +33,7 @@ jobs:
         mapfile -t <<<"$(find . -type f -iname "*.py")"
         ((${#MAPFILE[@]})) || { echo ERROR: No .py files found >&2 ; exit 1 ; }
         black --config .github/linters/.python-black --check "${MAPFILE[@]}"
-        echo "changes=$?" >>$GITHUB_ENV
+        echo "changes=$?" >>"${GITHUB_ENV}"
         exit 0
 
     - name: STEP black *.py
