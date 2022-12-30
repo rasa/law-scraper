@@ -147,7 +147,7 @@ class LawScraper:
             logging.error("Merging %s failed: %s", pdf, str(exc))
             return Retval.ERROR
 
-        bookmark = self.merger.addBookmark(title, self.next_page, parent)
+        bookmark = self.merger.add_outline_item(title, self.next_page, parent)
         self.parents[prefix] = bookmark
         self.next_page += self.get_num_pages(pdf)
         return Retval.OK
@@ -165,7 +165,7 @@ class LawScraper:
     def get_num_pages(pdf: str) -> Any:
         """doc me"""
         # Using with causes: AttributeError: __enter__
-        # XXXpylint: disable=R1732 # Consider using 'with' for resource-allocating operations (consider-using-with)
+        # _pylint: disable=R1732 # Consider using 'with' for resource-allocating operations (consider-using-with)
         return PdfReader(open(pdf, "rb"), strict=False).getNumPages()
 
     def get_pdf(self, url: str, title: str) -> str:
@@ -222,7 +222,7 @@ class LawScraper:
         """doc me"""
         path = path.replace(" - ", "-")
         path = re.sub(r"\. ", " ", path)
-        # Invalid characters on windows
+        # Remove characters that are invalid in windows paths
         path = re.sub(r"[<>:\"/\\|\?\*]+", " ", path)
         path = re.sub(r"\s+", "-", path)
         path = path.lower()
@@ -563,14 +563,14 @@ class LawScraper:
 def main() -> int:
     """doc me"""
     scraper = LawScraper()
-    if os.getenv("INPUT_LOG_LEVEL") is not None:
-        scraper.set_log_level(str(os.getenv("INPUT_LOG_LEVEL")))
-    if os.getenv("INPUT_DIVISION") is not None:
-        scraper.division = str(os.getenv("INPUT_DIVISION"))
-    if os.getenv("INPUT_PART") is not None:
-        scraper.part = str(os.getenv("INPUT_PART"))
-    if os.getenv("INPUT_CODE") is not None:
-        scraper.toc_code = str(os.getenv("INPUT_CODE"))
+    if os.environ.get("INPUT_LOG_LEVEL"):
+        scraper.set_log_level(str(os.environ.get("INPUT_LOG_LEVEL")))
+    if os.environ.get("INPUT_DIVISION"):
+        scraper.division = str(os.environ.get("INPUT_DIVISION"))
+    if os.environ.get("INPUT_PART"):
+        scraper.part = str(os.environ.get("INPUT_PART"))
+    if os.environ.get("INPUT_CODE"):
+        scraper.toc_code = str(os.environ.get("INPUT_CODE"))
     if len(sys.argv) > 1:
         scraper.division = sys.argv[1]
     if len(sys.argv) > 2:
