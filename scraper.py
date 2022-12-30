@@ -67,7 +67,7 @@ class LawScraper:
         self.downloads_dir = os.path.expanduser("~/Downloads")
         self.driver: Any = None
         self.has_tidy = shutil.which("tidy")
-        self.log_level = logging.INFO
+        self.log_level = logging.DEBUG
         self.merger: Any = None
         self.next_page = 0
         self.output_pdf = ""
@@ -142,7 +142,7 @@ class LawScraper:
         try:
             logging.debug("Merging %s", pdf)
             # see https://stackoverflow.com/a/52817391/1432614
-            self.merger.append(pdf, import_bookmarks=False)
+            self.merger.append(pdf, import_outline=False)
         except Exception as exc:
             logging.error("Merging %s failed: %s", pdf, str(exc))
             return Retval.ERROR
