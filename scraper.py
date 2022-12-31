@@ -107,7 +107,7 @@ class LawScraper:
             options.add_argument("--headless")
         self.driver = webdriver.Chrome(options=options)  # type: ignore
 
-        webdriver.remote.remote_connection.LOGGER.setLevel(logging.CRITICAL)  # pyright: ignore (github only)
+        webdriver.remote.remote_connection.LOGGER.setLevel(logging.CRITICAL)  # type: ignore # github only
 
     def append_pdf(self, url: str, title: str) -> Retval:
         """doc me"""
