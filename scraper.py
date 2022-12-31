@@ -20,8 +20,8 @@ from typing import Any
 
 import pdfkit  # type: ignore
 from PyPDF2 import PdfMerger, PdfReader  # type: ignore
-from selenium import webdriver
-from selenium.webdriver.common.by import By
+from selenium import webdriver  # pyright: ignore (github only)
+from selenium.webdriver.common.by import By  # pyright: ignore (github only)
 
 DEFAULT_TOC_CODE = "CIV"
 
@@ -107,7 +107,7 @@ class LawScraper:
             options.add_argument("--headless")
         self.driver = webdriver.Chrome(options=options)  # type: ignore
 
-        webdriver.remote.remote_connection.LOGGER.setLevel(logging.CRITICAL)
+        webdriver.remote.remote_connection.LOGGER.setLevel(logging.CRITICAL)  # pyright: ignore (github only)
 
     def append_pdf(self, url: str, title: str) -> Retval:
         """doc me"""
@@ -288,18 +288,17 @@ class LawScraper:
         if os.path.exists(html):
             return True
 
-        while True:
-            try:
-                xpath = MANYLAWSECTIONS_XPATH
-                elem = self.driver.find_element(By.XPATH, xpath)
-                break
-            except Exception:  # nosec
-                pass
+        xpath = MANYLAWSECTIONS_XPATH
+        elem = None
+        try:
+            elem = self.driver.find_element(By.XPATH, xpath)
+        except Exception:  # nosec
+            pass
 
+        if not elem:
+            xpath = EXPANDEDBRANCHCODESID_XPATH
             try:
-                xpath = EXPANDEDBRANCHCODESID_XPATH
                 elem = self.driver.find_element(By.XPATH, xpath)
-                break
             except Exception:
                 logging.warning("No element for %s found for %s", xpath, prefix)  # noqa
                 html = f"{ERR_DIR}/{prefix}.html"
