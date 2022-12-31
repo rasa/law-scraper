@@ -166,7 +166,7 @@ class LawScraper:
         """doc me"""
         # Using with causes: AttributeError: __enter__
         # _pylint: disable=R1732 # Consider using 'with' for resource-allocating operations (consider-using-with)
-        return PdfReader(open(pdf, "rb"), strict=False).getNumPages()
+        return len(PdfReader(open(pdf, "rb"), strict=False).pages)
 
     def get_pdf(self, url: str, title: str) -> str:
         """doc me"""
