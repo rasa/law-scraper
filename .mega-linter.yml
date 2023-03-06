@@ -2,7 +2,8 @@
 # See all available variables at https://oxsecurity.github.io/megalinter/configuration/ and in linters documentation
 
 APPLY_FIXES: all
-# DISABLE:
+DISABLE:
+  - REPOSITORY_CHECKOV
 #  - SPELL # Uncomment to disable checks of spelling mistakes
 # PYTHON_PYRIGHT_DISABLE_ERRORS: true
 # SPELL_CSPELL_DISABLE_ERRORS: true
