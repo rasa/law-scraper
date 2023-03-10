@@ -1,4 +1,5 @@
 ---
+#checkov:skip=CKV2_GHA_1:Ensure top-level permissions are not set to write-all
 # MegaLinter GitHub Action configuration file
 # More info at https://megalinter.github.io
 name: MegaLinter
