@@ -1,5 +1,6 @@
 ---
 # .github/workflows/black.yml
+#checkov:skip=CKV2_GHA_1:Ensure top-level permissions are not set to write-all
 # From https://github.com/ad-m/github-push-action#example-workflow-file
 name: black
 
