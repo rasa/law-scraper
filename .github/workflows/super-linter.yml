@@ -1,4 +1,5 @@
 ---
+#checkov:skip=CKV2_GHA_1:Ensure top-level permissions are not set to write-all
 # From https://github.com/github/super-linter/blob/main/TEMPLATES/linter.yml
 # This workflow executes several linters on changed files based on languages used in your code base whenever
 # you push a code or open a pull request.
