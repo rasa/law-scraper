@@ -19,7 +19,8 @@ from subprocess import PIPE, Popen  # nosec
 from typing import Any
 
 import pdfkit  # type: ignore
-from PyPDF2 import PdfMerger, PdfReader  # type: ignore
+from pypdf import PdfMerger, PdfReader  # type: ignore
+# from PyPDF2 import PdfMerger, PdfReader  # type: ignore
 from selenium import webdriver  # pyright: ignore (github only)
 from selenium.webdriver.common.by import By  # pyright: ignore (github only)
 
