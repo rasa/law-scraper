@@ -7,6 +7,8 @@ APPLY_FIXES: all
 #  - REPOSITORY_CHECKOV
 #  - SPELL # Uncomment to disable checks of spelling mistakes
 REPOSITORY_CHECKOV_DISABLE_ERRORS: true
+# false positive on .git/config: 
+REPOSITORY_TRUFFLEHOG_DISABLE_ERRORS: true
 # PYTHON_PYRIGHT_DISABLE_ERRORS: true
 # SPELL_CSPELL_DISABLE_ERRORS: true
 # PRINT_ALL_FILES: false
