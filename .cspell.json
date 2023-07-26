@@ -12,6 +12,7 @@
         "megalinter-reports"
     ],
     "words": [
+        "pypdf",
         "TRUFFLEHOG",
         "Aftertabs",
         "Autobuild",
