@@ -1,5 +1,5 @@
 """
-Copyright (c) 2022, Ross Smith II
+Copyright (c) 2022-2023, Ross Smith II
 SPDX-License-Identifier: MIT
 """
 # pylint: disable=W0703 # Catching too general exception Exception (broad-except)
@@ -426,11 +426,11 @@ class LawScraper:
 
         tpl = self.run("git diff-index --quiet HEAD --")
         if tpl[0] != 0:
-            version += "-dirty"
+            version += "-dev"
         else:
             tpl = self.run("git diff-index --quiet --cached HEAD --")
             if tpl[0] != 0:
-                version += "-dirty"
+                version += "-dev"
 
         print(f"law-scraper - version {version}")
 
