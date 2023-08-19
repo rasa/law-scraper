@@ -24,9 +24,9 @@ env:
     inputs:
       log_level: #checkov:skip=CKV_GHA_7
         description: 'Log level'
-        required: true
-        default: ${{ env.log_level }}
+        # required: true
         type: choice
+        default: 'info' # doesn't work: ${{ env.log_level }}
         options:
         - debug
         - info
@@ -36,15 +36,18 @@ env:
       division:
         description: 'Division'
         # required: false
-        default: ${{ env.division }}
+        type: string
+        default: 'CIV' # doesn't work: ${{ env.division }}
       code:
         description: 'TOC Code'
         # required: false
-        default: ${{ env.code }}
+        type: string
+        default: '4' # doesn't work: ${{ env.code }}
       part:
         description: 'Part'
         # required: false
-        default: ${{ env.part }}
+        type: string
+        default: '4' # doesn't work: ${{ env.part }}
 
 jobs:
   scraper-job:
