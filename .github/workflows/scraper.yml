@@ -56,7 +56,7 @@ jobs:
             sudo apt -y install tidy wkhtmltopdf
 
       - name: RUN chromedriver
-      - run: |
+        run: |
           echo chromedriver --url-base=/wd/hub &
           export DISPLAY=:99
           chromedriver --url-base=/wd/hub &
