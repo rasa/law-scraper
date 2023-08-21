@@ -1,7 +1,7 @@
 # ~/requirements.txt
 
 pdfkit==1.0.0
-pypdf==3.15.1
+pypdf==3.15.2
 # PyPDF2==3.0.1
 selenium==4.11.2
 
