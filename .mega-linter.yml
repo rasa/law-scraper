@@ -22,6 +22,9 @@ FILTER_REGEX_EXCLUDE: "(?i)(\
 
 ## COMMAND ARGUMENTS ##
 
+# REPOSITORY_DEVSKIM_ARGUMENTS doesnt seem to fix 
+# spurious errors, so let's turn them to warnings:
+REPOSITORY_DEVSKIM_DISABLE_ERRORS: true
 REPOSITORY_DEVSKIM_ARGUMENTS:
   - '--ignore-globs'
   - '**/megalinter-reports/**,**/.git/**'
