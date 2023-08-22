@@ -5,12 +5,12 @@
 name: scraper
 
 env:
-  log_level: info
-  code: CIV
-  division: 4
+  division: CIV
+  code: 4
   part: 4
+  log_level: info
   
-"on":
+"on": # quotes required to quiet linter
   push:
   #  branches: [ master, main ] # $default-branch doesn't seem to work
   pull_request:
@@ -50,7 +50,7 @@ env:
         default: '4' # doesn't work: ${{ env.part }}
 
 jobs:
-  scraper-job:
+  job:
     runs-on: ubuntu-latest
     steps:
       - name: RUN apt install tidy wkhtmltopdf
@@ -60,7 +60,7 @@ jobs:
 
       - name: RUN chromedriver
         run: |
-          echo chromedriver --url-base=/wd/hub &
+          echo chromedriver --url-base=/wd/hub
           export DISPLAY=:99
           chromedriver --url-base=/wd/hub &
           # sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
