@@ -11,33 +11,9 @@ FILTER_REGEX_EXCLUDE: >-
   |\\.git/.*
   )$
 
-# quiets: https://github.com/rasa/workflows/actions/runs/5944405268/job/16121614165#step:5:1640
-YAML_V8R_FILTER_REGEX_EXCLUDE: "\\.github/workflows/(docs|labeller-file-based|labels)\\.yaml"
-
 ## CONVERT ERRORS TO WARNINGS ##
 
-# quiets: https://github.com/rasa/workflows/actions/runs/5944405268/job/16121614165#step:5:2124
-ACTION_ACTIONLINT_DISABLE_ERRORS: true
-
-# quiets: https://github.com/rasa/workflows/actions/runs/5944405268/job/16121614165#step:5:151
-POWERSHELL_POWERSHELL_DISABLE_ERRORS: true
-
-# quiets: https://github.com/rasa/workflows/actions/runs/5944405268/job/16121614165#step:5:1967
-PYTHON_BANDIT_DISABLE_ERRORS: true
-# or quiet completely:
-# PYTHON_BANDIT_ARGUMENTS: "--skip B101,B404,B603"
-
-# quiets: https://github.com/rasa/workflows/actions/runs/5944405268/job/16121614165#step:5:1693
-PYTHON_PYLINT_DISABLE_ERRORS: true
-# or quiet completely:
-# PYTHON_PYLINT_ARGUMENTS: "--disable import-error"
-
-# quiets: https://github.com/rasa/workflows/actions/runs/5944405268/job/16121614165#step:5:1713
-REPOSITORY_CHECKOV_DISABLE_ERRORS: true
-# or quiet completely:
-# REPOSITORY_CHECKOV_ARGUMENTS: "--skip-check CKV2_GHA_1,CKV_GHA_7"
-
-# quiets: https://github.com/rasa/workflows/actions/runs/5944405268/job/16121614165#step:5:263
+# quiets:
 #   fatal: detected dubious ownership in repository at '/github/workspace/.git'
 REPOSITORY_DEVSKIM_DISABLE_ERRORS: true
 
