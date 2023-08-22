@@ -5,26 +5,20 @@
 
 ## FILTERS ##
 
-FILTER_REGEX_EXCLUDE: "(?i)(\
-|megalinter-reports/.*\
-|\\.git/.*\
-)$"
+FILTER_REGEX_EXCLUDE: -> 
+  (?ix)(
+  |megalinter-reports/.*
+  |\\.git/.*
+  )$
 
 ## CONVERT ERRORS TO WARNINGS ##
-
-# REPOSITORY_CHECKOV_DISABLE_ERRORS: true
-# false positive on .git/config: 
-# REPOSITORY_TRUFFLEHOG_DISABLE_ERRORS: true
-# false 404s:
-# SPELL_LYCHEE_DISABLE_ERRORS: true
-# PYTHON_PYRIGHT_DISABLE_ERRORS: true
-# SPELL_CSPELL_DISABLE_ERRORS: true
-
-## COMMAND ARGUMENTS ##
 
 # REPOSITORY_DEVSKIM_ARGUMENTS doesnt seem to fix 
 # spurious errors, so let's turn them to warnings:
 REPOSITORY_DEVSKIM_DISABLE_ERRORS: true
+
+## COMMAND ARGUMENTS ##
+
 REPOSITORY_DEVSKIM_ARGUMENTS:
   - '--ignore-globs'
   - '**/megalinter-reports/**,**/.git/**'
