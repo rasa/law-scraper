@@ -3,7 +3,20 @@
 name: clean-logs
 
 #checkov:skip=CKV2_GHA_1:Ensure top-level permissions are not set to write-all"
-permissions: read-all
+permissions:
+  actions: write
+  checks: write
+  contents: write
+  deployments: write
+  discussions: write
+  issues: write
+  packages: write
+  pages: write
+  pull-requests: write
+  repository-projects: write
+  statuses: write
+  security-events: write
+  id-token: write
 
 "on": # quotes required by linter
   workflow_dispatch:
