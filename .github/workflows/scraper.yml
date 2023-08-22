@@ -5,8 +5,8 @@
 name: scraper
 
 env:
-  division: CIV
-  code: 4
+  code: CIV
+  division: 4
   part: 4
   log_level: debug
   
@@ -33,16 +33,16 @@ env:
         - warning
         - error
         - critical
-      division:
-        description: 'Division'
-        # required: false
-        type: string
-        default: 'CIV' # doesn't work: ${{ env.division }}
       code:
         description: 'TOC Code'
         # required: false
         type: string
-        default: '4' # doesn't work: ${{ env.code }}
+        default: 'DIV' # doesn't work: ${{ env.code }}
+      division:
+        description: 'Division'
+        # required: false
+        type: string
+        default: '4' # doesn't work: ${{ env.division }}
       part:
         description: 'Part'
         # required: false
