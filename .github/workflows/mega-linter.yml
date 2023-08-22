@@ -4,7 +4,10 @@
 name: mega-linter
 
 #checkov:skip=CKV2_GHA_1:Ensure top-level permissions are not set to write-all"
-permissions: read-all
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
 
 "on": # quotes required by linter
   workflow_dispatch:
