@@ -5,11 +5,11 @@
 
 ## FILTERS ##
 
-FILTER_REGEX_EXCLUDE: >-
-  (?ix)(
-  |megalinter-reports/.*
-  |\\.git/.*
-  )$
+FILTER_REGEX_EXCLUDE: "\
+(?ix)(\
+|megalinter-reports/.*\
+|\\.git/.*\
+)$"
 
 ## CONVERT ERRORS TO WARNINGS ##
 
@@ -19,16 +19,16 @@ REPOSITORY_DEVSKIM_DISABLE_ERRORS: true
 
 ## COMMAND ARGUMENTS ##
 
-REPOSITORY_DEVSKIM_ARGUMENTS:
-  - '--ignore-globs'
-  - '**/megalinter-reports/**,**/.git/**'
+# REPOSITORY_DEVSKIM_ARGUMENTS:
+#   - '--ignore-globs'
+#   - '**/megalinter-reports/**,**/.git/**'
 
 ## GLOBAL SETTINGS ##
 
 APPLY_FIXES: all
 GITHUB_STATUS_REPORTER: true
 LOG_LEVEL: DEBUG
-PRINT_ALL_FILES: false
+PRINT_ALL_FILES: true
 PRINT_ALPACA: false
 PYRIGHT_PYTHON_FORCE_VERSION: 'latest'
 SHOW_ELAPSED_TIME: true
