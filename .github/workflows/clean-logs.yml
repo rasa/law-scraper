@@ -56,7 +56,7 @@ name: clean-logs
         type: string
 
 jobs:
-  clean-logs-job:
+  job:
       uses: rasa/workflows/.github/workflows/clean-logs.yaml@main
       with:
         # token: ${{ secrets.GITHUB_TOKEN }}
