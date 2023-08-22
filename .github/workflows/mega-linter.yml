@@ -2,7 +2,7 @@
 #checkov:skip=CKV2_GHA_1:Ensure top-level permissions are not set to write-all
 # MegaLinter GitHub Action configuration file
 # More info at https://megalinter.github.io
-name: MegaLinter
+name: mega-linter
 
 "on":
   # Trigger mega-linter at every push. Action will also be visible from Pull Requests to main
