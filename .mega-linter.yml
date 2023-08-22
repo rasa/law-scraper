@@ -23,7 +23,7 @@ FILTER_REGEX_EXCLUDE: "(?i)(\
 ## COMMAND ARGUMENTS ##
 
 REPOSITORY_DEVSKIM_ARGUMENTS:
-  - '--ignore-globs',
+  - '--ignore-globs'
   - '**/megalinter-reports/**,**/.git/**'
 
 ## GLOBAL SETTINGS ##
