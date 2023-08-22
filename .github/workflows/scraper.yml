@@ -1,8 +1,10 @@
 ---
 # $schema https://json.schemastore.org/github-workflow.json
-# checkov:skip=CKV2_GHA_1:Ensure top-level permissions are not set to write-all
 
 name: scraper
+
+# checkov:skip=CKV2_GHA_1:Ensure top-level permissions are not set to write-all"
+permissions: read-all
 
 env:
   code: CIV
