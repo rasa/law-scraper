@@ -24,7 +24,7 @@ name: mega-linter
         default: false
 
 jobs:
-  megalinter-job:
+  job:
     uses: rasa/workflows/.github/workflows/mega-linter.yml@main
     secrets: inherit
     with:
