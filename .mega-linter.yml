@@ -6,8 +6,8 @@
 ## FILTERS ##
 
 FILTER_REGEX_EXCLUDE: "(?i)(\
-|/megalinter-reports/.*\
-|/\\.git/.*\
+|megalinter-reports/.*\
+|\\.git/.*\
 )$"
 
 ## CONVERT ERRORS TO WARNINGS ##
