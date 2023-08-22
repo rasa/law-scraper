@@ -2,7 +2,8 @@
 # $schema https://json.schemastore.org/github-workflow.json
 name: clean-logs
 
-# permissions: write
+#checkov:skip=CKV2_GHA_1:Ensure top-level permissions are not set to write-all"
+permissions: read-all
 
 "on": # quotes required by linter
   workflow_dispatch:
