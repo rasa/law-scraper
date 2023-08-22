@@ -1,21 +1,37 @@
 ---
+# ~/.mega-linter.yml
 # Configuration file for MegaLinter
 # See all available variables at https://oxsecurity.github.io/megalinter/configuration/ and in linters documentation
 
-APPLY_FIXES: all
-# DISABLE_LINTERS: 
-#  - REPOSITORY_CHECKOV
-#  - SPELL # Uncomment to disable checks of spelling mistakes
-REPOSITORY_CHECKOV_DISABLE_ERRORS: true
+## FILTERS ##
+
+FILTER_REGEX_EXCLUDE: "(?i)(\
+|/megalinter-reports/|\
+|/\.git/\
+)$"
+
+## CONVERT ERRORS TO WARNINGS ##
+
+# REPOSITORY_CHECKOV_DISABLE_ERRORS: true
 # false positive on .git/config: 
-REPOSITORY_TRUFFLEHOG_DISABLE_ERRORS: true
+# REPOSITORY_TRUFFLEHOG_DISABLE_ERRORS: true
 # false 404s:
-SPELL_LYCHEE_DISABLE_ERRORS: true
+# SPELL_LYCHEE_DISABLE_ERRORS: true
 # PYTHON_PYRIGHT_DISABLE_ERRORS: true
 # SPELL_CSPELL_DISABLE_ERRORS: true
-# PRINT_ALL_FILES: false
-# SHOW_ELAPSED_TIME: true
-EMAIL_REPORTER: false
-FILEIO_REPORTER: false
-# JSON_REPORTER: false
-# GITHUB_STATUS_REPORTER: false
+
+## COMMAND ARGUMENTS ##
+
+REPOSITORY_DEVSKIM_ARGUMENTS:
+  - '--ignore-globs'
+  - '**/megalinter-reports/**'
+  - '**/.git/**'
+
+## GLOBAL SETTINGS ##
+
+APPLY_FIXES: all
+GITHUB_STATUS_REPORTER: true
+PRINT_ALL_FILES: false
+PRINT_ALPACA: false
+PYRIGHT_PYTHON_FORCE_VERSION: 'latest'
+SHOW_ELAPSED_TIME: true
