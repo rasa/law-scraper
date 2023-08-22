@@ -6,8 +6,8 @@
 ## FILTERS ##
 
 FILTER_REGEX_EXCLUDE: "(?i)(\
-|/megalinter-reports/|\
-|/\\.git/\
+|/megalinter-reports/.*\
+|/\\.git/.*\
 )$"
 
 ## CONVERT ERRORS TO WARNINGS ##
@@ -23,9 +23,8 @@ FILTER_REGEX_EXCLUDE: "(?i)(\
 ## COMMAND ARGUMENTS ##
 
 REPOSITORY_DEVSKIM_ARGUMENTS:
-  - '--ignore-globs'
-  - '**/megalinter-reports/**'
-  - '**/.git/**'
+  - '--ignore-globs',
+  - '**/megalinter-reports/**,**/.git/**'
 
 ## GLOBAL SETTINGS ##
 
