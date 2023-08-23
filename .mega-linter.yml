@@ -1,4 +1,6 @@
 ---
+# yamllint disable rule:line-length
+# $schema https://raw.githubusercontent.com/megalinter/megalinter/main/megalinter/descriptors/schemas/megalinter-configuration.jsonschema.json
 # ~/.mega-linter.yml
 # Configuration file for MegaLinter
 # See all available variables at https://megalinter.io/latest/configuration/ and in linters documentation
