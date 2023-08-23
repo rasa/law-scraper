@@ -27,7 +27,8 @@ REPOSITORY_DEVSKIM_DISABLE_ERRORS: true
 
 ## COMMAND ARGUMENTS ##
 
-PYTHON_MYPY_ARGUMENTS: '--install-types'
+# Doesn't quiet logs
+PYTHON_MYPY_ARGUMENTS: '--install-types --non-interactive'
 
 # REPOSITORY_DEVSKIM_ARGUMENTS:
 #   - '--ignore-globs'
