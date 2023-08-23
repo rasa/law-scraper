@@ -1,0 +1,43 @@
+{
+    "ignorePatterns": [
+        {
+            "reason": "private ip: 0.0.0.0/8",
+            "pattern": "^https?://0+\\."
+        },
+        {
+            "reason": "private ip: 10.0.0.0/8",
+            "pattern": "^https?://10\\."
+        },
+        {
+            "reason": "private ip: 127.0.0.0/8",
+            "pattern": "^https?://127\\."
+        },
+        {
+            "reason": "private ip: 169.154.0.0/16",
+            "pattern": "^https?://169\\.254\\."
+        },
+        {
+            "reason": "private ip: 172.16.0.0/12",
+            "pattern": "^https?://172\\.(1[6-9]|2[0-9]|3[01])\\."
+        },
+        {
+            "reason": "private ip: 192.168.0.0/16",
+            "pattern": "^https?://192\\.168\\."
+        },
+        {
+            "reason": "private ip: 100.64.0.0/10",
+            "pattern": "^https?://100\\.(6[4-9]|[789][0-9]|1[01][0-9]|12[0-7])\\."
+        },
+        {
+            "reason": "401",
+            "pattern": "^https://github\\.com/rasa/"
+        },
+        {
+            "reason": "404 (emphemeral)",
+            "pattern": "^https://sysupgrade.openwrt.org/?"
+        }
+    ],
+    "retryOn429": true,
+    "retryCount": 5,
+    "aliveStatusCodes": [200, 206, 405]
+}
