@@ -1,7 +1,15 @@
-
 {
-    "version": "0.2",
-    "language": "en",
+    "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+    "dictionaries": [
+        "linter-words",
+    ],
+    "dictionaryDefinitions": [
+        {
+            "addWords": true,
+            "name": "linter-words",
+            "path": "./.github/linter/.cspell.json"
+        }
+    ],
     "ignorePaths": [
         "**/node_modules/**",
         "**/vscode-extension/**",
@@ -85,5 +93,7 @@
         "venv",
         "webassets",
         "wkhtmltopdf"
-    ]
+    ],
+    "language": "en-US",
+    "version": "0.2"
 }
