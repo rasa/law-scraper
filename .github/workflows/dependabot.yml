@@ -1,0 +1,20 @@
+---
+# Source: https://github.com/BetaHuhn/repo-file-sync-action/blob/master/.github/workflows/dependabot.yml
+
+name: dependabot
+
+"on":
+  schedule:
+    - cron: "0 */6 * * *" # Every six hours
+  workflow_dispatch:
+jobs:
+  dependabot:
+    name: Auto Merge
+    runs-on: ubuntu-latest
+    steps:
+      - name: USES CondeNast/Snyk-pr-action@master
+        uses: CondeNast/Snyk-pr-action@master
+        with:
+          token: ${{ secrets.GH_PAT }}
+          merge-minor: true
+          merge-patch: true
