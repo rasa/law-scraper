@@ -1,23 +1,44 @@
 ---
+# ~/.github/dependabot.yml
 version: 2
 updates:
-  - package-ecosystem: "pip"
-    directory: "/" # Location of package manifests
+  # - package-ecosystem: "pip"
+  #   directory: "/.config"
+  #   schedule:
+  #     interval: "daily"
+  #     time: "13:00"
+  #     timezone: "America/Los_Angeles"
+  #   labels:
+  #     - "dependencies"
+  #   reviewers:
+  #     - "rasa"
+  # - package-ecosystem: "pip"
+  #   directory: "/bin"
+  #   schedule:
+  #     interval: "daily"
+  #     time: "14:00"
+  #     timezone: "America/Los_Angeles"
+  #   labels:
+  #     - "dependencies# "
+  #   reviewers:
+  #     - "rasa"
+  - package-ecosystem: "github-actions"
+    directory: "/" # == /.github/workflows/
     schedule:
       interval: "daily"
-      time: "08:30"
+      time: "12:00"
       timezone: "America/Los_Angeles"
-    # labels:
-    #  - "dependency"
+    labels:
+      - "dependencies"
     reviewers:
       - "rasa"
-  - package-ecosystem: "github-actions"
+  - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "daily"
-      time: "08:30"
+      time: "12:00"
       timezone: "America/Los_Angeles"
-    # labels:
-    #  - "dependency"
+    labels:
+      - "dependencies"
     reviewers:
       - "rasa"
