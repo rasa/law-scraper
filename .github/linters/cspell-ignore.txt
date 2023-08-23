@@ -1,0 +1,7 @@
+dotfiles
+emphemeral
+gitleaks
+hardis
+pylints
+pyproject
+pyrightconfig
