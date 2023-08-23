@@ -1,0 +1,7 @@
+# Exclude checking all private IPs:
+exclude_all_private = true
+
+# Exclude URLs and mail addresses from checking (supports regex).
+exclude = [
+  "https://oxsecurity.github.io/megalinter/configuration/",
+]
