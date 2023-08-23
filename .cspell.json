@@ -7,7 +7,7 @@
         {
             "addWords": true,
             "name": "linter-words",
-            "path": "./.github/linter/cspell-ignore.txt"
+            "path": "./.github/linters/cspell-ignore.txt"
         }
     ],
     "ignorePaths": [
