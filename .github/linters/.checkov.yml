@@ -1,0 +1,12 @@
+---
+# ~/.github/linters/.checkov.yml
+# schema see https://github.com/bridgecrewio/checkov/issues/5241
+# Source: https://github.com/oxsecurity/megalinter/blob/main/TEMPLATES/.checkov.yml
+# You can see all available properties here: https://github.com/bridgecrewio/checkov#configuration-using-a-config-file
+
+quiet: true
+
+skip-check:
+  # CKV2_GHA_1: "Ensure top-level permissions are not set to write-all"
+  - CKV2_GHA_1
+  # - CKV_DOCKER_2
