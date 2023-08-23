@@ -1,11 +1,12 @@
 ---
 # $schema https://json.schemastore.org/github-workflow.json
+# ~/.github/workflows/clean-logs.yml
 name: clean-logs
 
 # permissions: write
 
 "on": # quotes required by linter
-  workflow_dispatch:
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
     inputs:
       # checkov:skip=CKV_GHA_7:The build output cannot be affected by user parameters...
       #repository:
