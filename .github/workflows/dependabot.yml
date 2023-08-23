@@ -12,8 +12,9 @@ jobs:
     name: Auto Merge
     runs-on: ubuntu-latest
     steps:
-      - name: USES CondeNast/Snyk-pr-action@master
-        uses: CondeNast/Snyk-pr-action@master
+      # Docs: https://github.com/AnandChowdhary/dependabot-pr-action
+      - name: USES AnandChowdhary/dependabot-pr-action@master
+        uses: AnandChowdhary/dependabot-pr-actionn@master
         with:
           token: ${{ secrets.GH_PAT }}
           merge-minor: true
