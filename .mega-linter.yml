@@ -1,7 +1,7 @@
 ---
 # ~/.mega-linter.yml
 # Configuration file for MegaLinter
-# See all available variables at https://oxsecurity.github.io/megalinter/configuration/ and in linters documentation
+# See all available variables at http://megalinter.io/latest/configuration/ and in linters documentation
 
 ## FILTERS ##
 
