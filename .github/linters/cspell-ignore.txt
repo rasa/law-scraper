@@ -1,7 +1,13 @@
+Aftertabs
 dotfiles
+ecrc
 emphemeral
 gitleaks
 hardis
+markdownlint
+pylintrc
 pylints
 pyproject
 pyrightconfig
+rcfile
+textlintrc
