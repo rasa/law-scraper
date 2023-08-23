@@ -1,4 +1,6 @@
 Aftertabs
+Anand
+Chowdhary
 Conde
 dotfiles
 ecrc
