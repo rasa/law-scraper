@@ -12,6 +12,7 @@
         "megalinter-reports"
     ],
     "words": [
+        "DEVSKIM",
         "pypdf",
         "TRUFFLEHOG",
         "Aftertabs",
