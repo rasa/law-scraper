@@ -1,12 +1,14 @@
 ---
+# $schema https://json.schemastore.org/github-workflow.json
+# ~/.github/workflows/dependabot.yml
 # Source: https://github.com/BetaHuhn/repo-file-sync-action/blob/master/.github/workflows/dependabot.yml
 
 name: dependabot
 
-"on":
-  schedule:
-    - cron: "0 */6 * * *" # Every six hours
-  workflow_dispatch:
+"on": # quotes required to quiet linter
+  # schedule:
+  #   - cron: "0 */6 * * *" # Every six hours
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 jobs:
   dependabot:
     name: Auto Merge
