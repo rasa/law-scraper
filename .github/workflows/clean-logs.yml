@@ -2,21 +2,7 @@
 # $schema https://json.schemastore.org/github-workflow.json
 name: clean-logs
 
-#checkov:skip=CKV2_GHA_1:Ensure top-level permissions are not set to write-all"
-permissions:
-  actions: write
-  checks: write
-  contents: write
-  deployments: write
-  discussions: write
-  issues: write
-  packages: write
-  pages: write
-  pull-requests: write
-  repository-projects: write
-  statuses: write
-  security-events: write
-  id-token: write
+# permissions: write
 
 "on": # quotes required by linter
   workflow_dispatch:
@@ -29,12 +15,12 @@ permissions:
       #  default: ${{ github.repository }}
       retain_days:
         description: 'Number of days.'
-        required: true
+        required: false
         default: '30'
         type: string
       keep_minimum_runs:
         description: 'The minimum runs to keep for each workflow.'
-        required: true
+        required: false
         default: '2'
         type: string
       delete_workflow_pattern:
@@ -70,17 +56,19 @@ permissions:
         type: string
 
 jobs:
-  job:
-      uses: rasa/workflows/.github/workflows/clean-logs.yaml@main
-      with:
-        # token: ${{ secrets.GITHUB_TOKEN }}
-        repository: github.repository="${{ github.repository }}"
-        retain_days: ${{ inputs.retain_days }}
-        keep_minimum_runs: ${{ inputs.keep_minimum_runs }}
-        delete_workflow_pattern: ${{ inputs.delete_workflow_pattern }}
-        delete_workflow_by_state_pattern: ${{ inputs.delete_workflow_by_state_pattern }}
-        delete_run_by_conclusion_pattern: ${{ inputs.delete_run_by_conclusion_pattern }}
-        dry_run: ${{ inputs.dry_run }}
+  clean-logs:
+    uses: rasa/workflows/.github/workflows/clean-logs.yaml@main
+    with:
+      # not needed:
+      # token: ${{ secrets.GITHUB_TOKEN }}
+      # doesn't work:
+      # repository: ${{ github.repository }}
+      retain_days: ${{ inputs.retain_days }}
+      keep_minimum_runs: ${{ inputs.keep_minimum_runs }}
+      delete_workflow_pattern: ${{ inputs.delete_workflow_pattern }}
+      delete_workflow_by_state_pattern: ${{ inputs.delete_workflow_by_state_pattern }}
+      delete_run_by_conclusion_pattern: ${{ inputs.delete_run_by_conclusion_pattern }}
+      dry_run: ${{ inputs.dry_run }}
 
 
 # eof
