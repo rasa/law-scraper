@@ -13,13 +13,13 @@
 
 ## CONVERT ERRORS TO WARNINGS ##
 
-# quiets: https://github.com/rasa/law-scraper/actions/runs/5945176506/job/16123787621#step:5:335
+# quiets:
 #   Check: CKV2_GHA_1: "Ensure top-level permissions are not set to write-all"
 # 	FAILED for resource: on(mega-linter)
 # 	File: /.github/workflows/mega-linter.yml:6-7
 REPOSITORY_CHECKOV_DISABLE_ERRORS: true
 
-# quiets: https://github.com/rasa/law-scraper/actions/runs/5945176506/job/16123787621#step:5:78
+# quiets:
 #   fatal: detected dubious ownership in repository at '/github/workspace/.git'
 REPOSITORY_DEVSKIM_DISABLE_ERRORS: true
 
