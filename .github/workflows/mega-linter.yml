@@ -1,13 +1,11 @@
 ---
 # $schema https://json.schemastore.org/github-workflow.json
-
+# doesn't work, so moved to ~/.github/linters/.checkov.yml
+#checkov:skip=CKV2_GHA_1
+# CKV2_GHA_1: "Ensure top-level permissions are not set to write-all"
 name: mega-linter
 
-#checkov:skip=CKV2_GHA_1:Ensure top-level permissions are not set to write-all"
-# permissions: write-all
-#  contents: write
-#  issues: write
-#  pull-requests: write
+# permissions: write
 
 "on": # quotes required by linter
   workflow_dispatch:
