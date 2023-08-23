@@ -21,8 +21,8 @@ from typing import Any
 import pdfkit  # type: ignore
 from pypdf import PdfMerger, PdfReader  # type: ignore
 # from PyPDF2 import PdfMerger, PdfReader  # type: ignore
-from selenium import webdriver  # type: ignore (github only)
-from selenium.webdriver.common.by import By  # type: ignore (github only)
+from selenium import webdriver  # type: ignore
+from selenium.webdriver.common.by import By  # type: ignore
 
 DEFAULT_TOC_CODE = "CIV"
 
