@@ -1,7 +1,7 @@
 ---
 # $schema https://json.schemastore.org/github-workflow.json
 # ~/.github/workflows/dependabot.yml
-name: mega-linter
+name: dependabot
 
 "on": # quotes required by linter
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
