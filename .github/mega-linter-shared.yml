@@ -1,0 +1,90 @@
+# ~/.github/mega-linter-shared.yml
+
+## CONVERT ERRORS TO WARNINGS ##
+
+# produces too many flase positives:
+COPYPASTE_JSCPD_DISABLE_ERRORS: true
+
+# produces too many flase positives:
+MAKEFILE_CHECKMAKE_DISABLE_ERRORS: true
+
+# produces too many flase positives:
+REPOSITORY_DEVSKIM_DISABLE_ERRORS: true
+
+# produces too many flase positives:
+REPOSITORY_GIT_DIFF_DISABLE_ERRORS: true
+
+## COMMAND ARGUMENTS ##
+
+# https://www.shellcheck.net/wiki/SC2310 :
+# This function is invoked in an 'if' condition so set -e will be disabled. Invoke separately if failures should cause the script to exit.
+# https://www.shellcheck.net/wiki/SC2312 :
+# Consider invoking this command separately to avoid masking its return value (or use '|| true' to ignore).
+BASH_SHELLCHECK_ARGUMENTS: '--external-sources --enable=all --exclude SC2310,SC2312'
+
+BASH_SHFMT_ARGUMENTS: '-ci -i 2'
+
+# doesn't provide any helpful info:
+# EDITORCONFIG_EDITORCONFIG_CHECKER_ARGUMENTS: '--debug --verbose'
+
+# allow for comments in json files:
+JSON_JSONLINT_ARGUMENTS: '--mode cjson'
+
+# default is .markdownlint.json, but yaml is nicer :)
+MARKDOWN_MARKDOWNLINT_CONFIG_FILE: '.github/linters/.markdownlint.yaml'
+
+# Doesn't seem to quiet logs:
+PYTHON_MYPY_ARGUMENTS: '--install-types --non-interactive'
+
+# @todo determine default location:
+PYTHON_PYRIGHT_ARGUMENTS: '-p /github/workspace/.github/linters/.pyrightconfig.json'
+
+# Quiets "Ensure top-level permissions are not set to write-all":
+REPOSITORY_CHECKOV_ARGUMENTS: '--skip-check CKV2_GHA_1'
+
+# skip .mypy_cache (as it doesn't work when .mypy_cache is included in FILTER_REGEX_EXCLUDE):
+REPOSITORY_DEVSKIM_ARGUMENTS: ['--ignore-globs','**/megalinter-reports/**,**/.git/**,**/.mypy_cache/**']
+# megalinter already passes `--skip-git-ignored-files`:
+# https://github.com/oxsecurity/megalinter/blob/43943881/megalinter/descriptors/repository.megalinter-descriptor.yml#L78
+
+# this appears to have fixed the issue:
+REPOSITORY_GIT_DIFF_ARGUMENTS: '--ignore-space-change' # didn't fix it: --ignore-space-at-eol
+
+# I don't know if 2 verboses increases verbosity:
+YAML_V8R_ARGUMENTS: '--verbose --verbose'
+
+## GLOBAL SETTINGS ##
+
+# When active, APPLY_FIXES must also be defined as environment variable (in github/workflows/mega-linter.yml or other CI
+APPLY_FIXES: all # default: none
+
+# needs EMAIL_REPORTER_SMTP_PASSWORD to work:
+# EMAIL_REPORTER_EMAIL: ''
+
+# FILEIO_REPORTER: true # default: false
+
+# JSON_REPORTER: true # default: false
+
+# Quiet logs:
+# [GitHub Status Reporter] Error posting Status for JSONwith prettier: 403
+# GitHub API response: {"message":"Resource not accessible by integration","documentation_url":"https://docs.github.com/rest/commits/statuses#create-a-commit-status"}
+# GITHUB_STATUS_REPORTER: true # default: false
+
+# LOG_LEVEL: DEBUG # default: INFO
+
+PRINT_ALL_FILES: true # default: false
+
+PRINT_ALPACA: false # default: true
+
+# https://github.com/rasa/dotfiles/actions/runs/3518606223/jobs/5897703672#step:4:187 shows:
+#   WARNING: there is a new pyright version available (v1.1.270 -> v1.1.280).
+#   Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+# PYRIGHT_PYTHON_FORCE_VERSION: 'latest'
+
+# REPORT_OUTPUT_FOLDER: '${GITHUB_WORKSPACE}/.cache/mega-linter'
+
+SHOW_ELAPSED_TIME: true # default: false
+
+# cSpell:ignore CHECKMAKE, DEVSKIM, KICS, PROSELINT, PYLINT, SEMGREP, TRIVY
+
+# eof
