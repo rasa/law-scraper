@@ -30,20 +30,10 @@ REPOSITORY_DEVSKIM_DISABLE_ERRORS: true
 # Doesn't quiet logs
 PYTHON_MYPY_ARGUMENTS: '--install-types --non-interactive'
 
-# REPOSITORY_DEVSKIM_ARGUMENTS:
-#   - '--ignore-globs'
-#   - '**/megalinter-reports/**,**/.git/**'
-
 ## GLOBAL SETTINGS ##
 
 APPLY_FIXES: all
-# Quiet logs:
-# [GitHub Status Reporter] Error posting Status for JSONwith prettier: 403
-# GitHub API response: {"message":"Resource not accessible by integration","documentation_url":"https://docs.github.com/rest/commits/statuses#create-a-commit-status"}
-# GITHUB_STATUS_REPORTER: true
 # LOG_LEVEL: DEBUG
 PRINT_ALL_FILES: true
 PRINT_ALPACA: false
-# causes validation to fail:
-# PYRIGHT_PYTHON_FORCE_VERSION: 'latest'
 SHOW_ELAPSED_TIME: true
