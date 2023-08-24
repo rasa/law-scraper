@@ -72,7 +72,7 @@ APPLY_FIXES: all # default: none
 
 # LOG_LEVEL: DEBUG # default: INFO
 
-PRINT_ALL_FILES: true # default: false
+# PRINT_ALL_FILES: true # default: false
 
 PRINT_ALPACA: false # default: true
 
