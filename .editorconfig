@@ -1,4 +1,4 @@
-# .editorconfig
+# ~/.editorconfig
 # Docs: https://editorconfig.org/#file-format-details
 
 # EditorConfig (is awesome): https://editorconfig.github.io
@@ -29,15 +29,17 @@ max_line_length = 80
 
 [*.json]
 # indent_size = 4
+# generated files often leave off final newline, as well as jsonlint
+insert_final_newline = false
 
 # Makefiles require tab indentation
 [{Makefile{,.*},makefile{,.*},GNUMakefile{,.*},*.mak,*.mk}]
-indent_size = 2
 indent_style = tab
-trim_trailing_whitespace = false
+# why not?
+# trim_trailing_whitespace = false
 
-[*.md]
-trim_trailing_whitespace = false
+# [*.md]
+# trim_trailing_whitespace = false
 
 # Google Python Style Guide (https://google.github.io/styleguide/pyguide.html)
 [*.py]
@@ -47,16 +49,22 @@ max_line_length = 132
 # shfmt uses these settings:
 [*.sh]
 # like -i=2
-# indent_style = space
-# indent_size = 2
+indent_style = space
+indent_size = 2
 
 # shell_variant      = posix # like -ln=posix
 # binary_next_line   = true  # like -bn
-# switch_case_indent = true  # like -ci
+switch_case_indent = true  # like -ci
 # space_redirects    = true  # like -sr
 # keep_padding       = true  # like -kp
 # function_next_line = true  # like -fn
 
-# Ignore the entire "vendor" directory.
-[vendor/**]
+# Ignore all files in vendor directories
+[{vendor,.vendor}/**]
 ignore = true
+
+# Save batch file examples with CRLF newlines
+[*.cmd.example]
+end_of_line = crlf
+
+# eof
