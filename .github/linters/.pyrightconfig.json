@@ -1,6 +1,5 @@
 {
-  "exclude": [
-  ],
+  "exclude": [],
   "reportMissingImports": "warning",
   "verbose": "true"
 }
