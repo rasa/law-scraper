@@ -9,11 +9,11 @@ name: clean-logs
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
     inputs:
       # checkov:skip=CKV_GHA_7:The build output cannot be affected by user parameters...
-      #repository:
-      #  description: 'Name of repository (e.g., user/repo).'
-      #  type: string
-      #  required: true
-      #  default: ${{ github.repository }}
+      # repository:
+      #   description: 'Name of repository (e.g., user/repo).'
+      #   type: string
+      #   required: true
+      #   default: ${{ github.repository }}
       retain_days:
         description: 'Number of days.'
         required: false
