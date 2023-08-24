@@ -5,6 +5,8 @@
 # Configuration file for MegaLinter
 # See all available variables at https://megalinter.io/latest/configuration/ and in linters documentation
 
+EXTENDS: https://raw.githubusercontent.com/rasa/workflows/main/.github/mega-linter-shared.yml
+
 ## FILTERS ##
 
 # FILTER_REGEX_EXCLUDE: "\
@@ -19,21 +21,4 @@
 #   Check: CKV2_GHA_1: "Ensure top-level permissions are not set to write-all"
 # 	FAILED for resource: on(mega-linter)
 # 	File: /.github/workflows/mega-linter.yml:6-7
-REPOSITORY_CHECKOV_DISABLE_ERRORS: true
-
-# quiets:
-#   fatal: detected dubious ownership in repository at '/github/workspace/.git'
-REPOSITORY_DEVSKIM_DISABLE_ERRORS: true
-
-## COMMAND ARGUMENTS ##
-
-# Doesn't quiet logs
-PYTHON_MYPY_ARGUMENTS: '--install-types --non-interactive'
-
-## GLOBAL SETTINGS ##
-
-APPLY_FIXES: all
-# LOG_LEVEL: DEBUG
-PRINT_ALL_FILES: true
-PRINT_ALPACA: false
-SHOW_ELAPSED_TIME: true
+# REPOSITORY_CHECKOV_DISABLE_ERRORS: true
