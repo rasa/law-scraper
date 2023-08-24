@@ -5,6 +5,7 @@ Conde
 dotfiles
 ecrc
 emphemeral
+fastify
 gitleaks
 hardis
 lycheeignore
