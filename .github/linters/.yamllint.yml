@@ -8,16 +8,19 @@
 # https://yamllint.readthedocs.io/en/stable/configuration.html#default-configuration
 
 extends: relaxed
-
-line-length:
-  level: warning
-  max: 132 # default: 80
-  allow-non-breakable-words: true
-  allow-non-breakable-inline-mappings: true
-new-line-at-end-of-file: disable
-new-lines:
-  type: unix
-trailing-spaces: disable
+rules:
+  new-lines:
+    level: warning
+    type: unix
+  line-length:
+    level: warning
+    max: 132 # default: 80
+    allow-non-breakable-words: true
+    allow-non-breakable-inline-mappings: true
+  comments:
+    min-spaces-from-content: 1 # Used to follow prettier standard: https://github.com/prettier/prettier/pull/10926
+  new-line-at-end-of-file: disable
+  trailing-spaces: disable
 
 # was:
 # rules:
