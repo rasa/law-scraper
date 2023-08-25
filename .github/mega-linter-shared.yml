@@ -52,7 +52,7 @@ REPOSITORY_DEVSKIM_ARGUMENTS: ['--ignore-globs','**/megalinter-reports/**,**/.gi
 # this appears to have fixed the issue:
 REPOSITORY_GIT_DIFF_ARGUMENTS: '--ignore-space-change' # didn't fix it: --ignore-space-at-eol
 
-# I don't know if 2 verboses increases verbosity:
+# I don't know if 2 'verbose's increases verbosity:
 YAML_V8R_ARGUMENTS: '--verbose --verbose'
 
 ## GLOBAL SETTINGS ##
@@ -88,6 +88,7 @@ PRINT_ALPACA: false # default: true
 
 SHOW_ELAPSED_TIME: true # default: false
 
-# cSpell:ignore CHECKMAKE, DEVSKIM, KICS, PROSELINT, PYLINT, SEMGREP, TRIVY
+# cSpell:ignore CHECKMAKE, cjson, DEVSKIM, flase, JSONLINT, KICS, MYPY, mypy, PROSELINT, PYLINT, PYRIGHT, pyright, SEMGREP, TRIVY
+
 
 # eof
