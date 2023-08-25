@@ -4,10 +4,10 @@
 name: mega-linter
 
 "on": # quotes required by linter
-  # pull_request:
-  # push:
-  #  paths:
-  #    - '.github/**.yml'
+  pull_request:
+  push:
+    paths:
+      - '.github/'
   #    - '.github/**.txt'
   #    - '.github/linters/**'
   #    - '.editorconfig'
