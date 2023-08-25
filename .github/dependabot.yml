@@ -22,3 +22,7 @@ updates:
       - "dependencies"
     reviewers:
       - "rasa"
+
+# cSpell:ignore rasa
+
+# eof
