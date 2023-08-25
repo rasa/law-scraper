@@ -33,7 +33,7 @@
       "pattern": "^https://github\\.com/rasa/"
     },
     {
-      "reason": "404 (emphemeral)",
+      "reason": "404 (ephemeral)",
       "pattern": "^https://sysupgrade.openwrt.org/?"
     }
   ],

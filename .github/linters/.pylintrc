@@ -31,3 +31,7 @@ disable=import-error, E0401,
 
 [REPORTS]
 score=no
+
+# cSpell:ignore pylint, pylintrc, pylints, rcfile
+
+# eof

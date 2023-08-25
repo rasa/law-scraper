@@ -25,4 +25,6 @@
     '''(?i)\.(jpeg|xlsx)$''',
     ]
 
-# cSpell:ignore mypy
+# cSpell:ignore gitleaks, mypy, rasa
+
+# eof
