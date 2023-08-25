@@ -68,6 +68,6 @@ ignore = true
 [*.cmd.example]
 end_of_line = crlf
 
-# cSpell:ignore jsonlint, Makefiles, VCPROJ, vcproj, VCPROPS, vcprops
+# cSpell:ignore jsonlint, Makefiles, MSVC, VCPROJ, vcproj, VCPROPS, vcprops
 
 # eof
