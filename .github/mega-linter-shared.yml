@@ -12,7 +12,7 @@ COPYPASTE_JSCPD_DISABLE_ERRORS: true
 
 # produces too many flase positives:
 REPOSITORY_DEVSKIM_DISABLE_ERRORS: true
- 
+
 # Reporting errant whitespace where there is none:
 # REPOSITORY_GIT_DIFF_DISABLE_ERRORS: true
 
@@ -88,7 +88,8 @@ PRINT_ALPACA: false # default: true
 
 SHOW_ELAPSED_TIME: true # default: false
 
-# cSpell:ignore CHECKMAKE, cjson, DEVSKIM, flase, JSONLINT, KICS, MYPY, mypy, PROSELINT, PYLINT, PYRIGHT, pyright, SEMGREP, TRIVY
-
+# cSpell:ignore CHECKMAKE, cjson, DEVSKIM, JSONLINT, KICS, MARKDOWNLINT, markdownlint
+# cSpell:ignore MYPY, mypy, PROSELINT, PYLINT, PYRIGHT, pyright, pyrightconfig,
+# cSpell:ignore SEMGREP, SHELLCHECK, SHFMT, TRIVY
 
 # eof
