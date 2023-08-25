@@ -78,9 +78,10 @@ APPLY_FIXES: all # default: none
 
 PRINT_ALPACA: false # default: true
 
-# https://github.com/rasa/dotfiles/actions/runs/3518606223/jobs/5897703672#step:4:187 shows:
+# This error:
 #   WARNING: there is a new pyright version available (v1.1.270 -> v1.1.280).
 #   Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+# suggests the below, but including it causes the file to fail validation.
 # PYRIGHT_PYTHON_FORCE_VERSION: 'latest'
 
 # REPORT_OUTPUT_FOLDER: '${GITHUB_WORKSPACE}/.cache/mega-linter'
