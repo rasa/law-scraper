@@ -7,8 +7,10 @@ name: mega-linter
   pull_request:
   push:
     paths:
-      - '.github/**/*.yml'
+      - '.github/**.yml'
+      - '.github/**.txt'
       - '.github/linters/**'
+      - '.editorconfig'
     paths-ignore:
       - '**.md'
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
