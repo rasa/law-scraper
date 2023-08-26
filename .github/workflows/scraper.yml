@@ -24,7 +24,7 @@ env:
   #  - cron: '23 15 * * *'
   workflow_dispatch:
     inputs:
-      log_level: #checkov:skip=CKV_GHA_7
+      log_level: # checkov:skip=CKV_GHA_7
         description: 'Log level'
         # required: true
         type: choice
