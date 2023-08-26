@@ -16,6 +16,9 @@ REPOSITORY_DEVSKIM_DISABLE_ERRORS: true
 # Reporting errant whitespace where there is none:
 # REPOSITORY_GIT_DIFF_DISABLE_ERRORS: true
 
+# don't fail if a site is down, or their cert has expired:
+SPELL_LYCHEE_DISABLE_ERRORS: true
+
 ## COMMAND ARGUMENTS ##
 
 # https://www.shellcheck.net/wiki/SC2310 :
