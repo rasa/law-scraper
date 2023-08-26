@@ -7,22 +7,22 @@ name: mega-linter
   pull_request:
   push:
     paths:
-      - '.github/'
-      - '.github/**.txt'
-      - '.github/linters/**'
-      - '.editorconfig'
-      - '!**.md'
+      - ".github/"
+      - ".github/**.txt"
+      - ".github/linters/**"
+      - ".editorconfig"
+      - "!**.md"
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
     inputs:
       # checkov:skip=CKV_GHA_7:The build output cannot be affected by user parameters...
       fetch_depth:
-        description: "Number of commits to fetch. 0 indicates all history for all branches and tags."
+        description: Number of commits to fetch. 0 indicates all history for all branches and tags.
         type: string
         required: false
         default: '1'
       # checkov:skip=CKV_GHA_7:The build output cannot be affected by user parameters...
       validate_all_codebase:
-        description: "Validate the entire code base"
+        description: Validate the entire code base
         type: boolean
         required: false
         default: false
