@@ -2,10 +2,7 @@
 # cSpell:disable
 
 cspellignore
-codeql
-dumpvars
 lycheeignore
-rasa
 
 ## .github/linters/.ecrc: 1 word(s), 1 instance(s):
 Aftertabs
