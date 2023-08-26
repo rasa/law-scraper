@@ -4,6 +4,9 @@
 name: dependabot
 
 "on": # quotes required by linter
+  schedule:
+    # run every day at 16:00 UTC (09:00 PDT)
+    - cron: '0 16 * * *'
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 
 jobs:
