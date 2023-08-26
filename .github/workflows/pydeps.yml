@@ -8,6 +8,9 @@
 name: pydeps
 
 "on":
+  schedule:
+    # run every day at 15:00 UTC (08:00 PDT)
+    - cron: '0 15 * * *'
   workflow_call:
     inputs:
       # checkov:skip=CKV_GHA_7
