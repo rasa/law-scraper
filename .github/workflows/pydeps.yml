@@ -137,4 +137,6 @@ jobs:
           cd "${{ inputs.dir }}"
           pipdeptree --freeze --warn silence | grep -E '^[a-zA-Z0-9\-]+'
 
+# cSpell:ignore MAPFILE, mapfile, noprofile, norc, pipefail, pipreqs, pydeps
+
 # eof
