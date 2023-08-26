@@ -10,7 +10,7 @@ COPYPASTE_JSCPD_DISABLE_ERRORS: true
 # Reports variable assignment as targets:
 # MAKEFILE_CHECKMAKE_DISABLE_ERRORS: true
 
-# produces too many flase positives:
+# produces too many false positives:
 REPOSITORY_DEVSKIM_DISABLE_ERRORS: true
 
 # Reporting errant whitespace where there is none:
