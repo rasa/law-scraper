@@ -1,19 +1,19 @@
 # ~/.github/linters/.cspellignore
 # cSpell:disable
 
+## .github/linters/.cspellignore
+cspellignore
+
 ## .github/linters/.ecrc: 1 word(s), 1 instance(s):
 Aftertabs
 ecrc
 
+## .github/linters/.gitleaks.toml
+gitleaks
+
 ## .github/linters/.jscpd.json: 2 word(s), 2 instance(s):
 hardis
 venv
-
-## .github/linters/.cspellignore
-cspellignore
-
-# .github/linters/.gitleaks.toml
-gitleaks
 
 ## .github/linters/.markdownlint.yaml
 markdownlint
