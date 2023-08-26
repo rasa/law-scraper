@@ -3,7 +3,7 @@
     "dictionaries": [
         "custom-words",
         "custom-filenames",
-        "linter-words"
+        "github-words"
     ],
     "dictionaryDefinitions": [
         {
@@ -18,8 +18,8 @@
         },
         {
             "addWords": true,
-            "name": "linter-words",
-            "path": "./.github/linters/.cspellignore"
+            "name": "github-words",
+            "path": "./.github/.cspellignore"
         }
     ],
     "ignorePaths": [
