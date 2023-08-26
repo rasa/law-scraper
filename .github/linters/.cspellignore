@@ -1,4 +1,5 @@
 # ~/.github/linters/.cspellignore
+# cSpell:disable
 
 ## .github/linters/.ecrc: 1 word(s), 1 instance(s):
 Aftertabs
