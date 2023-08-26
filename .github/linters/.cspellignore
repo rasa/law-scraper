@@ -6,3 +6,11 @@ Aftertabs
 ## .github/linters/.jscpd.json: 2 word(s), 2 instance(s):
 hardis
 venv
+
+## .github/linters/.cspellignore
+cspellignore
+
+## .github/linters/.mypy.ini
+mypy
+
+# eof
