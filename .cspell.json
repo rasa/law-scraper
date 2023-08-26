@@ -19,7 +19,7 @@
         {
             "addWords": true,
             "name": "linter-words",
-            "path": "./.github/linters/cspell-ignore.txt"
+            "path": "./.github/linters/.cspellignore"
         }
     ],
     "ignorePaths": [
