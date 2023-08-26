@@ -2,6 +2,7 @@
 
 ## .github/linters/.ecrc: 1 word(s), 1 instance(s):
 Aftertabs
+ecrc
 
 ## .github/linters/.jscpd.json: 2 word(s), 2 instance(s):
 hardis
