@@ -12,6 +12,9 @@ venv
 ## .github/linters/.cspellignore
 cspellignore
 
+# .github/linters/.gitleaks.toml
+gitleaks
+
 ## .github/linters/.markdownlint.yaml
 markdownlint
 
