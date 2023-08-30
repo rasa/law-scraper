@@ -7,7 +7,7 @@
 
 name: pydeps
 
-"on":
+'on':
   schedule:
     # run every day at 15:00 UTC (08:00 PDT)
     - cron: '0 15 * * *'
@@ -15,29 +15,29 @@ name: pydeps
     inputs:
       # checkov:skip=CKV_GHA_7
       dir:
-        description: "Directory containing the requirements.txt file"
+        description: 'Directory containing the requirements.txt file'
         required: false
         type: string
-        default: "."
+        default: '.'
       mask:
-        description: "File mask for requirements*.txt file(s)"
+        description: 'File mask for requirements*.txt file(s)'
         required: false
         type: string
-        default: "requirements*.txt"
+        default: 'requirements*.txt'
 
   workflow_dispatch:
     inputs:
       # checkov:skip=CKV_GHA_7
       dir:
-        description: "Directory containing the requirements.txt file"
+        description: 'Directory containing the requirements.txt file'
         required: false
         type: string
-        default: "."
+        default: '.'
       mask:
-        description: "File mask for requirements*.txt file(s)"
+        description: 'File mask for requirements*.txt file(s)'
         required: false
         type: string
-        default: "requirements*.txt"
+        default: 'requirements*.txt'
 
 jobs:
   job:
@@ -80,16 +80,16 @@ jobs:
 
       - name: RUN sed -E -i.bak -e "/^#/d; /^$/d;" requirements.txt
         run: |
-          mapfile -t < <(find "${{ inputs.dir }}" -type f -iname "${{ inputs.mask }}")
+          mapfile -t < <(find '${{ inputs.dir }}' -type f -iname '${{ inputs.mask }}')
           for file in "${MAPFILE[@]}"; do
-            sed -E -i.bak -e "/^#/d; /^$/d;" "${file}"
+            sed -E -i.bak -e '/^#/d; /^$/d;' "${file}"
             cat "${file}"
           done
 
       - name: RUN pipreqs --print --diff requirements.txt
         continue-on-error: true
         run: |
-          mapfile -t < <(find "${{ inputs.dir }}" -type f -iname "${{ inputs.mask }}")
+          mapfile -t < <(find '${{ inputs.dir }}' -type f -iname '${{ inputs.mask }}')
           for file in "${MAPFILE[@]}"; do
             python -m pipreqs.pipreqs --print --diff "${file}"
           done
@@ -97,30 +97,31 @@ jobs:
       - name: RUN pur --dry-run --dry-run-changed --no-recursive --requirement requirements.txt
         continue-on-error: true
         run: |
-          mapfile -t < <(find "${{ inputs.dir }}" -type f -iname "${{ inputs.mask }}")
+          mapfile -t < <(find '${{ inputs.dir }}' -type f -iname '${{ inputs.mask }}')
           for file in "${MAPFILE[@]}"; do
             python -m pur --dry-run --dry-run-changed --no-recursive --requirement "${file}" | tee pur.tmp
             test -s pur.tmp || continue
-            printf "Changes found, aborting...\n"
+            printf 'Changes found, aborting...\n'
             exit 1
           done
 
       - name: RUN pur --no-recursive --requirement requirements.txt
         continue-on-error: true
         run: |
-          mapfile -t < <(find "${{ inputs.dir }}" -type f -iname "${{ inputs.mask }}")
+          mapfile -t < <(find '${{ inputs.dir }}' -type f -iname '${{ inputs.mask }}')
           for file in "${MAPFILE[@]}"; do
-            python -m pur --no-recursive --requirement "${file}" | tee pur.tmp
-            grep -q "All requirements up-to-date" pur.tmp || continue
+            {
+              python -m pur --no-recursive --requirement "${file}" | 
+              grep -q 'All requirements up-to-date'
+            } || continue
             printf "Changes found, aborting...\n"
             exit 1
           done
-          rm -f pur.tmp
 
       - name: RUN pip install -r requirements.txt
         continue-on-error: true
         run: |
-          mapfile -t < <(find "${{ inputs.dir }}" -type f -iname "${{ inputs.mask }}")
+          mapfile -t < <(find '${{ inputs.dir }}' -type f -iname '${{ inputs.mask }}')
           for file in "${MAPFILE[@]}"; do
             python -m pip install -r "${file}"
           done
@@ -128,13 +129,13 @@ jobs:
       - name: RUN pipdeptree --warn silence
         continue-on-error: true
         run: |
-          cd "${{ inputs.dir }}"
+          cd '${{ inputs.dir }}'
           pipdeptree --warn silence
 
       - name: RUN pipdeptree --freeze --warn silence | grep -E '^[a-zA-Z0-9\-]+'
         continue-on-error: true
         run: |
-          cd "${{ inputs.dir }}"
+          cd '${{ inputs.dir }}'
           pipdeptree --freeze --warn silence | grep -E '^[a-zA-Z0-9\-]+'
 
 # cSpell:ignore MAPFILE, mapfile, noprofile, norc, pipefail, pipreqs, pydeps, pipdeptree, pur
