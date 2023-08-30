@@ -3,7 +3,7 @@
 # ~/.github/workflows/dependabot.yml
 name: dependabot
 
-"on": # quotes required by linter
+'on': # quotes required by linter
   schedule:
     # run every day at 16:00 UTC (09:00 PDT)
     - cron: '0 16 * * *'
