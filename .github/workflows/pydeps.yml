@@ -99,10 +99,11 @@ jobs:
         run: |
           mapfile -t < <(find '${{ inputs.dir }}' -type f -iname '${{ inputs.mask }}')
           for file in "${MAPFILE[@]}"; do
-            python -m pur --dry-run --dry-run-changed --no-recursive --requirement "${file}" | tee pur.tmp
-            test -s pur.tmp || continue
-            printf 'Changes found, aborting...\n'
-            exit 1
+            out=$(python -m pur --dry-run --dry-run-changed --no-recursive --requirement "${file}")
+            echo \$?=$?
+            test -z "${out}" && continue
+            printf '%s: changes found:\n' "${file}"
+            echo "${out}"
           done
 
       - name: RUN pur --no-recursive --requirement requirements.txt
@@ -110,12 +111,10 @@ jobs:
         run: |
           mapfile -t < <(find '${{ inputs.dir }}' -type f -iname '${{ inputs.mask }}')
           for file in "${MAPFILE[@]}"; do
-            {
-              python -m pur --no-recursive --requirement "${file}" | 
-              grep -q 'All requirements up-to-date'
-            } || continue
-            printf "Changes found, aborting...\n"
-            exit 1
+              out=$(python -m pur --no-recursive --requirement "${file}")
+              grep -q 'All requirements up-to-date' <<<"${out}" && continue
+              printf '%s: changes found:\n' "${file}"
+              echo "${out}"
           done
 
       - name: RUN pip install -r requirements.txt
