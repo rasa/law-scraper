@@ -64,7 +64,8 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           # see https://stackoverflow.com/questions/73789054/reusable-github-action-workflow-with-actions-setup-python-fails-because-it-cant
-          # cache: 'pip'
+          cache: 'pip'
+          cache-dependency-path: '**/*requirements*.txt'
 
       - name: RUN pip install --upgrade pip
         run:  python -m pip install --upgrade pip
@@ -83,6 +84,7 @@ jobs:
           mapfile -t < <(find '${{ inputs.dir }}' -type f -iname '${{ inputs.mask }}')
           for file in "${MAPFILE[@]}"; do
             sed -E -i.bak -e '/^#/d; /^$/d;' "${file}"
+            printf '%s:\n' "${file}"
             cat "${file}"
           done
 
