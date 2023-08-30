@@ -1,6 +1,8 @@
 ---
 # $schema https://json.schemastore.org/github-workflow.json
+
 name: 'toc'
+
 "on":
   push:
     paths:
@@ -12,6 +14,10 @@ name: 'toc'
     paths:
       - '**/*.md'
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
 
 jobs:
   job:
