@@ -3,7 +3,7 @@
 # ~/.github/workflows/mega-linter.yml
 name: mega-linter
 
-"on": # quotes required by linter
+'on': # quotes required by linter
   pull_request:
   push:
     paths:
