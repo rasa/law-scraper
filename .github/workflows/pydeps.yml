@@ -14,40 +14,30 @@ name: pydeps
   workflow_call:
     inputs:
       # checkov:skip=CKV_GHA_7
-      dir:
-        description: 'Directory containing the requirements.txt file'
-        required: false
-        type: string
-        default: '.'
       mask:
         description: 'File mask for requirements*.txt file(s)'
         required: false
         type: string
-        default: 'requirements*.txt'
+        default: '**/*requirements*.txt'
 
   workflow_dispatch:
     inputs:
       # checkov:skip=CKV_GHA_7
-      dir:
-        description: 'Directory containing the requirements.txt file'
-        required: false
-        type: string
-        default: '.'
       mask:
         description: 'File mask for requirements*.txt file(s)'
         required: false
         type: string
-        default: 'requirements*.txt'
+        default: '**/*requirements*.txt'
 
 jobs:
   job:
     runs-on: ${{ matrix.os }}
     defaults:
       run:
-        shell: bash -v -x {0}
-        # shell: bash --noprofile --norc -e -o pipefail -v -x {0}
+        # shell: bash -v -x {0}
+        shell: bash --noprofile --norc -e -o pipefail {0}
     strategy:
-      fail-fast: false
+      fail-fast: true
       max-parallel: 1
       # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
       matrix:
@@ -64,8 +54,8 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           # see https://stackoverflow.com/questions/73789054/reusable-github-action-workflow-with-actions-setup-python-fails-because-it-cant
-          cache: 'pip'
-          cache-dependency-path: '**/*requirements*.txt'
+          # cache: 'pip'
+          # cache-dependency-path: '${{ inputs.mask }}'
 
       - name: RUN pip install --upgrade pip
         run:  python -m pip install --upgrade pip
@@ -79,64 +69,82 @@ jobs:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
           fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
 
-      - name: RUN sed -E -i.bak -e "/^#/d; /^$/d;" requirements.txt
+      - name: RUN gather file list
         run: |
-          mapfile -t < <(find '${{ inputs.dir }}' -type f -iname '${{ inputs.mask }}')
+          dir=$(dirname '${{ inputs.mask }}')
+          base=$(basename '${{ inputs.mask }}')
+          if [[ "${dir}" == "**" ]]; then
+            dir=.
+            depth=99
+          else
+            depth=1
+          fi
+          mapfile -t < <(find "${dir}" -maxdepth "${depth}" -type f -iname "${base}")
+          printf 'mapfiles=%s\n' "$(printf '%s\n' "${MAPFILE[@]}" | base64 -w 0)" >> "${GITHUB_ENV}"
+        
+      - name: RUN sed -E -i.bak -e '/^#/d; /^$/d;' requirements.txt
+        run: |
+          mapfile -t < <(base64 -d <<<"${mapfiles}")
           for file in "${MAPFILE[@]}"; do
             sed -E -i.bak -e '/^#/d; /^$/d;' "${file}"
-            printf '%s:\n' "${file}"
+            printf '\n%s:\n' "${file}"
             cat "${file}"
           done
 
       - name: RUN pipreqs --print --diff requirements.txt
         continue-on-error: true
         run: |
-          mapfile -t < <(find '${{ inputs.dir }}' -type f -iname '${{ inputs.mask }}')
+          mapfile -t < <(base64 -d <<<"${mapfiles}")
           for file in "${MAPFILE[@]}"; do
-            python -m pipreqs.pipreqs --print --diff "${file}"
+            printf '\n%s:\n' "${file}"
+            python -m pipreqs.pipreqs --print --diff "${file}" 2>/dev/null
           done
 
       - name: RUN pur --dry-run --dry-run-changed --no-recursive --requirement requirements.txt
         continue-on-error: true
         run: |
-          mapfile -t < <(find '${{ inputs.dir }}' -type f -iname '${{ inputs.mask }}')
+          mapfile -t < <(base64 -d <<<"${mapfiles}")
           for file in "${MAPFILE[@]}"; do
+            printf '\n%s: ' "${file}"
             out=$(python -m pur --dry-run --dry-run-changed --no-recursive --requirement "${file}")
-            echo \$?=$?
-            test -z "${out}" && continue
-            printf '%s: changes found:\n' "${file}"
-            echo "${out}"
+            if [[ -z "${out}" ]]; then
+              printf 'no changes found\n'
+              continue
+            fi
+            printf 'changes found:\n%s\n'  "${out}"
           done
 
       - name: RUN pur --no-recursive --requirement requirements.txt
         continue-on-error: true
         run: |
-          mapfile -t < <(find '${{ inputs.dir }}' -type f -iname '${{ inputs.mask }}')
+          mapfile -t < <(base64 -d <<<"${mapfiles}")
           for file in "${MAPFILE[@]}"; do
+              printf '\n%s: ' "${file}"
               out=$(python -m pur --no-recursive --requirement "${file}")
-              grep -q 'All requirements up-to-date' <<<"${out}" && continue
-              printf '%s: changes found:\n' "${file}"
-              echo "${out}"
+              if grep -q 'All requirements up-to-date' <<<"${out}"; then
+                printf 'no changes found\n'
+                continue
+              fi
+              printf 'changes found:\n%s\n'  "${out}"
           done
 
       - name: RUN pip install -r requirements.txt
         continue-on-error: true
         run: |
-          mapfile -t < <(find '${{ inputs.dir }}' -type f -iname '${{ inputs.mask }}')
+          mapfile -t < <(base64 -d <<<"${mapfiles}")
           for file in "${MAPFILE[@]}"; do
+            printf '\n%s: ' "${file}"
             python -m pip install -r "${file}"
           done
 
       - name: RUN pipdeptree --warn silence
         continue-on-error: true
         run: |
-          cd '${{ inputs.dir }}'
           pipdeptree --warn silence
 
       - name: RUN pipdeptree --freeze --warn silence | grep -E '^[a-zA-Z0-9\-]+'
         continue-on-error: true
         run: |
-          cd '${{ inputs.dir }}'
           pipdeptree --freeze --warn silence | grep -E '^[a-zA-Z0-9\-]+'
 
 # cSpell:ignore MAPFILE, mapfile, noprofile, norc, pipefail, pipreqs, pydeps, pipdeptree, pur
