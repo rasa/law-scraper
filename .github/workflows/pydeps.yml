@@ -80,14 +80,17 @@ jobs:
             depth=1
           fi
           mapfile -t < <(find "${dir}" -maxdepth "${depth}" -type f -iname "${base}")
-          printf 'mapfiles=%s\n' "$(printf '%s\n' "${MAPFILE[@]}" | base64 -w 0)" >> "${GITHUB_ENV}"
+          printf 'Found %d files matching %s:\n' "${#MAPFILE[@]}" '${{ inputs.mask }}'
+          printf '%s\n' "${MAPFILE[@]}"
+          ((${#MAPFILE[@]})) && mapfiles=$(printf '%s\n' "${MAPFILE[@]}" | base64 -w 0)
+          printf 'mapfiles=%s\n' "${mapfiles:-}" >> "${GITHUB_ENV}"
         
       - name: RUN sed -E -i.bak -e '/^#/d; /^$/d;' requirements.txt
         run: |
           mapfile -t < <(base64 -d <<<"${mapfiles}")
           for file in "${MAPFILE[@]}"; do
-            sed -E -i.bak -e '/^#/d; /^$/d;' "${file}"
             printf '\n%s:\n' "${file}"
+            sed -E -i.bak -e '/^#/d; /^$/d;' "${file}"
             cat "${file}"
           done
 
