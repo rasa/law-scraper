@@ -7,6 +7,9 @@
 
 name: pydeps
 
+env:
+  DEFAULT_MASK: '**/*requirements*.txt'
+
 'on':
   schedule:
     # run every day at 15:00 UTC (08:00 PDT)
@@ -49,7 +52,57 @@ jobs:
           - '3.10'
           - '3.11'
     steps:
+      - name: USES actions/checkout@v3.5.3
+        uses: actions/checkout@v3.5.3
+        with:
+          fetch-depth: 1
+
+      - name: RUN gather file list
+        run: |
+          mask="${{ inputs.mask || env.DEFAULT_MASK }}"
+          printf "mask=%s\n" "${mask}"
+          dir=$(dirname "${mask}")
+          base=$(basename "${mask}")
+          if [[ "${dir}" == "**" ]]; then
+            dir=.
+            depth=99
+          else
+            depth=1
+          fi
+          mapfile -t < <(find "${dir}" -maxdepth "${depth}" -type f -iname "${base}")
+          printf 'Found %d files matching %s:\n' "${#MAPFILE[@]}" '${mask}'
+          printf '%s\n' "${MAPFILE[@]}"
+          ((${#MAPFILE[@]})) && reqfiles=$(printf '%s\n' "${MAPFILE[@]}" | base64 -w 0)
+          printf 'reqfiles=%s\n' "${reqfiles:-}" >> "${GITHUB_ENV}"
+
+      - name: RUN find mis-versioned dups
+        if: env.reqfiles > ''
+        run: |
+          mapfile -t < <(base64 -d <<<"${reqfiles}")
+          cat "${MAPFILE[@]}" | 
+            grep -o '^[^#]*' |
+            sed -E 's/\s+//g' |
+            sort -u |
+            sed -E 's/[<>~!]+/=/g' |
+            grep '=' |
+            cut -d'=' -f 1 |
+            sort |
+            uniq -d >dups.tmp
+          printf "Duplicates found: "
+          wc -l < dups.tmp
+          if [[ -s dups.tmp ]]; then
+            printf "\n"
+            cat dups.tmp
+            printf "\n"
+            sed 's/^/\^/g' dups.tmp | 
+              grep -H -f - "${MAPFILE[@]}" | 
+              sed "s|^|::notice::|g" <<<"${out}"
+          fi
+          rm -f dups.tmp
+          exit 0
+
       - name: USES actions/setup-python@v4.7.0
+        if: env.reqfiles > ''
         uses: actions/setup-python@v4.7.0
         with:
           python-version: ${{ matrix.python-version }}
@@ -58,36 +111,17 @@ jobs:
           # cache-dependency-path: '${{ inputs.mask }}'
 
       - name: RUN pip install --upgrade pip
+        if: env.reqfiles > ''
         run:  python -m pip install --upgrade pip
 
       - name: RUN pip install pipdeptree pipreqs pur
+        if: env.reqfiles > ''
         run: python -m pip install pipdeptree pipreqs pur
 
-      - name: USES actions/checkout@v3.5.3
-        uses: actions/checkout@v3.5.3
-        with:
-          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
-          fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
-
-      - name: RUN gather file list
-        run: |
-          dir=$(dirname '${{ inputs.mask }}')
-          base=$(basename '${{ inputs.mask }}')
-          if [[ "${dir}" == "**" ]]; then
-            dir=.
-            depth=99
-          else
-            depth=1
-          fi
-          mapfile -t < <(find "${dir}" -maxdepth "${depth}" -type f -iname "${base}")
-          printf 'Found %d files matching %s:\n' "${#MAPFILE[@]}" '${{ inputs.mask }}'
-          printf '%s\n' "${MAPFILE[@]}"
-          ((${#MAPFILE[@]})) && mapfiles=$(printf '%s\n' "${MAPFILE[@]}" | base64 -w 0)
-          printf 'mapfiles=%s\n' "${mapfiles:-}" >> "${GITHUB_ENV}"
-        
       - name: RUN sed -E -i.bak -e '/^#/d; /^$/d;' requirements.txt
+        if: env.reqfiles > ''
         run: |
-          mapfile -t < <(base64 -d <<<"${mapfiles}")
+          mapfile -t < <(base64 -d <<<"${reqfiles}")
           for file in "${MAPFILE[@]}"; do
             printf '\n%s:\n' "${file}"
             sed -E -i.bak -e '/^#/d; /^$/d;' "${file}"
@@ -95,18 +129,20 @@ jobs:
           done
 
       - name: RUN pipreqs --print --diff requirements.txt
+        if: env.reqfiles > ''
         continue-on-error: true
         run: |
-          mapfile -t < <(base64 -d <<<"${mapfiles}")
+          mapfile -t < <(base64 -d <<<"${reqfiles}")
           for file in "${MAPFILE[@]}"; do
             printf '\n%s:\n' "${file}"
             python -m pipreqs.pipreqs --print --diff "${file}" 2>/dev/null
           done
 
       - name: RUN pur --dry-run --dry-run-changed --no-recursive --requirement requirements.txt
+        if: env.reqfiles > ''
         continue-on-error: true
         run: |
-          mapfile -t < <(base64 -d <<<"${mapfiles}")
+          mapfile -t < <(base64 -d <<<"${reqfiles}")
           for file in "${MAPFILE[@]}"; do
             printf '\n%s: ' "${file}"
             out=$(python -m pur --dry-run --dry-run-changed --no-recursive --requirement "${file}")
@@ -114,13 +150,16 @@ jobs:
               printf 'no changes found\n'
               continue
             fi
-            printf 'changes found:\n%s\n'  "${out}"
+            printf 'changes found:\n%s\n' "${out}"
+            sed "s|^|::notice::${file}:|g" <<<"${out}" |
+              grep -v '==>'
           done
 
       - name: RUN pur --no-recursive --requirement requirements.txt
+        if: env.reqfiles > ''
         continue-on-error: true
         run: |
-          mapfile -t < <(base64 -d <<<"${mapfiles}")
+          mapfile -t < <(base64 -d <<<"${reqfiles}")
           for file in "${MAPFILE[@]}"; do
               printf '\n%s: ' "${file}"
               out=$(python -m pur --no-recursive --requirement "${file}")
@@ -128,24 +167,29 @@ jobs:
                 printf 'no changes found\n'
                 continue
               fi
-              printf 'changes found:\n%s\n'  "${out}"
+              printf 'changes found:\n%s\n' "${out}"
+              sed "s|^|::notice::${file}:|g" <<<"${out}" |
+                grep -v '==>'
           done
 
       - name: RUN pip install -r requirements.txt
+        if: env.reqfiles > ''
         continue-on-error: true
         run: |
-          mapfile -t < <(base64 -d <<<"${mapfiles}")
+          mapfile -t < <(base64 -d <<<"${reqfiles}")
           for file in "${MAPFILE[@]}"; do
             printf '\n%s: ' "${file}"
             python -m pip install -r "${file}"
           done
 
       - name: RUN pipdeptree --warn silence
+        if: env.reqfiles > ''
         continue-on-error: true
         run: |
           pipdeptree --warn silence
 
       - name: RUN pipdeptree --freeze --warn silence | grep -E '^[a-zA-Z0-9\-]+'
+        if: env.reqfiles > ''
         continue-on-error: true
         run: |
           pipdeptree --freeze --warn silence | grep -E '^[a-zA-Z0-9\-]+'
