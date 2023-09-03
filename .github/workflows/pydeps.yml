@@ -149,7 +149,7 @@ jobs:
           mapfile -t < <(base64 -d <<<"${reqfiles}")
           for file in "${MAPFILE[@]}"; do
             printf '\n%s: ' "${file}"
-            out=$(python -m pur --dry-run --dry-run-changed --no-recursive --requirement "${file}" | grep -v '==>' | tr -d '\015' || true)
+            out=$(python -m pur --dry-run --dry-run-changed --no-recursive --requirement "${file}" || true)
             if [[ -z "${out}" ]]; then
               printf 'no changes found\n'
               continue
@@ -166,7 +166,7 @@ jobs:
           mapfile -t < <(base64 -d <<<"${reqfiles}")
           for file in "${MAPFILE[@]}"; do
               printf '\n%s: ' "${file}"
-              out=$(python -m pur --no-recursive --requirement "${file}" | grep -v '==>' | tr -d '\015' || true)
+              out=$(python -m pur --no-recursive --requirement "${file}" || true)
               if grep -q 'All requirements up-to-date' <<<"${out}"; then
                 printf 'no changes found\n'
                 continue
