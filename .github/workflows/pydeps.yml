@@ -58,6 +58,7 @@ jobs:
           fetch-depth: 1
 
       - name: RUN gather file list
+        continue-on-error: true
         run: |
           mask="${{ inputs.mask || env.DEFAULT_MASK }}"
           printf "mask=%s\n" "${mask}"
@@ -74,9 +75,10 @@ jobs:
           printf '%s\n' "${MAPFILE[@]}"
           ((${#MAPFILE[@]})) && reqfiles=$(printf '%s\n' "${MAPFILE[@]}" | base64 -w 0)
           printf 'reqfiles=%s\n' "${reqfiles:-}" >> "${GITHUB_ENV}"
+          ((${#MAPFILE[@]}))
 
       - name: RUN find mis-versioned dups
-        if: env.reqfiles > ''
+        if: success()
         run: |
           mapfile -t < <(base64 -d <<<"${reqfiles}")
           cat "${MAPFILE[@]}" | 
@@ -102,7 +104,7 @@ jobs:
           exit 0
 
       - name: USES actions/setup-python@v4.7.0
-        if: env.reqfiles > ''
+        if: success()
         uses: actions/setup-python@v4.7.0
         with:
           python-version: ${{ matrix.python-version }}
@@ -111,15 +113,15 @@ jobs:
           # cache-dependency-path: '${{ inputs.mask }}'
 
       - name: RUN pip install --upgrade pip
-        if: env.reqfiles > ''
+        if: success()
         run:  python -m pip install --upgrade pip
 
       - name: RUN pip install pipdeptree pipreqs pur
-        if: env.reqfiles > ''
+        if: success()
         run: python -m pip install pipdeptree pipreqs pur
 
       - name: RUN sed -E -i.bak -e '/^#/d; /^$/d;' requirements.txt
-        if: env.reqfiles > ''
+        if: success()
         run: |
           mapfile -t < <(base64 -d <<<"${reqfiles}")
           for file in "${MAPFILE[@]}"; do
@@ -129,7 +131,7 @@ jobs:
           done
 
       - name: RUN pipreqs --print --diff requirements.txt
-        if: env.reqfiles > ''
+        if: success()
         continue-on-error: true
         run: |
           mapfile -t < <(base64 -d <<<"${reqfiles}")
@@ -139,7 +141,7 @@ jobs:
           done
 
       - name: RUN pur --dry-run --dry-run-changed --no-recursive --requirement requirements.txt
-        if: env.reqfiles > ''
+        if: success()
         continue-on-error: true
         run: |
           mapfile -t < <(base64 -d <<<"${reqfiles}")
@@ -156,7 +158,7 @@ jobs:
           done
 
       - name: RUN pur --no-recursive --requirement requirements.txt
-        if: env.reqfiles > ''
+        if: success()
         continue-on-error: true
         run: |
           mapfile -t < <(base64 -d <<<"${reqfiles}")
@@ -173,7 +175,7 @@ jobs:
           done
 
       - name: RUN pip install -r requirements.txt
-        if: env.reqfiles > ''
+        if: success()
         continue-on-error: true
         run: |
           mapfile -t < <(base64 -d <<<"${reqfiles}")
@@ -183,17 +185,18 @@ jobs:
           done
 
       - name: RUN pipdeptree --warn silence
-        if: env.reqfiles > ''
+        if: success()
         continue-on-error: true
         run: |
           pipdeptree --warn silence
 
       - name: RUN pipdeptree --freeze --warn silence | grep -E '^[a-zA-Z0-9\-]+'
-        if: env.reqfiles > ''
+        if: success()
         continue-on-error: true
         run: |
           pipdeptree --freeze --warn silence | grep -E '^[a-zA-Z0-9\-]+'
 
-# cSpell:ignore MAPFILE, mapfile, noprofile, norc, pipefail, pipreqs, pydeps, pipdeptree, pur
+# cSpell:ignore dups, MAPFILE, mapfile, maxdepth, noprofile, norc, pipefail, pipreqs
+# cSpell:ignore pydeps, pipdeptree, pur, reqfiles
 
 # eof
