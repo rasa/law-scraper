@@ -81,7 +81,7 @@ jobs:
         if: success()
         run: |
           mapfile -t < <(base64 -d <<<"${reqfiles}")
-          cat "${MAPFILE[@]}" | 
+          cat "${MAPFILE[@]}" |
             grep -o '^[^#]*' |
             sed -E 's/\s+//g' |
             sort -u |
@@ -96,8 +96,8 @@ jobs:
             printf "\n"
             cat dups.tmp
             printf "\n"
-            sed 's/^/\^/g' dups.tmp | 
-              grep -H -f - "${MAPFILE[@]}" | 
+            sed 's/^/\^/g' dups.tmp |
+              grep -H -f - "${MAPFILE[@]}" |
               sed "s|^|::notice::|g" <<<"${out}"
           fi
           rm -f dups.tmp
