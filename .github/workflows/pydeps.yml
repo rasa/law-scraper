@@ -37,8 +37,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     defaults:
       run:
+        # force Windows to use bash:
+        shell: bash
         # shell: bash -v -x {0}
-        shell: bash --noprofile --norc -e -o pipefail {0}
+        # shell: bash --noprofile --norc -e -o pipefail {0}
     strategy:
       fail-fast: true
       max-parallel: 1
@@ -52,8 +54,8 @@ jobs:
           - '3.10'
           - '3.11'
     steps:
-      - name: USES actions/checkout@v3.5.3
-        uses: actions/checkout@v3.5.3
+      - name: USES actions/checkout@v3.6.0
+        uses: actions/checkout@v3.6.0
         with:
           fetch-depth: 1
 
@@ -100,7 +102,7 @@ jobs:
             printf "\n"
             sed -e 's/^/\^/g' "${tmp1}" |
               grep -H -f - "${MAPFILE[@]}" > "${tmp2}"
-            od -c -t x1 "${tmp2}"
+            # od -c -t x1 "${tmp2}"
             sed "s|^|::notice::|g" < "${tmp2}"
           fi
           rm -f "${tmp1}" "${tmp2}"
@@ -149,13 +151,13 @@ jobs:
           mapfile -t < <(base64 -d <<<"${reqfiles}")
           for file in "${MAPFILE[@]}"; do
             printf '\n%s: ' "${file}"
-            out=$(python -m pur --dry-run --dry-run-changed --no-recursive --requirement "${file}" || true)
+            out=$(python -m pur --dry-run --dry-run-changed --no-recursive --requirement "${file}" | grep -v '==>' || true)
             if [[ -z "${out}" ]]; then
               printf 'no changes found\n'
               continue
             fi
             printf 'changes found:\n%s\n' "${out}"
-            od -c -t x1 <<<"${out}"
+            # od -c -t x1 <<<"${out}"
             sed "s|^|::notice::${file}:|g" <<<"${out}" || true
           done
 
@@ -166,13 +168,13 @@ jobs:
           mapfile -t < <(base64 -d <<<"${reqfiles}")
           for file in "${MAPFILE[@]}"; do
               printf '\n%s: ' "${file}"
-              out=$(python -m pur --no-recursive --requirement "${file}" || true)
+              out=$(python -m pur --no-recursive --requirement "${file}" | grep -v '==>' || true)
               if grep -q 'All requirements up-to-date' <<<"${out}"; then
                 printf 'no changes found\n'
                 continue
               fi
               printf 'changes found:\n%s\n' "${out}"
-              od -c -t x1 <<<"${out}"
+              # od -c -t x1 <<<"${out}"
               sed "s|^|::notice::${file}:|g" <<<"${out}" || true
           done
 
