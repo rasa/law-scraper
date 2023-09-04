@@ -9,6 +9,8 @@ name: dependabot
     - cron: '0 16 * * *'
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 
+permissions: write-all
+
 jobs:
   dependabot:
     uses: rasa/workflows/.github/workflows/dependabot.yml@main
