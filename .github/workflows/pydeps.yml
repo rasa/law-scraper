@@ -79,12 +79,11 @@ jobs:
           printf 'reqfiles=%s\n' "${reqfiles:-}" >> "${GITHUB_ENV}"
           ((${#MAPFILE[@]}))
 
-      - name: RUN find mis-versioned dups
+      - name: RUN find duplicate packages, if any, across all requirements files
         if: success()
         run: |
           mapfile -t < <(base64 -d <<<"${reqfiles}")
           tmp1=$(mktemp)
-          tmp2=$(mktemp)
           cat "${MAPFILE[@]}" |
             grep -o '^[^#]*' |
             sed -E 's/\s+//g' |
@@ -104,7 +103,7 @@ jobs:
               grep -H -f - "${MAPFILE[@]}" |
               sed "s|^|::notice::|g"
           fi
-          rm -f "${tmp1}" "${tmp2}"
+          rm -f "${tmp1}"
           exit 0
 
       - name: USES actions/setup-python@v4.7.0
