@@ -101,9 +101,8 @@ jobs:
             cat "${tmp1}"
             printf "\n"
             sed -e 's/^/\^/g' "${tmp1}" |
-              grep -H -f - "${MAPFILE[@]}" > "${tmp2}"
-            # od -c -t x1 "${tmp2}"
-            sed "s|^|::notice::|g" < "${tmp2}"
+              grep -H -f - "${MAPFILE[@]}" |
+              sed "s|^|::notice::|g"
           fi
           rm -f "${tmp1}" "${tmp2}"
           exit 0
@@ -125,7 +124,7 @@ jobs:
       - name: RUN pip install pipdeptree pipreqs pur
         if: success()
         run: |
-          python -m pip install pipdeptree pipreqs pur
+          pip install pipdeptree pipreqs pur
 
       - name: RUN sed -E -i.bak -e '/^\s*#/d; /^\s*$/d;' requirements.txt
         if: success()
@@ -136,67 +135,59 @@ jobs:
 
       - name: RUN pipreqs --print --diff requirements.txt
         if: success()
-        continue-on-error: true
         run: |
           mapfile -t < <(base64 -d <<<"${reqfiles}")
           for file in "${MAPFILE[@]}"; do
             printf '\n%s:\n' "${file}"
-            python -m pipreqs.pipreqs --print --diff "${file}" 2>/dev/null || true
+            pipreqs --print --diff "${file}" 2>/dev/null || true
           done
 
       - name: RUN pur --dry-run --dry-run-changed --no-recursive --requirement requirements.txt
         if: success()
-        continue-on-error: true
         run: |
           mapfile -t < <(base64 -d <<<"${reqfiles}")
           for file in "${MAPFILE[@]}"; do
             printf '\n%s: ' "${file}"
-            out=$(python -m pur --dry-run --dry-run-changed --no-recursive --requirement "${file}" | grep -v '==>' || true)
+            out=$(pur --dry-run --dry-run-changed --no-recursive --requirement "${file}" | grep -v '==>' || true)
             if [[ -z "${out}" ]]; then
               printf 'no changes found\n'
               continue
             fi
             printf 'changes found:\n%s\n' "${out}"
-            # od -c -t x1 <<<"${out}"
-            sed "s|^|::notice::${file}:|g" <<<"${out}" || true
+            sed "s|^|::notice::${file}:|g" <<<"${out}"
           done
 
       - name: RUN pur --no-recursive --requirement requirements.txt
         if: success()
-        continue-on-error: true
         run: |
           mapfile -t < <(base64 -d <<<"${reqfiles}")
           for file in "${MAPFILE[@]}"; do
               printf '\n%s: ' "${file}"
-              out=$(python -m pur --no-recursive --requirement "${file}" | grep -v '==>' || true)
+              out=$(pur --no-recursive --requirement "${file}" | grep -v '==>' || true)
               if grep -q 'All requirements up-to-date' <<<"${out}"; then
                 printf 'no changes found\n'
                 continue
               fi
               printf 'changes found:\n%s\n' "${out}"
-              # od -c -t x1 <<<"${out}"
-              sed "s|^|::notice::${file}:|g" <<<"${out}" || true
+              sed "s|^|::notice::${file}:|g" <<<"${out}"
           done
 
       - name: RUN pip install -r requirements.txt
         if: success()
-        continue-on-error: true
         run: |
           mapfile -t < <(base64 -d <<<"${reqfiles}")
           for file in "${MAPFILE[@]}"; do
             printf '\n%s: ' "${file}"
-            python -m pip install -r "${file}" || true
+            pip install -r "${file}" || true
           done
 
       - name: RUN pipdeptree --warn silence
         if: success()
-        continue-on-error: true
         run: |
           pipdeptree --warn silence || true
 
       - name: RUN pipdeptree --freeze --warn silence | grep -E '^[a-zA-Z0-9\-]+'
         if: success()
-        continue-on-error: true
         run: |
           pipdeptree --freeze --warn silence | grep -E '^[a-zA-Z0-9\-]+' || true
 
