@@ -54,10 +54,11 @@ jobs:
           - '3.10'
           - '3.11'
     steps:
-      - name: USES actions/checkout@v3.6.0
-        uses: actions/checkout@v3.6.0
+      - name: USES actions/checkout@v4
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
+          progress: false
 
       - name: RUN gather file list
         continue-on-error: true
