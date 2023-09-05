@@ -1,7 +1,8 @@
 ---
 # yamllint disable rule:line-length
 # $schema https://raw.githubusercontent.com/megalinter/megalinter/main/megalinter/descriptors/schemas/megalinter-configuration.jsonschema.json
-# ~/.github/mega-linter-shared.yml
+# Copied from: rasa/dotfiles/.github/mega-linter-shared.yml
+# EDIT THE ABOVE FILE OR YOUR CHANGES WILL BE LOST!
 
 ## CONVERT ERRORS TO WARNINGS ##
 
