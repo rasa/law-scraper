@@ -73,7 +73,7 @@ jobs:
             depth=1
           fi
           mapfile -t < <(find "${dir}" -maxdepth "${depth}" -type f -iname "${base}")
-          printf 'Found %d files matching %s:\n' "${#MAPFILE[@]}" '${mask}'
+          printf 'Found %d files matching %s:\n' "${#MAPFILE[@]}" "${mask}"
           printf '%s\n' "${MAPFILE[@]}"
           ((${#MAPFILE[@]})) && reqfiles=$(printf '%s\n' "${MAPFILE[@]}" | base64 -w 0)
           printf 'reqfiles=%s\n' "${reqfiles:-}" >> "${GITHUB_ENV}"
@@ -153,6 +153,7 @@ jobs:
               continue
             fi
             printf 'changes found:\n%s\n' "${out}"
+            # shellcheck disable=SC2001
             sed "s|^|::notice::${file}:|g" <<<"${out}"
           done
 
@@ -168,6 +169,7 @@ jobs:
                 continue
               fi
               printf 'changes found:\n%s\n' "${out}"
+              # shellcheck disable=SC2001
               sed "s|^|::notice::${file}:|g" <<<"${out}"
           done
 
