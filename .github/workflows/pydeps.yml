@@ -10,7 +10,7 @@ name: pydeps
 env:
   DEFAULT_MASK: '**/*requirements*.txt'
 
-'on':
+'on': # quotes required by linter
   schedule:
     # run every day at 15:00 UTC (08:00 PDT)
     - cron: '0 15 * * *'
@@ -55,10 +55,9 @@ jobs:
           - '3.11'
     steps:
       - name: USES actions/checkout@v4
-        uses: actions/checkout@v4
+        uses:      actions/checkout@v4
         with:
-          fetch-depth: 1
-          progress: false
+          show-progress: false
 
       - name: RUN gather file list
         continue-on-error: true
@@ -109,7 +108,7 @@ jobs:
 
       - name: USES actions/setup-python@v4.7.0
         if: success()
-        uses: actions/setup-python@v4.7.0
+        uses:      actions/setup-python@v4.7.0
         with:
           python-version: ${{ matrix.python-version }}
           # see https://stackoverflow.com/questions/73789054/reusable-github-action-workflow-with-actions-setup-python-fails-because-it-cant
