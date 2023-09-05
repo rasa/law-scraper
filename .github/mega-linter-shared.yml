@@ -4,6 +4,14 @@
 # Copied from: rasa/dotfiles/.github/mega-linter-shared.yml
 # EDIT THE ABOVE FILE OR YOUR CHANGES WILL BE LOST!
 
+## FILTERS ##
+
+FILTER_REGEX_EXCLUDE: "\
+(?i)(\
+|megalinter-reports/.*\
+|\\.git/.*\
+)$"
+
 ## CONVERT ERRORS TO WARNINGS ##
 
 # produces too many false positives:
