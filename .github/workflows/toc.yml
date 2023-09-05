@@ -29,10 +29,9 @@ jobs:
       GH_TOC_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: USES actions/checkout@v4
-        uses: actions/checkout@v4
+        uses:      actions/checkout@v4
         with:
-          fetch-depth: 1
-          progress: false
+          show-progress: false
 
       - name: RUN gh-md-toc
         run: |
@@ -43,7 +42,7 @@ jobs:
           true
 
       - name: USES stefanzweifel/git-auto-commit-action@v4.16.0
-        uses: stefanzweifel/git-auto-commit-action@v4.16.0
+        uses:      stefanzweifel/git-auto-commit-action@v4.16.0
         with:
           commit_message: "chore(docs): auto update markdown TOC"
 
