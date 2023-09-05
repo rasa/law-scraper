@@ -1,6 +1,8 @@
 ---
 # $schema https://json.schemastore.org/github-workflow.json
-# ~/.github/workflows/mega-linter.yml
+# Copied from: rasa/dotfiles/.github/workflows/mega-linter.yml
+# EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
+
 name: mega-linter
 
 'on': # quotes required by linter
