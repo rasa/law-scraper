@@ -1,16 +1,18 @@
 ---
 # $schema https://json.schemastore.org/github-workflow.json
+# Copied from: rasa/dotfiles/.github/workflows/toc.yml
+# EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
 
 name: 'toc'
 
-"on":
-  push:
-    paths:
-      - '**/*.md'
+'on': # quotes required by linter
   pull_request:
     branches:
       - main
       - master
+    paths:
+      - '**/*.md'
+  push:
     paths:
       - '**/*.md'
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
@@ -26,8 +28,10 @@ jobs:
     env: 
       GH_TOC_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: USES actions/checkout@v3.6.0
-        uses: actions/checkout@v3.6.0
+      - name: USES actions/checkout@v4
+        uses: actions/checkout@v4
+        with:
+          progress: false
 
       - name: RUN gh-md-toc
         run: |
