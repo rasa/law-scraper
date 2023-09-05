@@ -1,5 +1,6 @@
 ---
-# ~/.github/dependabot.yml
+# Copied from: rasa/dotfiles/.github/dependabot.yml
+# EDIT THE ABOVE FILE OR YOUR CHANGES WILL BE LOST!
 version: 2
 updates:
   - package-ecosystem: "github-actions"
