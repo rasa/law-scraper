@@ -12,7 +12,7 @@ env:
   part: 4
   log_level: debug
   
-"on": # quotes required to quiet linter
+'on': # quotes required to quiet linter
   push:
   #  branches: [ master, main ] # $default-branch doesn't seem to work
   pull_request:
@@ -68,13 +68,15 @@ jobs:
           # sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
 
       - name: USES actions/checkout@v4
-        uses: actions/checkout@v4
+        uses:      actions/checkout@v4
+        with:
+          show-progress: false
 
       - name: USES actions/setup-python@v4
-        uses: actions/setup-python@v4
+        uses:      actions/setup-python@v4
         with:
           python-version: '3.11'
-          cache: 'pip' # caching pip dependencies
+          cache: 'pip'
 
       - name: RUN pip install -r requirements.txt
         run: |
@@ -89,8 +91,8 @@ jobs:
           (set -o posix;set)
           python scraper.py "${{ github.event.inputs.division || env.division }}" "${{ github.event.inputs.part || env.part }}" "${{ github.event.inputs.code || env.code }}"
 
-      - name: USES actions/upload-artifact
-        uses: actions/upload-artifact@v3
+      - name: USES actions/upload-artifact@v3
+        uses:      actions/upload-artifact@v3
         with:
           name: html and pdf
           path: |
