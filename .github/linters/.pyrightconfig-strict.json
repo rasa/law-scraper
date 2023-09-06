@@ -1,0 +1,7 @@
+{
+  "pythonVersion": "3.11",
+  "pythonPlatform": "All",
+  "reportMissingImports": "warning",
+  "reportUnnecessaryTypeIgnoreComment": true,
+  "typeCheckingMode": "strict"
+}
