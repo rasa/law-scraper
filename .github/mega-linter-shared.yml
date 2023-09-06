@@ -17,19 +17,20 @@ FILTER_REGEX_EXCLUDE: "\
 # produces too many false positives:
 COPYPASTE_JSCPD_DISABLE_ERRORS: true
 
+# produces too many false positives:
+REPOSITORY_DEVSKIM_DISABLE_ERRORS: true
+
+# don't fail if a site is down, or their cert has expired:
+SPELL_LYCHEE_DISABLE_ERRORS: true
+
+#
 # EDITORCONFIG_EDITORCONFIG_CHECKER_DISABLE_ERRORS
 
 # Reports variable assignment as targets:
 # MAKEFILE_CHECKMAKE_DISABLE_ERRORS: true
 
-# produces too many false positives:
-REPOSITORY_DEVSKIM_DISABLE_ERRORS: true
-
 # Reporting errant whitespace where there is none:
 # REPOSITORY_GIT_DIFF_DISABLE_ERRORS: true
-
-# don't fail if a site is down, or their cert has expired:
-SPELL_LYCHEE_DISABLE_ERRORS: true
 
 ## COMMAND ARGUMENTS ##
 
@@ -40,9 +41,6 @@ SPELL_LYCHEE_DISABLE_ERRORS: true
 BASH_SHELLCHECK_ARGUMENTS: '--external-sources --enable=all --exclude SC2310,SC2312'
 
 BASH_SHFMT_ARGUMENTS: '-ci -i 2'
-
-# doesn't provide any helpful info:
-# EDITORCONFIG_EDITORCONFIG_CHECKER_ARGUMENTS: '--debug --verbose'
 
 # allow for comments in json files:
 JSON_JSONLINT_ARGUMENTS: '--mode cjson'
@@ -70,28 +68,33 @@ REPOSITORY_GIT_DIFF_ARGUMENTS: '--ignore-space-change' # didn't fix it: --ignore
 # I don't know if 2 'verbose's increases verbosity:
 YAML_V8R_ARGUMENTS: '--verbose --verbose'
 
+# doesn't provide any helpful info:
+# EDITORCONFIG_EDITORCONFIG_CHECKER_ARGUMENTS: '--debug --verbose'
+
 ## GLOBAL SETTINGS ##
 
 # When active, APPLY_FIXES must also be defined as environment variable (in github/workflows/mega-linter.yml or other CI
 APPLY_FIXES: all # default: none
+
+PRINT_ALPACA: false # default: true
+
+SHOW_ELAPSED_TIME: true # default: false
 
 # needs EMAIL_REPORTER_SMTP_PASSWORD to work:
 # EMAIL_REPORTER_EMAIL: ''
 
 # FILEIO_REPORTER: true # default: false
 
-# JSON_REPORTER: true # default: false
-
 # Quiet logs:
 # [GitHub Status Reporter] Error posting Status for JSONwith prettier: 403
 # GitHub API response: {"message":"Resource not accessible by integration","documentation_url":"https://docs.github.com/rest/commits/statuses#create-a-commit-status"}
 # GITHUB_STATUS_REPORTER: true # default: false
 
+# JSON_REPORTER: true # default: false
+
 # LOG_LEVEL: DEBUG # default: INFO
 
 # PRINT_ALL_FILES: true # default: false
-
-PRINT_ALPACA: false # default: true
 
 # This error:
 #   WARNING: there is a new pyright version available (v1.1.270 -> v1.1.280).
@@ -100,8 +103,6 @@ PRINT_ALPACA: false # default: true
 # PYRIGHT_PYTHON_FORCE_VERSION: 'latest'
 
 # REPORT_OUTPUT_FOLDER: '${GITHUB_WORKSPACE}/.cache/mega-linter'
-
-SHOW_ELAPSED_TIME: true # default: false
 
 # cSpell:ignore CHECKMAKE, cjson, DEVSKIM, JSONLINT, KICS, MARKDOWNLINT, markdownlint
 # cSpell:ignore MYPY, mypy, PROSELINT, PYLINT, PYRIGHT, pyright, pyrightconfig,
