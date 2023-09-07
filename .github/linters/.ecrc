@@ -5,7 +5,9 @@
   "IgnoreDefaults": false,
   "SpacesAftertabs": false,
   "NoColor": false,
-  "Exclude": [],
+  "Exclude": [
+    "\\.xls$"
+  ],
   "AllowedContentTypes": [],
   "PassedFiles": [],
   "Disable": {
