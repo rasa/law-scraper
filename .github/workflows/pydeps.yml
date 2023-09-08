@@ -45,6 +45,7 @@ jobs:
     strategy:
       fail-fast: true
       max-parallel: 1
+      # yamllint disable-line rule:line-length
       # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
       matrix:
         os:
@@ -112,6 +113,7 @@ jobs:
         uses:      actions/setup-python@v4.7.0
         with:
           python-version: ${{ matrix.python-version }}
+          # yamllint disable-line rule:line-length
           # see https://stackoverflow.com/questions/73789054/reusable-github-action-workflow-with-actions-setup-python-fails-because-it-cant
           # cache: 'pip'
           # cache-dependency-path: '${{ inputs.mask }}'
