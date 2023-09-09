@@ -105,6 +105,6 @@ SHOW_ELAPSED_TIME: true # default: false
 
 # cSpell:ignore CHECKMAKE, cjson, DEVSKIM, dotfiles, JSONLINT, KICS, MARKDOWNLINT, markdownlint
 # cSpell:ignore MYPY, mypy, PROSELINT, PYLINT, PYRIGHT, pyright, pyrightconfig,
-# cSpell:ignore SEMGREP, SHELLCHECK, SHFMT, TRIVY
+# cSpell:ignore SEMGREP, SHELLCHECK, SHFMT, TRIVY, TRUFFLEHOG
 
 # eof
