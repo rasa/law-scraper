@@ -16,6 +16,9 @@ COPYPASTE_JSCPD_DISABLE_ERRORS: true
 # produces too many false positives:
 REPOSITORY_DEVSKIM_DISABLE_ERRORS: true
 
+# .git/config:11
+REPOSITORY_TRUFFLEHOG_DISABLE_ERRORS: true
+
 # don't fail if a site is down, or their cert has expired:
 SPELL_LYCHEE_DISABLE_ERRORS: true
 
