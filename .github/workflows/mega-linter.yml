@@ -36,9 +36,8 @@ jobs:
     uses: rasa/workflows/.github/workflows/mega-linter.yml@main
     secrets: inherit
     with:
-      # fromJSON
       fetch_depth: ${{ inputs.fetch_depth }}
-      validate_all_codebase: ${{ fromJSON(inputs.validate_all_codebase || false) }}
+      validate_all_codebase: ${{ inputs.validate_all_codebase || false }}
 
 
 # eof
