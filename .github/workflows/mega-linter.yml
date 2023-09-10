@@ -38,7 +38,7 @@ jobs:
     with:
       # fromJSON
       fetch_depth: ${{ inputs.fetch_depth }}
-      validate_all_codebase: ${{ inputs.validate_all_codebase }}
+      validate_all_codebase: ${{ fromJSON(inputs.validate_all_codebase || false) }}
 
 
 # eof
