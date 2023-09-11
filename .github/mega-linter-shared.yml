@@ -14,6 +14,9 @@ FILTER_REGEX_EXCLUDE: "(?i)(megalinter-reports|\\.git)/"
 COPYPASTE_JSCPD_DISABLE_ERRORS: true
 
 # produces too many false positives:
+MARKDOWN_MARKDOWNLINT_DISABLE_ERRORS: true
+
+# produces too many false positives:
 REPOSITORY_DEVSKIM_DISABLE_ERRORS: true
 
 # .git/config:11
