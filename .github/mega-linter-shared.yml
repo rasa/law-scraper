@@ -51,7 +51,7 @@ MARKDOWN_MARKDOWNLINT_CONFIG_FILE: '.github/linters/.markdownlint.yaml'
 PYTHON_MYPY_ARGUMENTS: '--install-types --non-interactive'
 
 # @todo determine default location:
-PYTHON_PYRIGHT_ARGUMENTS: '-p .github/linters/.pyrightconfig.json'
+PYTHON_PYRIGHT_ARGUMENTS: '-p .github/linters/.pyrightconfig-loose.json'
 
 # Quiets "Ensure top-level permissions are not set to write-all":
 REPOSITORY_CHECKOV_ARGUMENTS: '--skip-check CKV2_GHA_1'
