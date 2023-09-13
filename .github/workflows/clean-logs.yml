@@ -5,7 +5,7 @@ name: clean-logs
 
 # permissions: write
 
-'on': # quotes required by linter
+"on": # quotes required by linter
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
     inputs:
       # checkov:skip=CKV_GHA_7:The build output cannot be affected by user parameters...
@@ -15,44 +15,44 @@ name: clean-logs
       #   required: true
       #   default: ${{ github.repository }}
       retain_days:
-        description: 'Number of days.'
+        description: "Number of days."
         required: false
-        default: '30'
+        default: "30"
         type: string
       keep_minimum_runs:
-        description: 'The minimum runs to keep for each workflow.'
+        description: "The minimum runs to keep for each workflow."
         required: false
-        default: '2'
+        default: "2"
         type: string
       delete_workflow_pattern:
-        description: 'The name or filename of the workflow. if not set then it will target all workflows.'
+        description: "The name or filename of the workflow. if not set then it will target all workflows."
         required: false
         type: string
       delete_workflow_by_state_pattern:
-        description: 'Remove workflow by state: active, deleted, disabled_fork, disabled_inactivity, disabled_manually'
+        description: "Remove workflow by state: active, deleted, disabled_fork, disabled_inactivity, disabled_manually"
         required: false
-        default: 'All'
+        default: "All"
         type: choice
         options:
-          - 'All'
+          - "All"
           - active
           - deleted
           - disabled_inactivity
           - disabled_manually
       delete_run_by_conclusion_pattern:
-        description: 'Remove workflow by conclusion: action_required, cancelled, failure, skipped, success'
+        description: "Remove workflow by conclusion: action_required, cancelled, failure, skipped, success"
         required: false
-        default: 'All'
+        default: "All"
         type: choice
         options:
-          - 'All'
+          - "All"
           - action_required
           - cancelled
           - failure
           - skipped
           - success
       dry_run:
-        description: 'Only log actions, do not perform any delete operations.'
+        description: "Only log actions, do not perform any delete operations."
         required: false
         type: string
 
@@ -70,7 +70,6 @@ jobs:
       delete_workflow_by_state_pattern: ${{ inputs.delete_workflow_by_state_pattern }}
       delete_run_by_conclusion_pattern: ${{ inputs.delete_run_by_conclusion_pattern }}
       dry_run: ${{ inputs.dry_run }}
-
 # cSpell:ignore Mattraks, rasa
 
 # eof
