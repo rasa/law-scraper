@@ -18,14 +18,14 @@ name: mega-linter
       fetch_depth:
         description: Number of commits to fetch. 0 indicates all history for all branches and tags.
         type: string
-        required: false
         default: '1'
       # checkov:skip=CKV_GHA_7:The build output cannot be affected by user parameters...
       validate_all_codebase:
         description: Validate the entire code base
-        type: boolean
-        required: false
-        default: false
+        type: choice
+        options:
+          - "false"
+          - "true"
 
 concurrency:
   group: ${{ github.workflow }}
@@ -37,7 +37,7 @@ jobs:
     secrets: inherit
     with:
       fetch_depth: ${{ inputs.fetch_depth }}
-      validate_all_codebase: ${{ inputs.validate_all_codebase || false }}
+      validate_all_codebase: ${{ inputs.validate_all_codebase }}
 
 
 # eof
