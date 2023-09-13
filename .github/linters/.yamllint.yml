@@ -21,7 +21,6 @@ rules:
     min-spaces-from-content: 1 # Used to follow prettier standard: https://github.com/prettier/prettier/pull/10926
   new-line-at-end-of-file: disable
   trailing-spaces: disable
-
 # cSpell:ignore rasa
 
 # eof
