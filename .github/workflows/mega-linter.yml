@@ -5,7 +5,7 @@
 
 name: mega-linter
 
-'on': # quotes required by linter
+"on": # quotes required by linter
   pull_request:
   push:
     paths:
@@ -18,7 +18,7 @@ name: mega-linter
       fetch_depth:
         description: Number of commits to fetch. 0 indicates all history for all branches and tags.
         type: string
-        default: '1'
+        default: "1"
       # checkov:skip=CKV_GHA_7:The build output cannot be affected by user parameters...
       validate_all_codebase:
         description: Validate the entire code base
@@ -38,6 +38,4 @@ jobs:
     with:
       fetch_depth: ${{ inputs.fetch_depth }}
       validate_all_codebase: ${{ inputs.validate_all_codebase }}
-
-
 # eof
