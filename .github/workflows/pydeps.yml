@@ -15,23 +15,23 @@ env:
   schedule:
     # run every day at 15:00 UTC (08:00 PDT)
     - cron: '0 15 * * *'
+  push:
+    paths:
+      - '**/*requirements*.txt'
   workflow_call:
     inputs:
       # checkov:skip=CKV_GHA_7
       mask:
-        description: 'File mask for requirements*.txt file(s)'
-        required: false
         type: string
         default: '**/*requirements*.txt'
-
+        description: 'File mask for requirements*.txt file(s)'
   workflow_dispatch:
     inputs:
       # checkov:skip=CKV_GHA_7
       mask:
-        description: 'File mask for requirements*.txt file(s)'
-        required: false
         type: string
         default: '**/*requirements*.txt'
+        description: 'File mask for requirements*.txt file(s)'
 
 jobs:
   job:
