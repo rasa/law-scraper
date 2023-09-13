@@ -48,35 +48,36 @@ SPELL_LYCHEE_DISABLE_ERRORS: true
 # This function is invoked in an 'if' condition so set -e will be disabled. Invoke separately if failures should cause the script to exit.
 # https://www.shellcheck.net/wiki/SC2312 :
 # Consider invoking this command separately to avoid masking its return value (or use '|| true' to ignore).
-BASH_SHELLCHECK_ARGUMENTS: '--external-sources --enable=all --exclude SC2310,SC2312'
+BASH_SHELLCHECK_ARGUMENTS: "--external-sources --enable=all --exclude SC2310,SC2312"
 
-BASH_SHFMT_ARGUMENTS: '-ci -i 2'
+BASH_SHFMT_ARGUMENTS: "-ci -i 2"
 
 # allow for comments in json files:
-JSON_JSONLINT_ARGUMENTS: '--mode cjson'
+JSON_JSONLINT_ARGUMENTS: "--mode cjson"
 
 # default is .markdownlint.json, but yaml is nicer :)
-MARKDOWN_MARKDOWNLINT_CONFIG_FILE: '.github/linters/.markdownlint.yaml'
+MARKDOWN_MARKDOWNLINT_CONFIG_FILE: ".github/linters/.markdownlint.yaml"
 
 # Doesn't seem to quiet logs:
-PYTHON_MYPY_ARGUMENTS: '--install-types --non-interactive'
+PYTHON_MYPY_ARGUMENTS: "--install-types --non-interactive"
 
 # @todo determine default location:
-PYTHON_PYRIGHT_ARGUMENTS: '-p .github/linters/.pyrightconfig-loose.json'
+PYTHON_PYRIGHT_ARGUMENTS: "-p .github/linters/.pyrightconfig-loose.json"
 
 # Quiets "Ensure top-level permissions are not set to write-all":
-REPOSITORY_CHECKOV_ARGUMENTS: '--skip-check CKV2_GHA_1'
+REPOSITORY_CHECKOV_ARGUMENTS: "--skip-check CKV2_GHA_1"
 
 # skip .mypy_cache (as it doesn't work when .mypy_cache is included in FILTER_REGEX_EXCLUDE):
-REPOSITORY_DEVSKIM_ARGUMENTS: ['--ignore-globs','**/megalinter-reports/**,**/.git/**,**/.mypy_cache/**']
+REPOSITORY_DEVSKIM_ARGUMENTS:
+  ["--ignore-globs", "**/megalinter-reports/**,**/.git/**,**/.mypy_cache/**"]
 # megalinter already passes `--skip-git-ignored-files`:
 # https://github.com/oxsecurity/megalinter/blob/43943881/megalinter/descriptors/repository.megalinter-descriptor.yml#L78
 
 # this appears to have fixed the issue:
-REPOSITORY_GIT_DIFF_ARGUMENTS: '--ignore-space-change' # didn't fix it: --ignore-space-at-eol
+REPOSITORY_GIT_DIFF_ARGUMENTS: "--ignore-space-change" # didn't fix it: --ignore-space-at-eol
 
 # I don't know if 2 'verbose's increases verbosity:
-YAML_V8R_ARGUMENTS: '--verbose --verbose'
+YAML_V8R_ARGUMENTS: "--verbose --verbose"
 
 # doesn't provide any helpful info:
 # EDITORCONFIG_EDITORCONFIG_CHECKER_ARGUMENTS: '--debug --verbose'
