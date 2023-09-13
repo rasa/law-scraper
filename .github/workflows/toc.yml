@@ -3,18 +3,18 @@
 # Copied from: rasa/dotfiles/.github/workflows/toc.yml
 # EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
 
-name: 'toc'
+name: "toc"
 
-'on': # quotes required by linter
+"on": # quotes required by linter
   pull_request:
     branches:
       - main
       - master
     paths:
-      - '**/*.md'
+      - "**/*.md"
   push:
     paths:
-      - '**/*.md'
+      - "**/*.md"
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 
 concurrency:
@@ -25,11 +25,11 @@ jobs:
   job:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    env: 
+    env:
       GH_TOC_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: USES actions/checkout@v4
-        uses:      actions/checkout@v4
+        uses: actions/checkout@v4
         with:
           show-progress: false
 
@@ -42,10 +42,9 @@ jobs:
           true
 
       - name: USES stefanzweifel/git-auto-commit-action@v4.16.0
-        uses:      stefanzweifel/git-auto-commit-action@v4.16.0
+        uses: stefanzweifel/git-auto-commit-action@v4.16.0
         with:
           commit_message: "chore(docs): auto update markdown TOC"
-
 # cSpell:ignore iname
 
 # eof
