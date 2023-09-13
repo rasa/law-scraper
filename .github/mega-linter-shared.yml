@@ -6,7 +6,12 @@
 
 ## FILTERS ##
 
-FILTER_REGEX_EXCLUDE: "(?i)(megalinter-reports|\\.git)/"
+FILTER_REGEX_EXCLUDE: >-
+  (?ix)(
+    megalinter-reports/ |
+    mega-linter.log |
+    \.git/
+  )
 
 ## CONVERT ERRORS TO WARNINGS ##
 
