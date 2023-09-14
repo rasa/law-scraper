@@ -1,5 +1,17 @@
-# .prettierrc.yaml
-trailingComma: "es5"
-tabWidth: 4
-semi: false
-singleQuote: true
+---
+# Copied from: rasa/dotfiles/linters/.prettierrc.yaml
+# EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
+
+# Docs: https://prettier.io/docs/en/options
+
+# may not work.
+# See https://github.com/prettier/prettier/issues/15255#issuecomment-1707022705
+editorconfig: true     # default: false
+printWidth: 132        # default: 80
+trailingComma: "es5"   # default: all
+# arrowParens: "avoid" # default: always
+# semi: false          # default: true
+# singleQuote: true    # default: false
+# tabWidth: 4          # default: 2
+
+# eof
