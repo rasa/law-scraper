@@ -37,7 +37,7 @@ jobs:
         run: |
           curl -fsSL --output gh-md-toc https://raw.githubusercontent.com/ekalinin/github-markdown-toc/HEAD/gh-md-toc
           chmod a+x gh-md-toc
-          find . -type f -iname '*.md' -exec ./gh-md-toc --indent 2 --no-backup --hide-footer --skip-header {} \;
+          find . -type f -iname '*.md' -exec ./gh-md-toc --indent 0 --no-backup --hide-footer --skip-header {} \;
           rm -f gh-md-toc
           true
 
@@ -45,7 +45,8 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4.16.0
         with:
           commit_message: "chore(docs): auto update markdown TOC"
-# cSpell:ignore iname
 
+# cSpell:ignore iname
+#
 # eof
 
