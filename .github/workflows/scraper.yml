@@ -11,8 +11,8 @@ env:
   division: 4
   part: 4
   log_level: debug
-  
-'on': # quotes required to quiet linter
+
+"on": # quotes required to quiet linter
   push:
   #  branches: [ master, main ] # $default-branch doesn't seem to work
   pull_request:
@@ -25,31 +25,31 @@ env:
   workflow_dispatch:
     inputs:
       log_level: # checkov:skip=CKV_GHA_7
-        description: 'Log level'
+        description: "Log level"
         # required: true
         type: choice
-        default: 'info' # doesn't work: ${{ env.log_level }}
+        default: "info" # doesn't work: ${{ env.log_level }}
         options:
-        - debug
-        - info
-        - warning
-        - error
-        - critical
+          - debug
+          - info
+          - warning
+          - error
+          - critical
       code:
-        description: 'TOC Code'
+        description: "TOC Code"
         # required: false
         type: string
-        default: 'DIV' # doesn't work: ${{ env.code }}
+        default: "DIV" # doesn't work: ${{ env.code }}
       division:
-        description: 'Division'
+        description: "Division"
         # required: false
         type: string
-        default: '4' # doesn't work: ${{ env.division }}
+        default: "4" # doesn't work: ${{ env.division }}
       part:
-        description: 'Part'
+        description: "Part"
         # required: false
         type: string
-        default: '4' # doesn't work: ${{ env.part }}
+        default: "4" # doesn't work: ${{ env.part }}
 
 jobs:
   job:
@@ -57,8 +57,8 @@ jobs:
     steps:
       - name: RUN apt install tidy wkhtmltopdf
         run: |
-            sudo apt -y update
-            sudo apt -y install tidy wkhtmltopdf
+          sudo apt -y update
+          sudo apt -y install tidy wkhtmltopdf
 
       - name: RUN chromedriver
         run: |
@@ -68,15 +68,15 @@ jobs:
           # sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
 
       - name: USES actions/checkout@v4
-        uses:      actions/checkout@v4
+        uses: actions/checkout@v4
         with:
           show-progress: false
 
       - name: USES actions/setup-python@v4
-        uses:      actions/setup-python@v4
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
-          cache: 'pip'
+          python-version: "3.11"
+          cache: "pip"
 
       - name: RUN pip install -r requirements.txt
         run: |
@@ -92,7 +92,7 @@ jobs:
           python scraper.py "${{ github.event.inputs.division || env.division }}" "${{ github.event.inputs.part || env.part }}" "${{ github.event.inputs.code || env.code }}"
 
       - name: USES actions/upload-artifact@v3
-        uses:      actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3
         with:
           name: html and pdf
           path: |

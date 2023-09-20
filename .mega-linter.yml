@@ -9,11 +9,11 @@ EXTENDS: https://raw.githubusercontent.com/rasa/workflows/main/.github/mega-lint
 
 ## FILTERS ##
 
-FILTER_REGEX_EXCLUDE: "\
-(?i)(\
-megalinter-reports\
-\\.git\
-)/"
+FILTER_REGEX_EXCLUDE: >-
+  (?ix)(
+  megalinter-reports
+  \.git
+  )/"
 
 ## CONVERT ERRORS TO WARNINGS ##
 
