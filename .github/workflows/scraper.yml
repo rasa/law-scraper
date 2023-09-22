@@ -26,7 +26,6 @@ env:
     inputs:
       log_level: # checkov:skip=CKV_GHA_7
         description: "Log level"
-        # required: true
         type: choice
         default: "info" # doesn't work: ${{ env.log_level }}
         options:
@@ -37,17 +36,14 @@ env:
           - critical
       code:
         description: "TOC Code"
-        # required: false
         type: string
         default: "DIV" # doesn't work: ${{ env.code }}
       division:
         description: "Division"
-        # required: false
         type: string
         default: "4" # doesn't work: ${{ env.division }}
       part:
         description: "Part"
-        # required: false
         type: string
         default: "4" # doesn't work: ${{ env.part }}
 
@@ -87,9 +83,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INPUT_LOG_LEVEL: ${{ github.event.inputs.log_level || env.log_level }}
-        run: |
-          (set -o posix;set)
-          python scraper.py "${{ github.event.inputs.division || env.division }}" "${{ github.event.inputs.part || env.part }}" "${{ github.event.inputs.code || env.code }}"
+        run: >
+          python scraper.py 
+            "${{ github.event.inputs.division || env.division }}"
+            "${{ github.event.inputs.part || env.part }}" 
+            "${{ github.event.inputs.code || env.code }}"
 
       - name: USES actions/upload-artifact@v3
         uses: actions/upload-artifact@v3
