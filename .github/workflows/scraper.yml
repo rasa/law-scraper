@@ -83,7 +83,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INPUT_LOG_LEVEL: ${{ github.event.inputs.log_level || env.log_level }}
-        run: >
+        run:
           python scraper.py 
             "${{ github.event.inputs.division || env.division }}"
             "${{ github.event.inputs.part || env.part }}" 
