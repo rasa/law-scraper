@@ -20,12 +20,12 @@ name: mega-linter
         type: string
         default: "1"
       # checkov:skip=CKV_GHA_7:The build output cannot be affected by user parameters...
-      validate_all_codebase:
-        description: Validate the entire code base
-        type: choice
-        options:
-          - "false"
-          - "true"
+      # validate_all_codebase:
+      #   description: Validate the entire code base
+      #   type: choice
+      #  options:
+      #    - "false"
+      #    - "true"
 
 concurrency:
   group: ${{ github.workflow }}
@@ -37,5 +37,6 @@ jobs:
     secrets: inherit
     with:
       fetch_depth: ${{ inputs.fetch_depth }}
-      validate_all_codebase: ${{ inputs.validate_all_codebase }}
+      validate_all_codebase: "true"
+#  
 # eof
