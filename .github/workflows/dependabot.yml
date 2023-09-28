@@ -15,8 +15,9 @@ permissions: write-all
 
 jobs:
   dependabot:
+    name: USES rasa/workflows/.github/workflows/dependabot.yml@main
     uses: rasa/workflows/.github/workflows/dependabot.yml@main
     secrets: inherit
 # cSpell:ignore rasa
-
+#
 # eof
