@@ -33,6 +33,7 @@ concurrency:
 
 jobs:
   job:
+    name: USES rasa/workflows/.github/workflows/mega-linter.yml@main
     uses: rasa/workflows/.github/workflows/mega-linter.yml@main
     secrets: inherit
     with:
