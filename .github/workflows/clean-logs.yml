@@ -1,7 +1,7 @@
 ---
 # $schema https://json.schemastore.org/github-workflow.json
 # Copied from: rasa/dotfiles/.github/workflows/clean-logs.yml
-# EDIT THE ABOVE FILE OR YOUR CHANGES WILL BE LOST!
+# EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
 
 name: clean-logs
 
