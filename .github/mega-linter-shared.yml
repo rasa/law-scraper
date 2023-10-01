@@ -77,6 +77,9 @@ REPOSITORY_DEVSKIM_ARGUMENTS:
 REPOSITORY_GIT_DIFF_ARGUMENTS: "--ignore-space-change" # didn't fix it: --ignore-space-at-eol
 
 #
+SPELL_CSPELL_ARGUMENTS: "--words-only --unique"
+
+#
 TYPESCRIPT_PRETTIER_CONFIG_FILE: ".github/linters/.prettierrc.yaml"
 
 # I don't know if 2 'verbose's increases verbosity:
