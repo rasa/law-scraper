@@ -108,9 +108,9 @@ jobs:
           rm -f "${tmp1}"
           exit 0
 
-      - name: USES actions/setup-python@v4.7.0
+      - name: USES actions/setup-python@v4.7.1
         if: success()
-        uses: actions/setup-python@v4.7.0
+        uses: actions/setup-python@v4.7.1
         with:
           python-version: ${{ matrix.python-version }}
           # yamllint disable-line rule:line-length
