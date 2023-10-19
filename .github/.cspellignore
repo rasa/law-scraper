@@ -3,6 +3,8 @@
 # cSpell:disable
 
 cspellignore
+
+##
 dotfiles
 
 ## .lycheeignore
@@ -15,7 +17,8 @@ ecrc
 ## .github/linters/.gitleaks.toml
 gitleaks
 
-## .github/linters/.jscpd.json: 2 word(s), 2 instance(s):
+## .github/linters/.jscpd.json: 3 word(s), 3 instance(s):
+adoc
 hardis
 venv
 
