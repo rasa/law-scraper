@@ -4,10 +4,13 @@
 
 cspellignore
 
-##
+## .github/linters/.grype.yml
+grype
+
+## ?
 dotfiles
 
-## .lycheeignore
+## .github/linters/.lycheeignore
 lycheeignore
 
 ## .github/linters/.ecrc: 1 word(s), 1 instance(s):
