@@ -4,6 +4,9 @@
 
 cspellignore
 
+## .github/workflows/mega-linter.yml
+gitmodules
+
 ## .github/linters/.grype.yml
 grype
 
