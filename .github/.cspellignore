@@ -4,6 +4,9 @@
 
 cspellignore
 
+## .github/workflows/scraper.yml
+awalsh
+
 ## .github/workflows/mega-linter.yml
 gitmodules
 
