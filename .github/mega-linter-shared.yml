@@ -27,6 +27,9 @@ MARKDOWN_MARKDOWN_LINK_CHECK_DISABLE_ERRORS: true
 # produces too many false positives:
 REPOSITORY_DEVSKIM_DISABLE_ERRORS: true
 
+# whines unless actions use SHAs, instead of version numbers:
+REPOSITORY_KICS_DISABLE_ERRORS: true
+
 # .git/config:11
 REPOSITORY_TRUFFLEHOG_DISABLE_ERRORS: true
 
