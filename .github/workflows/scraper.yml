@@ -51,10 +51,18 @@ jobs:
   job:
     runs-on: ubuntu-latest
     steps:
+      # - name: RUN apt install tidy wkhtmltopdf
+      #   run: |
+      #     sudo apt -y update
+      #     sudo apt -y install tidy wkhtmltopdf
       - name: RUN apt install tidy wkhtmltopdf
-        run: |
-          sudo apt -y update
-          sudo apt -y install tidy wkhtmltopdf
+        uses: awalsh128/cache-apt-pkgs-action@v1.3.0
+        # This action handles caching APT packages, and leaves the option for package configuration scripts to be run if needed,
+        # saving a boat-load of time, if needed bump the action version.
+        with:
+          packages: tidy wkhtmltopdf
+          version: 1.0
+          # Bump me ^ if you have added any new packages
 
       - name: RUN chromedriver
         run: |
