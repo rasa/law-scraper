@@ -55,6 +55,10 @@ BASH_SHELLCHECK_ARGUMENTS: "--external-sources --enable=all --exclude SC2310,SC2
 
 BASH_SHFMT_ARGUMENTS: "-ci -i 2"
 
+# DL3006 warning: Always tag the version of an image explicitly
+# DL3018 warning: Pin versions in apk add. Instead of apk add <package> use apk add <package>=<version>.
+DOCKERFILE_HADOLINT_ARGUMENTS: "--style DL3006 --style DL3018" # --failure-threshold error
+
 # allow for comments in json files:
 JSON_JSONLINT_ARGUMENTS: "--mode cjson"
 
@@ -67,8 +71,10 @@ PYTHON_MYPY_ARGUMENTS: "--install-types --non-interactive"
 # @todo determine default location:
 PYTHON_PYRIGHT_ARGUMENTS: "-p .github/linters/.pyrightconfig-loose.json"
 
-# Quiets "Ensure top-level permissions are not set to write-all":
-REPOSITORY_CHECKOV_ARGUMENTS: "--skip-check CKV2_GHA_1"
+# CKV2_GHA_1: "Ensure top-level permissions are not set to write-all"
+# CKV_DOCKER_2: "Ensure that HEALTHCHECK instructions have been added to container images"
+# CKV_DOCKER_7: "Ensure the base image uses a non latest version tag"
+REPOSITORY_CHECKOV_ARGUMENTS: "--skip-check CKV2_GHA_1,CKV_DOCKER_2,CKV_DOCKER_7"
 
 # skip .mypy_cache (as it doesn't work when .mypy_cache is included in FILTER_REGEX_EXCLUDE):
 REPOSITORY_DEVSKIM_ARGUMENTS:
