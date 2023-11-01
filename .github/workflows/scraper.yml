@@ -56,7 +56,7 @@ jobs:
       #     sudo apt -y update
       #     sudo apt -y install tidy wkhtmltopdf
       - name: RUN apt install tidy wkhtmltopdf
-        uses: awalsh128/cache-apt-pkgs-action@v1.3.0
+        uses: awalsh128/cache-apt-pkgs-action@v1.3.1
         # This action handles caching APT packages, and leaves the option for package configuration scripts to be run if needed,
         # saving a boat-load of time, if needed bump the action version.
         with:
