@@ -55,6 +55,10 @@ BASH_SHELLCHECK_ARGUMENTS: "--external-sources --enable=all --exclude SC2310,SC2
 
 BASH_SHFMT_ARGUMENTS: "-ci -i 2"
 
+# DL3006 warning: Always tag the version of an image explicitly
+# DL3018 warning: Pin versions in apk add. Instead of apk add <package> use apk add <package>=<version>.
+DOCKERFILE_HADOLINT_ARGUMENTS: "--style DL3006 --style DL3018" # --failure-threshold error
+
 # allow for comments in json files:
 JSON_JSONLINT_ARGUMENTS: "--mode cjson"
 
