@@ -4,6 +4,15 @@
 
 cspellignore
 
+## .github/linters/.checkov.yml
+HEALTHCHECK
+
+## .github/linters/.hadolint.yaml
+hadolint
+
+## .github/mega-linter-shared.yml
+HADOLINT
+
 ## .github/workflows/codeql.yaml
 Autobuild
 
