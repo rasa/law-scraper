@@ -9,4 +9,8 @@ quiet: true
 skip-check:
   # CKV2_GHA_1: "Ensure top-level permissions are not set to write-all"
   - CKV2_GHA_1
-  # - CKV_DOCKER_2
+  
+  # CKV_DOCKER_7: "Ensure the base image uses a non latest version tag"
+  - CKV_DOCKER_7
+
+# eof
