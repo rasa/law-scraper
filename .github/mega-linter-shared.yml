@@ -94,6 +94,12 @@ TYPESCRIPT_PRETTIER_CONFIG_FILE: ".github/linters/.prettierrc.yaml"
 # I don't know if 2 'verbose's increases verbosity:
 YAML_V8R_ARGUMENTS: "--verbose --verbose"
 
+#
+YAML_V8R_FILTER_REGEX_EXCLUDE: >-
+  (?ix)(
+    \.trivyignore
+  )
+
 # doesn't provide any helpful info:
 # EDITORCONFIG_EDITORCONFIG_CHECKER_ARGUMENTS: '--debug --verbose'
 
