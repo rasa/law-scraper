@@ -12,12 +12,7 @@ hadolint
 
 ## .github/mega-linter-shared.yml
 HADOLINT
-
-## .github/workflows/codeql.yaml
-Autobuild
-
-## .github/workflows/scraper.yml
-awalsh
+trivyignore
 
 ## .github/workflows/mega-linter.yml
 gitmodules
