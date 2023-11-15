@@ -1,6 +1,7 @@
 ---
 # Copied from: rasa/dotfiles/.github/dependabot.yml
 # EDIT THE ABOVE FILE OR YOUR CHANGES WILL BE LOST!
+# cSpell:ignore rasa
 version: 2
 updates:
   - package-ecosystem: "github-actions"
@@ -13,6 +14,8 @@ updates:
       - "dependencies"
     reviewers:
       - "rasa"
+    commit-message:
+      prefix: "[action] "
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
@@ -23,6 +26,17 @@ updates:
       - "dependencies"
     reviewers:
       - "rasa"
-# cSpell:ignore rasa
-
-# eof
+    commit-message:
+      prefix: "[pip] "
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "08:00"
+      timezone: "America/Los_Angeles"
+    labels:
+      - "dependencies"
+    reviewers:
+      - "rasa"
+    commit-message:
+      prefix: "[docker] "
