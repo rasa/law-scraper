@@ -88,8 +88,8 @@ REPOSITORY_DEVSKIM_ARGUMENTS:
 # this appears to have fixed the issue:
 REPOSITORY_GIT_DIFF_ARGUMENTS: "--ignore-space-change" # didn't fix it: --ignore-space-at-eol
 
-#
-SPELL_CSPELL_ARGUMENTS: "--words-only --unique --quiet"
+# https://github.com/streetsidesoftware/cspell-cli?tab=readme-ov-file#lint
+SPELL_CSPELL_ARGUMENTS: "--no-color --quiet"
 
 #
 TYPESCRIPT_PRETTIER_CONFIG_FILE: ".github/linters/.prettierrc.yaml"
