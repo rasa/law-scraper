@@ -46,6 +46,6 @@ jobs:
         with:
           commit_message: "docs: auto update table-of-contents in markdown"
 
-# cSpell:ignore iname, rasa
+# cSpell:ignore iname, rasa, stefanzweifel
 #
 # eof
