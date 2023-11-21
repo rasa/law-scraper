@@ -1,7 +1,7 @@
 ---
-# $schema https://json.schemastore.org/github-workflow.json
 # Copied from: rasa/dotfiles/.github/workflows/clean-logs.yml
 # EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
+# $schema https://json.schemastore.org/github-workflow.json
 
 name: clean-logs
 
@@ -72,6 +72,7 @@ jobs:
       delete_workflow_by_state_pattern: ${{ inputs.delete_workflow_by_state_pattern }}
       delete_run_by_conclusion_pattern: ${{ inputs.delete_run_by_conclusion_pattern }}
       dry_run: ${{ inputs.dry_run }}
-# cSpell:ignore Mattraks, rasa
 
+# cSpell:ignore Mattraks, rasa
+#
 # eof
