@@ -1,65 +1,66 @@
-# cSpell:disable
-# Copied from: rasa/dotfiles/.github/.cspellignore
-# EDIT THE ABOVE FILE OR YOUR CHANGES WILL BE LOST!
+## cSpell:disable
+## Copied from: rasa/dotfiles/.github/.cspellignore
+## EDIT THE ABOVE FILE OR YOUR CHANGES WILL BE LOST!
+## .github/.cspellignore
 
 cspellignore
 
-## .github/linters/.checkov.yml
-HEALTHCHECK
+# .github/linters/.checkov.yml
+# HEALTHCHECK
 
-## .github/linters/.hadolint.yaml
+# .github/linters/.hadolint.yaml
 hadolint
 
-## .github/mega-linter-shared.yml
-HADOLINT
-trivyignore
+# .github/mega-linter-shared.yml
+# HADOLINT
+# trivyignore
 
-## .github/workflows/mega-linter.yml
+# .github/workflows/mega-linter.yml
 gitmodules
 
-## .github/linters/.grype.yml
+# .github/linters/.grype.yml
 grype
 
-## ?
-dotfiles
+# ?
+# dotfiles
 
-## .github/linters/.lycheeignore
+# .github/linters/.lycheeignore
 lycheeignore
 
-## .github/linters/.ecrc: 1 word(s), 1 instance(s):
+# .github/linters/.ecrc: 1 word(s), 1 instance(s):
 Aftertabs
 ecrc
 
-## .github/linters/.gitleaks.toml
+# .github/linters/.gitleaks.toml
 gitleaks
 
-## .github/linters/.jscpd.json: 3 word(s), 3 instance(s):
+# .github/linters/.jscpd.json: 3 word(s), 3 instance(s):
 adoc
 hardis
 venv
 
-## .github/linters/.markdownlint.yaml
+# .github/linters/.markdownlint.yaml
 markdownlint
 
-## .github/linters/.mypy.ini
+# .github/linters/.mypy.ini
 mypy
 
-## .github/linters/.pylintrc
+# .github/linters/.pylintrc
 pylintrc
 
-## .github/linters/.pyrightconfig.json
+# .github/linters/.pyrightconfig.json
 pyrightconfig
 
-## .gihub/linters/pyproject.toml
+# .gihub/linters/pyproject.toml
 pyproject
 
-## .github/linters/.textlintrc
+# .github/linters/.textlintrc
 textlintrc
 
-## .github/workflows/codeql.yml
+# .github/workflows/codeql.yml
 codeql
 
-## .github/workflows/pydeps.yml
+# .github/workflows/pydeps.yml
 pydeps
 
 # eof
