@@ -11,4 +11,6 @@ override:
     # DL3006 warning: Always tag the version of an image explicitly
     - DL3006
 
+# cSpell:ignore hadolint
+#
 # eof
