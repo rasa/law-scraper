@@ -1,8 +1,8 @@
 ---
-# yamllint disable rule:line-length
-# $schema https://raw.githubusercontent.com/megalinter/megalinter/main/megalinter/descriptors/schemas/megalinter-configuration.jsonschema.json
 # Copied from: rasa/dotfiles/.github/mega-linter-shared.yml
 # EDIT THE ABOVE FILE OR YOUR CHANGES WILL BE LOST!
+# yamllint disable rule:line-length
+# $schema https://raw.githubusercontent.com/megalinter/megalinter/main/megalinter/descriptors/schemas/megalinter-configuration.jsonschema.json
 
 ## FILTERS ##
 
@@ -36,7 +36,7 @@ REPOSITORY_TRUFFLEHOG_DISABLE_ERRORS: true
 # don't fail if a site is down, or their cert has expired:
 SPELL_LYCHEE_DISABLE_ERRORS: true
 
-# 
+#
 YAML_V8R_DISABLE_ERRORS: true
 
 #
@@ -140,7 +140,7 @@ SHOW_ELAPSED_TIME: true # default: false
 # REPORT_OUTPUT_FOLDER: '${GITHUB_WORKSPACE}/.cache/mega-linter'
 
 # cSpell:ignore CHECKMAKE, cjson, DEVSKIM, dotfiles, JSONLINT, KICS, MARKDOWNLINT, markdownlint
-# cSpell:ignore MYPY, mypy, PROSELINT, PYLINT, PYRIGHT, pyright, pyrightconfig,
+# cSpell:ignore MYPY, mypy, PROSELINT, PYLINT, PYRIGHT, pyright, pyrightconfig, rasa
 # cSpell:ignore SEMGREP, SHELLCHECK, SHFMT, TRIVY, TRUFFLEHOG
 
 # eof
