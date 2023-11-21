@@ -44,3 +44,4 @@ jobs:
       validate_all_codebase: "true"
 
 #
+# cSpell:ignore rasa
