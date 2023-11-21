@@ -138,7 +138,7 @@ SHOW_ELAPSED_TIME: true # default: false
 # PYRIGHT_PYTHON_FORCE_VERSION: 'latest'
 
 # REPORT_OUTPUT_FOLDER: '${GITHUB_WORKSPACE}/.cache/mega-linter'
-
+# cspell:ignore CHECKMAKE, PYRIGHT, pyright
 # cSpell:ignore cjson, DEVSKIM, HEALTHCHECK, JSONLINT, KICS, rasa, trivyignore
 # cSpell:ignore TRUFFLEHOG
 # eof
