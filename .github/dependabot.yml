@@ -3,7 +3,6 @@
 # EDIT THE ABOVE FILE OR YOUR CHANGES WILL BE LOST!
 # yamllint disable rule:line-length
 # Docs: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
-# cSpell:ignore rasa
 version: 2
 updates:
   - package-ecosystem: "github-actions"
