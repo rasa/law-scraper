@@ -1,6 +1,26 @@
 {
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
-  "dictionaries": ["custom-words", "custom-filenames", "github-words"],
+  "dictionaries": [
+    "custom-words",
+    "custom-filenames",
+    "github-words",
+    "bash",
+    "!cpp",
+    "!csharp",
+    "!css",
+    "filetypes",
+    "!fonts",
+    "!go",
+    "!golang",
+    "!html",
+    "!latex",
+    "!makefile",
+    "!node",
+    "!php",
+    "!powershell",
+    "python",
+    "!typescript"
+  ],
   "dictionaryDefinitions": [
     {
       "addWords": true,
