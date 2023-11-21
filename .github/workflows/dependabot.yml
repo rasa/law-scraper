@@ -19,6 +19,4 @@ jobs:
     uses: rasa/workflows/.github/workflows/dependabot.yml@main
     secrets: inherit
 
-# cSpell:ignore rasa
 #
-# eof
