@@ -195,5 +195,5 @@ jobs:
         run: |
           pipdeptree --freeze --warn silence | grep -E '^[a-zA-Z0-9\-]+' || true
 
-#
-# cSpell:ignore iname, noprofile, norc, pipdeptree, pipreqs, rasa, reqfiles
+# cspell:ignore pipreqs
+# cSpell:ignore iname, noprofile, norc, pipdeptree, rasa, reqfiles
