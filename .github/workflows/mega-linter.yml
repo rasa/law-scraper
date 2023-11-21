@@ -1,7 +1,7 @@
 ---
-# $schema https://json.schemastore.org/github-workflow.json
 # Copied from: rasa/dotfiles/.github/workflows/mega-linter.yml
 # EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
+# $schema https://json.schemastore.org/github-workflow.json
 
 name: mega-linter
 
@@ -42,5 +42,7 @@ jobs:
     with:
       fetch_depth: ${{ inputs.fetch_depth }}
       validate_all_codebase: "true"
-#  
+
+# cSpell: ignore rasa
+#
 # eof
