@@ -17,6 +17,4 @@ trailingComma: "es5" # default: all
 # singleQuote: true    # default: false
 # tabWidth: 4          # default: 2
 
-# cSpell:ignore Parens, rasa
 
-# eof
