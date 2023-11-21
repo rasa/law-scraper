@@ -53,6 +53,4 @@ MD042: false # false == disabled
 # # Rules by tags
 # blank_lines: false  # Error on blank lines
 
-# cSpell:ignore dotfiles, markdownlint, rasa
 
-# eof

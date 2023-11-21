@@ -17,6 +17,4 @@ skip-check:
   # CKV_DOCKER_7: "Ensure the base image uses a non latest version tag"
   - CKV_DOCKER_7
 
-# cSpell:ignore HEALTHCHECK
 #
-# eof
