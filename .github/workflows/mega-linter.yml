@@ -43,6 +43,4 @@ jobs:
       fetch_depth: ${{ inputs.fetch_depth }}
       validate_all_codebase: "true"
 
-# cSpell: ignore rasa
 #
-# eof
