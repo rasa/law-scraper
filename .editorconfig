@@ -70,4 +70,4 @@ ignore = true
 end_of_line = crlf
 
 
-# cSpell:ignore jsonlint, Makefiles, vcproj, VCPROJ, vcprops, VCPROPS
+# cSpell:ignore jsonlint, Makefiles, MSVC, rasa, vcproj, VCPROJ, vcprops, VCPROPS
