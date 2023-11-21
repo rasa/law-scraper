@@ -1,7 +1,7 @@
 ---
-# $schema https://json.schemastore.org/github-workflow.json
 # Copied from: rasa/dotfiles/.github/workflows/toc.yml
 # EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
+# $schema https://json.schemastore.org/github-workflow.json
 
 name: "toc"
 
@@ -45,7 +45,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5.0.0
         with:
           commit_message: "docs: auto update table-of-contents in markdown"
-#
-# cSpell:ignore iname
+
+# cSpell:ignore iname, rasa
 #
 # eof
