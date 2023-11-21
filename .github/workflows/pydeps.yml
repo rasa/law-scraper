@@ -195,7 +195,4 @@ jobs:
         run: |
           pipdeptree --freeze --warn silence | grep -E '^[a-zA-Z0-9\-]+' || true
 
-# cSpell:ignore MAPFILE, mapfile, maxdepth, mktemp, noprofile, norc, pipefail, pipreqs
-# cSpell:ignore pydeps, pipdeptree, pur, rasa, reqfiles, shellcheck
 #
-# eof
