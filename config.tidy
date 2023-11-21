@@ -119,3 +119,4 @@ wrap: 255
 // wrap-script-literals: no
 // wrap-sections: yes
 // write-back: no
+// cSpell:ignore blocklevel, divs, endtags, jste, nbsp, procins

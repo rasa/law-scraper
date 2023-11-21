@@ -130,3 +130,6 @@ dmypy.json
 
 github_conf
 megalinter-reports
+# cSpell:ignore celerybeat, Connor, dmypy, htmlcov, ipynb, ipython, mkdocs, nosetests
+# cSpell:ignore pyflow, pypa, pypackages, ropeproject, Spyder, spyderproject
+# cSpell:ignore spyproject, webassets

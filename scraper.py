@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Copyright (c) 2022-2023, Ross Smith II
 SPDX-License-Identifier: MIT
@@ -583,3 +584,5 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+# cSpell:ignore EXPANDEDBRANCHCODESID, expandedbranchcodesid, EXPANDEDBRANCHCODESIDA
+# cSpell:ignore MANYLAWSECTIONS, manylawsections, pdfkit, Pdfkit, pdfs, prefs, pypdf
