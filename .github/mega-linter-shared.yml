@@ -139,5 +139,5 @@ SHOW_ELAPSED_TIME: true # default: false
 
 # REPORT_OUTPUT_FOLDER: '${GITHUB_WORKSPACE}/.cache/mega-linter'
 
-# cSpell:ignore HADOLINT, trivyignore
+# cSpell:ignore cjson, DEVSKIM, HEALTHCHECK, JSONLINT, KICS, trivyignore, TRUFFLEHOG
 # eof
