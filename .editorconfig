@@ -61,6 +61,9 @@ switch_case_indent = true  # like -ci
 # keep_padding       = true  # like -kp
 # function_next_line = true  # like -fn
 
+[*.txt]
+indent_size = 0
+
 # Ignore all files in vendor directories
 [{vendor,.vendor}/**]
 ignore = true
@@ -69,5 +72,41 @@ ignore = true
 [*.cmd.example]
 end_of_line = crlf
 
+# gen'd:
+[.docker/config.json]
+insert_final_newline = false
+
+# gen'd:
+[.vscode/default.code-snippets]
+insert_final_newline = false
+
+# gen'd:
+[.fonts.conf]
+indent_size = 0
+
+# gen'd:
+[*.vbs]
+indent_size = 0
+
+[*.diff]
+indent_size = 0
+
+[*.patch]
+indent_size = 0
+
+[*.vim]
+indent_size = 0
+
+[*.xls]
+
+[archive]
+insert_final_newline = false
+
+[.mylogin.cnf*]
+insert_final_newline = false
+
+[.toprc]
+indent_size = 0
 
 # cSpell:ignore jsonlint, Makefiles, MSVC, rasa, vcproj, VCPROJ, vcprops, VCPROPS
+
