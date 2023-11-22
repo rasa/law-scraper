@@ -15,38 +15,32 @@ FILTER_REGEX_EXCLUDE: >-
 
 ## CONVERT ERRORS TO WARNINGS ##
 
-# produces too many false positives:
+# Produces too many false positives:
 COPYPASTE_JSCPD_DISABLE_ERRORS: true
 
-# save error reporting for more important issues:
+# Save error reporting for more important issues:
 EDITORCONFIG_EDITORCONFIG_CHECKER_DISABLE_ERRORS: true
 
-# produces too many false positives:
+# Produces too many false positives:
 MARKDOWN_MARKDOWN_LINK_CHECK_DISABLE_ERRORS: true
 
-# produces too many false positives:
+# Produces too many false positives:
 REPOSITORY_DEVSKIM_DISABLE_ERRORS: true
 
-# whines unless actions use SHAs, instead of version numbers:
+# Whines unless actions use SHAs, instead of version numbers:
 REPOSITORY_KICS_DISABLE_ERRORS: true
 
 # .git/config:11
 REPOSITORY_TRUFFLEHOG_DISABLE_ERRORS: true
 
-# don't fail if a site is down, or their cert has expired:
+# Don't fail on spelling errors (for now):
+SPELL_CSPELL_DISABLE_ERRORS: true
+
+# Don't fail if a site is down, or their cert has expired:
 SPELL_LYCHEE_DISABLE_ERRORS: true
 
-#
+# Could not find a schema to validate: .github/linters/*
 YAML_V8R_DISABLE_ERRORS: true
-
-#
-# EDITORCONFIG_EDITORCONFIG_CHECKER_DISABLE_ERRORS
-
-# Reports variable assignment as targets:
-# MAKEFILE_CHECKMAKE_DISABLE_ERRORS: true
-
-# Reporting errant whitespace where there is none:
-# REPOSITORY_GIT_DIFF_DISABLE_ERRORS: true
 
 ## COMMAND ARGUMENTS ##
 
@@ -56,22 +50,23 @@ YAML_V8R_DISABLE_ERRORS: true
 # Consider invoking this command separately to avoid masking its return value (or use '|| true' to ignore).
 BASH_SHELLCHECK_ARGUMENTS: "--external-sources --enable=all --exclude SC2310,SC2312"
 
+# Indent 2 spaces, case statements, per https://google.github.io/styleguide/shellguide.html
 BASH_SHFMT_ARGUMENTS: "-ci -i 2"
 
 # DL3006 warning: Always tag the version of an image explicitly
 # DL3018 warning: Pin versions in apk add. Instead of apk add <package> use apk add <package>=<version>.
 DOCKERFILE_HADOLINT_ARGUMENTS: "--style DL3006 --style DL3018" # --failure-threshold error
 
-# allow for comments in json files:
+# Allow for comments in json files:
 JSON_JSONLINT_ARGUMENTS: "--mode cjson"
 
-# default is .markdownlint.json, but yaml is nicer :)
+# Default is ~/.markdownlint.json, but yaml is nicer :)
 MARKDOWN_MARKDOWNLINT_CONFIG_FILE: ".github/linters/.markdownlint.yaml"
 
 # Doesn't seem to quiet logs:
 PYTHON_MYPY_ARGUMENTS: "--install-types --non-interactive"
 
-# @todo determine default location:
+# Default is ~/pyrightconfig.json
 PYTHON_PYRIGHT_ARGUMENTS: "-p .github/linters/.pyrightconfig-loose.json"
 
 # CKV2_GHA_1: "Ensure top-level permissions are not set to write-all"
@@ -79,7 +74,7 @@ PYTHON_PYRIGHT_ARGUMENTS: "-p .github/linters/.pyrightconfig-loose.json"
 # CKV_DOCKER_7: "Ensure the base image uses a non latest version tag"
 REPOSITORY_CHECKOV_ARGUMENTS: "--skip-check CKV2_GHA_1,CKV_DOCKER_2,CKV_DOCKER_7"
 
-# skip .mypy_cache (as it doesn't work when .mypy_cache is included in FILTER_REGEX_EXCLUDE):
+# Skip .mypy_cache (as it doesn't work when .mypy_cache is included in FILTER_REGEX_EXCLUDE):
 REPOSITORY_DEVSKIM_ARGUMENTS:
   ["--ignore-globs", "**/megalinter-reports/**,**/.git/**,**/.mypy_cache/**"]
 # megalinter already passes `--skip-git-ignored-files`:
@@ -88,10 +83,11 @@ REPOSITORY_DEVSKIM_ARGUMENTS:
 # this appears to have fixed the issue:
 REPOSITORY_GIT_DIFF_ARGUMENTS: "--ignore-space-change" # didn't fix it: --ignore-space-at-eol
 
-# https://github.com/streetsidesoftware/cspell-cli?tab=readme-ov-file#lint
+# Only show misspelled words, and the filename
+# See https://github.com/streetsidesoftware/cspell-cli?tab=readme-ov-file#lint
 SPELL_CSPELL_ARGUMENTS: "--no-color --quiet"
 
-#
+# Use yaml, default is ~/.prettierrc.json
 TYPESCRIPT_PRETTIER_CONFIG_FILE: ".github/linters/.prettierrc.yaml"
 
 # I don't know if 2 'verbose's increases verbosity:
@@ -103,17 +99,34 @@ YAML_V8R_FILTER_REGEX_EXCLUDE: >-
     \.trivyignore
   )
 
+## GLOBAL SETTINGS ##
+
+# When active, APPLY_FIXES must also be defined as environment variable (in github/workflows/mega-linter.yml or other CI)
+APPLY_FIXES: all # default: none
+
+# Don't print logo
+PRINT_ALPACA: false # default: true
+
+# Include total elapsed time:
+SHOW_ELAPSED_TIME: true # default: false
+
+###############################################################################################
+## COMMENTED OUT ##
+
+## CONVERT ERRORS TO WARNINGS ##
+
+# Reports variable assignment as targets:
+# MAKEFILE_CHECKMAKE_DISABLE_ERRORS: true
+
+# Reporting errant whitespace where there is none:
+# REPOSITORY_GIT_DIFF_DISABLE_ERRORS: true
+
+## COMMAND ARGUMENTS ##
+
 # doesn't provide any helpful info:
 # EDITORCONFIG_EDITORCONFIG_CHECKER_ARGUMENTS: '--debug --verbose'
 
 ## GLOBAL SETTINGS ##
-
-# When active, APPLY_FIXES must also be defined as environment variable (in github/workflows/mega-linter.yml or other CI
-APPLY_FIXES: all # default: none
-
-PRINT_ALPACA: false # default: true
-
-SHOW_ELAPSED_TIME: true # default: false
 
 # needs EMAIL_REPORTER_SMTP_PASSWORD to work:
 # EMAIL_REPORTER_EMAIL: ''
@@ -138,6 +151,7 @@ SHOW_ELAPSED_TIME: true # default: false
 # PYRIGHT_PYTHON_FORCE_VERSION: 'latest'
 
 # REPORT_OUTPUT_FOLDER: '${GITHUB_WORKSPACE}/.cache/mega-linter'
+#
 # cspell:ignore CHECKMAKE, PYRIGHT, pyright
 # cSpell:ignore cjson, DEVSKIM, HEALTHCHECK, JSONLINT, KICS, rasa, trivyignore
 # cSpell:ignore TRUFFLEHOG
