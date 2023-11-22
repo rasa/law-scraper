@@ -53,13 +53,15 @@ max_line_length = 132
 # like -i=2
 indent_style = space
 indent_size = 2
-
+# --language-variant
 # shell_variant      = posix # like -ln=posix
-# binary_next_line   = true  # like -bn
-switch_case_indent = true  # like -ci
-# space_redirects    = true  # like -sr
-# keep_padding       = true  # like -kp
-# function_next_line = true  # like -fn
+binary_next_line   = true # like -bn
+# --case-indent
+switch_case_indent = true # like -ci
+# space_redirects    = true # like -sr
+# keep_padding       = true # like -kp
+# --func-next-line
+# function_next_line = true # like -fn
 
 [*.txt]
 indent_size = 0
