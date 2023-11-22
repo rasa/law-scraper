@@ -5,21 +5,16 @@
 
 cspellignore
 
-# .github/linters/.checkov.yml
-# HEALTHCHECK
-
-# .github/linters/.hadolint.yaml
-hadolint
-
-# .github/mega-linter-shared.yml
-# HADOLINT
-# trivyignore
-
-# .github/workflows/mega-linter.yml
-gitmodules
+# .github/linters/.ecrc
+Aftertabs
+ecrc
+mylogin
 
 # .github/linters/.grype.yml
 grype
+
+# .github/linters/.hadolint.yaml
+hadolint
 
 # ?
 # dotfiles
@@ -27,14 +22,10 @@ grype
 # .github/linters/.lycheeignore
 lycheeignore
 
-# .github/linters/.ecrc: 1 word(s), 1 instance(s):
-Aftertabs
-ecrc
-
 # .github/linters/.gitleaks.toml
 gitleaks
 
-# .github/linters/.jscpd.json: 3 word(s), 3 instance(s):
+# .github/linters/.jscpd.json
 adoc
 hardis
 venv
@@ -59,6 +50,9 @@ textlintrc
 
 # .github/workflows/codeql.yml
 codeql
+
+# .github/workflows/mega-linter.yml
+gitmodules
 
 # .github/workflows/pydeps.yml
 pydeps
