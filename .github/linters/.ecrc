@@ -1,12 +1,13 @@
 {
-  "_comment1": "Version=2.7.1",
+  "_comment1": "Version=2.7.2",
   "Verbose": false,
   "Debug": false,
   "IgnoreDefaults": false,
   "SpacesAftertabs": false,
-  "NoColor": false,
+  "NoColor": true,
   "Exclude": [
-    "\\.xls$"
+    "/archive$",
+    ".mylogin.cnf"
   ],
   "AllowedContentTypes": [],
   "PassedFiles": [],
