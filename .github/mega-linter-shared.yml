@@ -44,8 +44,12 @@ YAML_V8R_DISABLE_ERRORS: true
 # Consider invoking this command separately to avoid masking its return value (or use '|| true' to ignore).
 BASH_SHELLCHECK_ARGUMENTS: "--external-sources --enable=all --exclude SC2310,SC2312"
 
-# Indent 2 spaces, case statements, per https://google.github.io/styleguide/shellguide.html
-BASH_SHFMT_ARGUMENTS: "-ci -i 2"
+# See https://google.github.io/styleguide/shellguide.html
+# binary_next_line   = true # like -bn
+# switch_case_indent = true # like -ci
+# indent_size = 2
+# indent_style = space
+BASH_SHFMT_ARGUMENTS: "-bn -ci -i 2"
 
 # DL3006 warning: Always tag the version of an image explicitly
 # DL3018 warning: Pin versions in apk add. Instead of apk add <package> use apk add <package>=<version>.
