@@ -110,4 +110,4 @@ insert_final_newline = false
 [.toprc]
 indent_size = 0
 
-# cSpell:ignore jsonlint, Makefiles, MSVC, mylogin, rasa, toprc, vcproj, VCPROJ, vcprops, VCPROPS
+# cSpell:ignore jsonlint, Makefiles, MSVC, rasa, vcproj, VCPROJ, vcprops, VCPROPS
