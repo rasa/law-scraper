@@ -20,9 +20,6 @@ trim_trailing_whitespace = true
 [*.{bat,cmd,BAT,CMD}]
 end_of_line = crlf
 
-[*.{diff,patch}]
-ignore = true
-
 # MSVC project files require CRLF newlines
 [*.{dsp,dsw,sln,vcproj,vcprops,DSP,DSW,SLN,VCPROJ,VCPROPS}]
 end_of_line = crlf
@@ -66,51 +63,39 @@ switch_case_indent = true # like -ci
 # --func-next-line
 # function_next_line = true # like -fn
 
-[*.txt]
-indent_size = 0
-
-# Ignore all files in vendor directories
-[{vendor,.vendor}/**]
-ignore = true
-
-# Save batch file examples with CRLF newlines
-[*.cmd.example,*.cmd.old]
-end_of_line = crlf
-
-# gen'd:
-[.docker/config.json]
-insert_final_newline = false
-
-# gen'd:
-[.vscode/default.code-snippets]
-insert_final_newline = false
-
-# gen'd:
-[.fonts.conf]
-indent_size = 0
-
-# gen'd:
 [*.vbs]
-indent_size = 0
+indent_size = unset
 
-[*.diff]
-indent_size = 0
+# unrooted file extensions:
+[*.{cmd.*,diff,ignore,patch,txt,wip}]
+end_of_line = unset
+indent_size = unset
+indent_style = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
 
-[*.patch]
-indent_size = 0
+# unrooted directories:
+[{.ignore,.vendor,.wip,ignore,vendor,wip}/**]
+end_of_line = unset
+indent_size = unset
+indent_style = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
 
-[*.vim]
-indent_size = 0
+# unrooted final files:
+[**/{archive,plug.vim}]
+end_of_line = unset
+indent_size = unset
+indent_style = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
 
-[*.xls]
-
-[archive]
-insert_final_newline = false
-
-[.mylogin.cnf*]
-insert_final_newline = false
-
-[.toprc]
-indent_size = 0
+# rooted files:
+[/{.docker/*,.fonts.conf,.mylogin.cnf*,.vscode/default.code-snippets,.toprc}]
+end_of_line = unset
+indent_size = unset
+indent_style = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
 
 # cSpell:ignore jsonlint, Makefiles, MSVC, rasa, toprc, vcproj, VCPROJ, vcprops, VCPROPS
