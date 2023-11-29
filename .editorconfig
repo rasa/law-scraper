@@ -28,11 +28,12 @@ end_of_line = crlf
 [*.js]
 max_line_length = 80
 
-# [*.json]
+[*.json]
 # jsonlint defaults to 2 spaces:
 # indent_size = 4
-# generated files often leave off final newline, as well as jsonlint:
-# insert_final_newline = false
+# generated files often leave off final newline,
+# and jsonlint complains if not found.
+insert_final_newline = unset
 
 # Makefiles require tab indentation
 [{Makefile{,.*},makefile{,.*},GNUMakefile{,.*},*.mak,*.mk}]
