@@ -84,7 +84,7 @@ insert_final_newline = unset
 trim_trailing_whitespace = unset
 
 # unrooted final files:
-[**/{archive,plug.vim}]
+[{archive,plug.vim}]
 end_of_line = unset
 indent_size = unset
 indent_style = unset
@@ -92,11 +92,12 @@ insert_final_newline = unset
 trim_trailing_whitespace = unset
 
 # rooted files:
-[/{.docker/*,.fonts.conf,.mylogin.cnf*,.vscode/default.code-snippets,.toprc}]
+[/{.docker/*,.fonts.conf,.mylogin.cnf*,.toprc,.vscode/default.code-snippets}]
 end_of_line = unset
 indent_size = unset
 indent_style = unset
 insert_final_newline = unset
 trim_trailing_whitespace = unset
 
-# cSpell:ignore jsonlint, Makefiles, MSVC, rasa, toprc, unrooted, vcproj, VCPROJ, vcprops, VCPROPS
+# cspell:ignore mylogin, toprc
+# cSpell:ignore jsonlint, Makefiles, MSVC, rasa, unrooted, vcproj, VCPROJ, vcprops, VCPROPS
