@@ -20,6 +20,9 @@ trim_trailing_whitespace = true
 [*.{bat,cmd,BAT,CMD}]
 end_of_line = crlf
 
+[*.{diff,patch}]
+ignore = true
+
 # MSVC project files require CRLF newlines
 [*.{dsp,dsw,sln,vcproj,vcprops,DSP,DSW,SLN,VCPROJ,VCPROPS}]
 end_of_line = crlf
@@ -71,7 +74,7 @@ indent_size = 0
 ignore = true
 
 # Save batch file examples with CRLF newlines
-[*.cmd.example]
+[*.cmd.example,*.cmd.old]
 end_of_line = crlf
 
 # gen'd:
