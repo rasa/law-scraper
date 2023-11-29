@@ -1,6 +1,5 @@
 {
-  "threshold": 0.5,
-  "reporters": ["html", "markdown", "consoleFull"],
+  "absolute": true,
   "ignore": [
     "**/node_modules/**",
     "**/.git/**",
@@ -26,5 +25,10 @@
     "**/*.yml",
     "**/*.zip"
   ],
-  "absolute": true
+  "reporters": [
+    "html",
+    "markdown",
+    "consoleFull"
+  ],
+  "threshold": 0.5
 }
