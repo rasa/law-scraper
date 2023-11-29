@@ -98,4 +98,4 @@ indent_style = unset
 insert_final_newline = unset
 trim_trailing_whitespace = unset
 
-# cSpell:ignore jsonlint, Makefiles, MSVC, rasa, toprc, vcproj, VCPROJ, vcprops, VCPROPS
+# cSpell:ignore jsonlint, Makefiles, MSVC, rasa, toprc, unrooted, vcproj, VCPROJ, vcprops, VCPROPS
