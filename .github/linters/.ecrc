@@ -5,10 +5,7 @@
   "IgnoreDefaults": false,
   "SpacesAftertabs": false,
   "NoColor": true,
-  "Exclude": [
-    "/archive$",
-    ".mylogin.cnf"
-  ],
+  "Exclude": [],
   "AllowedContentTypes": [],
   "PassedFiles": [],
   "Disable": {
