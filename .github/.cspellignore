@@ -5,10 +5,13 @@
 
 cspellignore
 
-# .github/linters/.ecrc
+# .github/linters/.ecrc (json format)
 Aftertabs
 ecrc
 mylogin
+
+# .github/linters/.gitleaks.toml
+gitleaks
 
 # .github/linters/.grype.yml
 grype
@@ -16,19 +19,16 @@ grype
 # .github/linters/.hadolint.yaml
 hadolint
 
-# ?
-# dotfiles
-
-# .github/linters/.lycheeignore
-lycheeignore
-
-# .github/linters/.gitleaks.toml
-gitleaks
-
 # .github/linters/.jscpd.json
 adoc
 hardis
 venv
+
+# .github/linters/.jsonlintrc (json format)
+jsonlintrc
+
+# .lycheeignore (text format)
+lycheeignore
 
 # .github/linters/.markdownlint.yaml
 markdownlint
@@ -36,7 +36,7 @@ markdownlint
 # .github/linters/.mypy.ini
 mypy
 
-# .github/linters/.pylintrc
+# .github/linters/.pylintrc (ini format)
 pylintrc
 
 # .github/linters/.pyrightconfig.json
@@ -45,7 +45,7 @@ pyrightconfig
 # .gihub/linters/pyproject.toml
 pyproject
 
-# .github/linters/.textlintrc
+# .github/linters/.textlintrc (json format)
 textlintrc
 
 # .github/workflows/codeql.yml
