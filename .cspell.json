@@ -1,9 +1,12 @@
 {
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
   "dictionaries": [
-    "custom-words",
-    "custom-filenames",
-    "github-words",
+    "local-dictionary",
+    "local-words",
+    "local-filenames",
+    "global-dictionary",
+    "global-words",
+    "global-filenames",
     "bash",
     "!cpp",
     "!csharp",
@@ -24,18 +27,33 @@
   "dictionaryDefinitions": [
     {
       "addWords": true,
-      "name": "custom-words",
+      "name": "local-dictionary",
+      "path": "./.cspellignore"
+    },
+    {
+      "addWords": true,
+      "name": "local-words",
       "path": "./.cspell/custom-words.txt"
     },
     {
       "addWords": true,
-      "name": "custom-filenames",
+      "name": "local-filenames",
       "path": "./.cspell/custom-filenames.txt"
     },
     {
       "addWords": true,
-      "name": "github-words",
+      "name": "global-dictionary",
       "path": "./.github/.cspellignore"
+    },
+    {
+      "addWords": true,
+      "name": "global-words",
+      "path": "./.github/.cspell/custom-words.txt"
+    },
+    {
+      "addWords": true,
+      "name": "global-filenames",
+      "path": "./.github/.cspell/custom-filenames.txt"
     }
   ],
   "ignorePaths": [
