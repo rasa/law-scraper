@@ -1,0 +1,11 @@
+## cSpell:disable
+##  ~/.github/.cspell/custom-filenames.txt
+## Unknown words found in files in .github
+## See https://cspell.org/docs/dictionaries-custom/
+##
+
+Aftertabs
+
+# Aftertabs:
+#  ./linters/.ecrc: application/json (1x)
+
