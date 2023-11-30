@@ -105,5 +105,5 @@ indent_style = unset
 insert_final_newline = unset
 trim_trailing_whitespace = unset
 
-# cspell:ignore mylogin, toprc
-# cSpell:ignore jsonlint, Makefiles, MSVC, rasa, unrooted, vcproj, VCPROJ, vcprops, VCPROPS
+# cspell:ignore ecrc, jsonlint, mylogin, toprc
+# cSpell:ignore Makefiles, MSVC, rasa, unrooted, vcproj, VCPROJ, vcprops, VCPROPS
