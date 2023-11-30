@@ -38,6 +38,7 @@ indent_size = unset
 # https://github.com/rasa/workflows/blob/main/.github/linters/.jsonlintrc.json
 # per
 # https://github.com/prantlf/jsonlint/tree/master?tab=readme-ov-file#usage
+# GitHub UI always adds final newlines, if file is edited
 insert_final_newline = unset
 
 # Makefiles require tab indentation
