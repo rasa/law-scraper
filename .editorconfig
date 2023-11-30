@@ -29,11 +29,16 @@ end_of_line = crlf
 max_line_length = 80
 
 [*.json]
-# jsonlint defaults to 2 spaces:
-# indent_size = 4
-# generated files often leave off final newline,
-# and jsonlint complains if not found.
-insert_final_newline = unset
+indent_size = unset
+# https://github.com/zaach/jsonlint
+# generates files that do not have final newlines
+# so, the setting:
+#     "trailing-newline": false
+# was added to
+# https://github.com/rasa/workflows/blob/main/.github/linters/.jsonlintrc.json
+# per
+# https://github.com/prantlf/jsonlint/tree/master?tab=readme-ov-file#usage
+insert_final_newline = false
 
 # Makefiles require tab indentation
 [{Makefile{,.*},makefile{,.*},GNUMakefile{,.*},*.mak,*.mk}]
@@ -67,6 +72,10 @@ switch_case_indent = true # like -ci
 [*.vbs]
 indent_size = unset
 
+# json files without .json extension:
+[{.ecrc,.textlintrc}]
+insert_final_newline = unset
+
 # unrooted file extensions:
 [*.{cmd.*,diff,ignore,patch,txt,wip}]
 end_of_line = unset
@@ -83,7 +92,7 @@ indent_style = unset
 insert_final_newline = unset
 trim_trailing_whitespace = unset
 
-# unrooted final files:
+# unrooted files:
 [{archive,plug.vim}]
 end_of_line = unset
 indent_size = unset
