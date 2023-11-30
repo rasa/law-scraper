@@ -158,5 +158,4 @@ SHOW_ELAPSED_TIME: true # default: false
 #
 # cspell:ignore CHECKMAKE, HADOLINT, HEALTHCHECK, MARKDOWNLINT, markdownlint
 # cspell:ignore MYPY, mypy, PYRIGHT, pyright, pyrightconfig
-# cSpell:ignore cjson, DEVSKIM, JSONLINT, KICS, rasa, trivyignore
-# cSpell:ignore TRUFFLEHOG
+# cSpell:ignore cjson, DEVSKIM, JSONLINT, KICS, rasa, trivyignore, TRUFFLEHOG
