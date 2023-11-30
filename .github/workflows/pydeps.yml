@@ -77,9 +77,12 @@ jobs:
           mapfile -t < <(find "${dir}" -maxdepth "${depth}" -type f -iname "${base}")
           printf 'Found %d files matching %s:\n' "${#MAPFILE[@]}" "${mask}"
           printf '%s\n' "${MAPFILE[@]}"
-          ((${#MAPFILE[@]})) && reqfiles=$(printf '%s\n' "${MAPFILE[@]}" | base64 -w 0)
+          # this works:
+          # ((${#MAPFILE[@]}>0)) && reqfiles=$(printf '%s\n' "${MAPFILE[@]}" | base64 -w 0)
+          # will his work instead:
+          ((${#MAPFILE[@]}>0)) && reqfiles=$(base64 -w 0 <<<"${MAPFILE[@]}")
           printf 'reqfiles=%s\n' "${reqfiles:-}" >> "${GITHUB_ENV}"
-          ((${#MAPFILE[@]}))
+          ((${#MAPFILE[@]}>0))
 
       - name: RUN find duplicate packages, if any, across all requirements files
         if: success()
