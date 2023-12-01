@@ -92,9 +92,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INPUT_LOG_LEVEL: ${{ github.event.inputs.log_level || env.log_level }}
         run:
-          python scraper.py 
+          python scraper.py
             "${{ github.event.inputs.division || env.division }}"
-            "${{ github.event.inputs.part || env.part }}" 
+            "${{ github.event.inputs.part || env.part }}"
             "${{ github.event.inputs.code || env.code }}"
 
       - name: USES actions/upload-artifact@v3
@@ -107,5 +107,4 @@ jobs:
             !**/.gitignore
 
 
-# cSpell:ignore awalsh, Xvfb
-# eof
+# cSpell:ignore awalsh, chromedriver, pdfs, Xvfb
