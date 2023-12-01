@@ -54,3 +54,4 @@ MD042: false # false == disabled
 # blank_lines: false  # Error on blank lines
 
 
+# cSpell:ignore rasa
