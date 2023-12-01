@@ -107,5 +107,5 @@ jobs:
             !**/.gitignore
 
 
-# cSpell:ignore awalsh, chromedriver, Xvfb
+# cSpell:ignore awalsh, Xvfb
 # eof

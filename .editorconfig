@@ -106,4 +106,4 @@ insert_final_newline = unset
 trim_trailing_whitespace = unset
 
 # cspell:ignore ecrc, jsonlint, mylogin, textlintrc, toprc
-# cSpell:ignore MSVC, rasa, unrooted, vcproj, VCPROJ, vcprops, VCPROPS
+# cSpell:ignore MSVC, vcprops, VCPROPS
