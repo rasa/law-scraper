@@ -18,14 +18,17 @@ trim_trailing_whitespace = true
 
 # Batch files require CRLF newlines
 [*.{bat,cmd,BAT,CMD}]
+# @TODO max_line_length = 132
 end_of_line = crlf
 
 # MSVC project files require CRLF newlines
 [*.{dsp,dsw,sln,vcproj,vcprops,DSP,DSW,SLN,VCPROJ,VCPROPS}]
+max_line_length = 132
 end_of_line = crlf
 
 # Google JavaScript Style Guide (https://google.github.io/styleguide/javascriptguide.xml)
 [*.js]
+# The 132 character VT100 came out in 1978
 max_line_length = 132
 
 [*.json]
@@ -38,11 +41,12 @@ indent_size = unset
 # https://github.com/rasa/workflows/blob/main/.github/linters/.jsonlintrc.json
 # per
 # https://github.com/prantlf/jsonlint/tree/master?tab=readme-ov-file#usage
-# GitHub UI always adds final newlines, if file is edited
+# GitHub UI always adds final newlines, when files are edited
 insert_final_newline = unset
 
 # Makefiles require tab indentation
 [{Makefile{,.*},makefile{,.*},GNUMakefile{,.*},*.mak,*.mk}]
+max_line_length = 132
 indent_style = tab
 
 # Google Python Style Guide (https://google.github.io/styleguide/pyguide.html)
@@ -68,6 +72,7 @@ switch_case_indent = true # like -ci
 # function_next_line = true # like -fn
 
 [*.vbs]
+max_line_length = 132
 indent_size = unset
 
 # json files without .json extension:
