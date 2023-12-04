@@ -26,7 +26,7 @@ end_of_line = crlf
 
 # Google JavaScript Style Guide (https://google.github.io/styleguide/javascriptguide.xml)
 [*.js]
-max_line_length = 80
+max_line_length = 132
 
 [*.json]
 indent_size = unset
@@ -52,6 +52,7 @@ max_line_length = 132
 
 # Google Shell Style Guide (https://google.github.io/styleguide/shellguide.html)
 [*.sh]
+max_line_length = 132
 # shfmt uses these settings:
 # like -i=2
 indent_style = space
