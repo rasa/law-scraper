@@ -44,4 +44,5 @@ jobs:
       validate_all_codebase: "true"
 
 #
+
 # cSpell:ignore gitmodules, rasa
