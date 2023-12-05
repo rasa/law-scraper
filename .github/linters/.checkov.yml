@@ -18,4 +18,5 @@ skip-check:
   - CKV_DOCKER_7
 
 #
+
 # cSpell:ignore HEALTHCHECK
