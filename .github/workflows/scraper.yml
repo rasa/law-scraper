@@ -76,8 +76,8 @@ jobs:
         with:
           show-progress: false
 
-      - name: USES actions/setup-python@v4
-        uses: actions/setup-python@v4
+      - name: USES actions/setup-python@v5
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: "pip"
