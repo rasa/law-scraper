@@ -56,15 +56,12 @@
       "path": "./.github/.cspell/custom-filenames.txt"
     }
   ],
+  "enableGlobDot": true,
   "ignorePaths": [
-    "**/node_modules/**",
-    "**/vscode-extension/**",
-    "**/.git/**",
-    "**/.pnpm-lock.json",
-    ".vscode",
-    "package-lock.json",
-    "megalinter-reports"
   ],
-  "version": "0.2",
-  "language": "en"
+  "language": "en",
+  "maxNumberOfProblems": 1000,
+  "noConfigSearch": true,
+  "useGitignore": true,
+  "version": "0.2"
 }
