@@ -76,44 +76,39 @@ jobs:
           fi
           mapfile -t < <(find "${dir}" -maxdepth "${depth}" -type f -iname "${base}")
           printf 'Found %d files matching %s:\n' "${#MAPFILE[@]}" "${mask}"
-          printf '%s\n' "${MAPFILE[@]}"
-          # this works:
-          # ((${#MAPFILE[@]}>0)) && reqfiles=$(printf '%s\n' "${MAPFILE[@]}" | base64 -w 0)
-          # will his work instead:
-          ((${#MAPFILE[@]}>0)) && reqfiles=$(base64 -w 0 <<<"${MAPFILE[@]}")
-          printf 'reqfiles=%s\n' "${reqfiles:-}" >> "${GITHUB_ENV}"
+          typeset -p MAPFILE
+          printf 'serialized=%s\n' "$(typeset -p MAPFILE | base64 -w 0)" >>"${GITHUB_ENV}"
           ((${#MAPFILE[@]}>0))
 
       - name: RUN find duplicate packages, if any, across all requirements files
         if: success()
         run: |
-          mapfile -t < <(base64 -d <<<"${reqfiles}")
+          eval "$(base64 -d <<<"${serialized}")"
           tmp1=$(mktemp)
-          cat "${MAPFILE[@]}" |
-            grep -o '^[^#]*' |
-            sed -E 's/\s+//g' |
-            sort -u |
-            sed -E 's/[<>~!]+/=/g' |
-            grep '=' |
-            cut -d'=' -f 1 |
-            sort |
-            uniq -d > "${tmp1}"
+          cat "${MAPFILE[@]}" \
+            | grep -o '^[^#]*' \
+            | sed -E 's/\s+//g' \
+            | sort -u \
+            | sed -E 's/[<>~!]+/=/g' \
+            | grep '=' \
+            | cut -d'=' -f 1 \
+            | sort \
+            | uniq -d > "${tmp1}"
           printf "Duplicates found: "
           wc -l < "${tmp1}"
           if [[ -s "${tmp1}" ]]; then
             printf "\n"
             cat "${tmp1}"
             printf "\n"
-            sed -e 's/^/\^/g' "${tmp1}" |
-              grep -H -f - "${MAPFILE[@]}" |
-              sed "s|^|::notice::|g"
+            sed -e 's/^/\^/g' "${tmp1}" \
+              | grep -H -f - "${MAPFILE[@]}" \
+              | sed "s|^|::notice::|g"
           fi
-          rm -f "${tmp1}"
           exit 0
 
-      - name: USES actions/setup-python@v4.7.1
+      - name: USES actions/setup-python@v5
         if: success()
-        uses: actions/setup-python@v4.7.1
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
           # yamllint disable-line rule:line-length
@@ -134,14 +129,15 @@ jobs:
       - name: RUN sed -E -i.bak -e '/^\s*#/d; /^\s*$/d;' requirements.txt
         if: success()
         run: |
-          mapfile -t < <(base64 -d <<<"${reqfiles}")
+          eval "$(base64 -d <<<"${serialized}")"
           sed -E -i.bak -e '/^\s*#/d; /^\s*$/d;' "${MAPFILE[@]}"
-          pr -f -n "${MAPFILE[@]}" | tr -s '\n'
+          pr -f -n "${MAPFILE[@]}" \
+            | tr -s '\n'
 
       - name: RUN pipreqs --print --diff requirements.txt
         if: success()
         run: |
-          mapfile -t < <(base64 -d <<<"${reqfiles}")
+          eval "$(base64 -d <<<"${serialized}")"
           for file in "${MAPFILE[@]}"; do
             printf '\n%s:\n' "${file}"
             pipreqs --print --diff "${file}" 2>/dev/null || true
@@ -150,10 +146,13 @@ jobs:
       - name: RUN pur --dry-run --dry-run-changed --no-recursive --requirement requirements.txt
         if: success()
         run: |
-          mapfile -t < <(base64 -d <<<"${reqfiles}")
+          eval "$(base64 -d <<<"${serialized}")"
           for file in "${MAPFILE[@]}"; do
             printf '\n%s: ' "${file}"
-            out=$(pur --dry-run --dry-run-changed --no-recursive --requirement "${file}" | grep -v '==>' || true)
+            out=$(
+              pur --dry-run --dry-run-changed --no-recursive --requirement "${file}" \
+                | grep -v '==>' || true
+            )
             if [[ -z "${out}" ]]; then
               printf 'no changes found\n'
               continue
@@ -166,10 +165,13 @@ jobs:
       - name: RUN pur --no-recursive --requirement requirements.txt
         if: success()
         run: |
-          mapfile -t < <(base64 -d <<<"${reqfiles}")
+          eval "$(base64 -d <<<"${serialized}")"
           for file in "${MAPFILE[@]}"; do
               printf '\n%s: ' "${file}"
-              out=$(pur --no-recursive --requirement "${file}" | grep -v '==>' || true)
+              out=$(
+                pur --no-recursive --requirement "${file}" \
+                  | grep -v '==>' || true
+              )
               if grep -q 'All requirements up-to-date' <<<"${out}"; then
                 printf 'no changes found\n'
                 continue
@@ -182,7 +184,7 @@ jobs:
       - name: RUN pip install -r requirements.txt
         if: success()
         run: |
-          mapfile -t < <(base64 -d <<<"${reqfiles}")
+          eval "$(base64 -d <<<"${serialized}")"
           for file in "${MAPFILE[@]}"; do
             printf '\n%s: ' "${file}"
             pip install -r "${file}" || true
@@ -196,7 +198,9 @@ jobs:
       - name: RUN pipdeptree --freeze --warn silence | grep -E '^[a-zA-Z0-9\-]+'
         if: success()
         run: |
-          pipdeptree --freeze --warn silence | grep -E '^[a-zA-Z0-9\-]+' || true
+          pipdeptree --freeze --warn silence \
+            | grep -E '^[a-zA-Z0-9\-]+' || true
 
 # cspell:ignore pipreqs
-# cSpell:ignore iname, noprofile, norc, pipdeptree, pydeps, rasa, reqfiles
+
+# cSpell:ignore iname, noprofile, norc, pipdeptree, pydeps, rasa

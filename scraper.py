@@ -585,5 +585,6 @@ def main() -> int:
 if __name__ == "__main__":
     sys.exit(main())
 
+# cspell:ignore pdfs
 # cSpell:ignore EXPANDEDBRANCHCODESID, expandedbranchcodesid, EXPANDEDBRANCHCODESIDA
 # cSpell:ignore MANYLAWSECTIONS, manylawsections, pdfkit, Pdfkit, pdfs, prefs, pypdf
