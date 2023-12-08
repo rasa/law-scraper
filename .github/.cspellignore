@@ -5,6 +5,7 @@
 ## cSpell dictionary of curated words found in .github
 
 cspellignore
+rasa
 
 # .github/linters/.ecrc (json format)
 Aftertabs
