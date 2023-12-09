@@ -57,8 +57,7 @@
     }
   ],
   "enableGlobDot": true,
-  "ignorePaths": [
-  ],
+  "ignorePaths": [],
   "language": "en",
   "maxNumberOfProblems": 1000,
   "noConfigSearch": true,
