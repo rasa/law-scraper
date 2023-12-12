@@ -1,6 +1,7 @@
 ## cSpell:disable
-##  ~/.github/.cspell/custom-filenames.txt
-## Unknown words found in files in .github
+## Copied from: rasa/dotfiles/.github/.cspell/ignore-words.yml
+## EDIT THE ABOVE FILE OR YOUR CHANGES WILL BE LOST!
+## Auto-generated cSpell dictionary of words to assume are correctly spelled
 ## See https://cspell.org/docs/dictionaries-custom/
 ##
 

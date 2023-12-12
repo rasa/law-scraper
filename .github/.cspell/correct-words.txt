@@ -1,0 +1,61 @@
+## cSpell:disable
+## Copied from: rasa/dotfiles/.github/.cspell/correct-words.txt
+## EDIT THE ABOVE FILE OR YOUR CHANGES WILL BE LOST!
+# cSpell dictionary of manually curated list of words (and filenames) to treat as correctly spelled
+
+cspellignore
+rasa
+
+# .github/linters/.ecrc (json format)
+Aftertabs
+ecrc
+mylogin
+
+# .github/linters/.gitleaks.toml
+gitleaks
+
+# .github/linters/.grype.yml
+grype
+
+# .github/linters/.hadolint.yaml
+hadolint
+
+# .github/linters/.jscpd.json
+adoc
+hardis
+venv
+
+# .github/linters/.jsonlintrc (json format)
+jsonlintrc
+
+# .lycheeignore (text format)
+lycheeignore
+
+# .github/linters/.markdownlint.yaml
+markdownlint
+
+# .github/linters/.mypy.ini
+mypy
+
+# .github/linters/.pylintrc (ini format)
+pylintrc
+
+# .github/linters/.pyrightconfig.json
+pyrightconfig
+
+# .gihub/linters/pyproject.toml
+pyproject
+
+# .github/linters/.textlintrc (json format)
+textlintrc
+
+# .github/workflows/codeql.yml
+codeql
+
+# .github/workflows/mega-linter.yml
+gitmodules
+
+# .github/workflows/pydeps.yml
+pydeps
+
+# eof
