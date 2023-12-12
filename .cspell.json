@@ -1,66 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
-  "dictionaries": [
-    "local-dictionary",
-    "local-words",
-    "local-filenames",
-    "global-dictionary",
-    "global-words",
-    "global-filenames",
-    "bash",
-    "!cpp",
-    "!csharp",
-    "!css",
-    "filetypes",
-    "!fonts",
-    "!go",
-    "!golang",
-    "html",
-    "!latex",
-    "makefile",
-    "!node",
-    "!php",
-    "powershell",
-    "python",
-    "!typescript"
+  "import": [
+    ".cspell/cspell.config.yml"
   ],
-  "dictionaryDefinitions": [
-    {
-      "addWords": true,
-      "name": "local-dictionary",
-      "path": "./.cspellignore"
-    },
-    {
-      "addWords": true,
-      "name": "local-words",
-      "path": "./.cspell/custom-words.txt"
-    },
-    {
-      "addWords": true,
-      "name": "local-filenames",
-      "path": "./.cspell/custom-filenames.txt"
-    },
-    {
-      "addWords": true,
-      "name": "global-dictionary",
-      "path": "./.github/.cspellignore"
-    },
-    {
-      "addWords": true,
-      "name": "global-words",
-      "path": "./.github/.cspell/custom-words.txt"
-    },
-    {
-      "addWords": true,
-      "name": "global-filenames",
-      "path": "./.github/.cspell/custom-filenames.txt"
-    }
-  ],
-  "enableGlobDot": true,
-  "ignorePaths": [],
-  "language": "en",
-  "maxNumberOfProblems": 1000,
-  "noConfigSearch": true,
-  "useGitignore": true,
   "version": "0.2"
 }
