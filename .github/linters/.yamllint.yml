@@ -9,16 +9,18 @@
 
 extends: relaxed
 rules:
-  new-lines:
-    level: warning
-    type: unix
+  comments:
+    min-spaces-from-content: 1 # Used to follow prettier standard: https://github.com/prettier/prettier/pull/10926
+  colons:
+    max-spaces-after: -1
   line-length:
     level: warning
     max: 132 # default: 80
     allow-non-breakable-words: true
     allow-non-breakable-inline-mappings: true
-  comments:
-    min-spaces-from-content: 1 # Used to follow prettier standard: https://github.com/prettier/prettier/pull/10926
   new-line-at-end-of-file: disable
+  new-lines:
+    level: warning
+    type: unix
   trailing-spaces: disable
 

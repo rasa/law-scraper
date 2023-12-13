@@ -52,5 +52,3 @@ MD042: false # false == disabled
 # doesn't appear in https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.yaml
 # # Rules by tags
 # blank_lines: false  # Error on blank lines
-
-
