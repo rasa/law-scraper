@@ -118,4 +118,4 @@ trim_trailing_whitespace = unset
 
 # cspell:ignore ecrc, jsonlint, Makefiles, mylogin, textlintrc, toprc
 
-# cSpell:ignore MSVC, rasa, Televideo, unrooted, vcproj, VCPROJ, vcprops, VCPROPS
+# cSpell:ignore MSVC, Televideo, unrooted, vcproj, VCPROJ, vcprops, VCPROPS
