@@ -1,11 +1,2 @@
 ## cSpell:disable
 
-ecrc
-grype
-hadolint
-jsonlintrc
-markdownlint
-pydeps
-pylintrc
-pyrightconfig
-textlintrc
