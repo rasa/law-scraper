@@ -37,4 +37,3 @@ updates:
     commit-message:
       prefix: "[docker] "
 
-# cSpell:ignore rasa
