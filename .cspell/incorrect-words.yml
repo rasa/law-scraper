@@ -1,0 +1,8 @@
+---
+# cSpell:disable
+# ~/.cspell/incorrect-words.yml
+# Manually curated list of words to treat as incorrectly spelled
+
+flagWords:
+  - notaword1
+  - notaword2
