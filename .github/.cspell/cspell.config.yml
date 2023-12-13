@@ -2,9 +2,9 @@
 # ~/.cspell/cspell.config.yml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
 dictionaries:
-  - '.cspell/correct-words.txt' #CORRECT
-  - '.cspell/ignore-words.txt' #IGNORE
-  - '.cspell/ignore-filenames.txt' #IGNORE
+  - '.cspell/correct-words.txt' # CORRECT
+  - '.cspell/ignore-words.txt' # IGNORE
+  - '.cspell/ignore-filenames.txt' # IGNORE
   - 'bash'
   - '!cpp'
   - '!csharp'
