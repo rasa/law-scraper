@@ -13,6 +13,10 @@ rules:
     min-spaces-from-content: 1 # Used to follow prettier standard: https://github.com/prettier/prettier/pull/10926
   colons:
     max-spaces-after: -1
+  empty-lines:
+    max: -1
+    max-start: -1
+    max-end: -1
   line-length:
     level: warning
     max: 132 # default: 80
