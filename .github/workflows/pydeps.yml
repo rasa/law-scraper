@@ -1,5 +1,5 @@
 ---
-# Copied from: rasa/dotfiles/.github/workflows/pydeps.yaml
+# Copied from: rasa/dotfiles/.github/workflows/pydeps.yml
 # EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
 # checkov:skip=CKV_GHA_7:The build output cannot be affected by user parameters
 #   other than the build entry point and the top-level source location.
@@ -11,10 +11,16 @@ name: pydeps
 env:
   DEFAULT_MASK: "**/*requirements*.txt"
 
-"on": # quotes required by linter
+on: # yamllint disable-line rule:truthy
   schedule:
     # run every day at 15:00 UTC (08:00 PDT)
-    - cron: "0 15 * * *"
+    - cron: "0 15  *  *  *"
+    #        ┬  ┬  ┬  ┬  ┬
+    #        │  │  │  │  └─ day of week (0-6 or SUN-SAT) # *    : run every 5 minutes/every 1 hour/every 1 day/every 1 month
+    #        │  │  │  └──── month (1-12 or JAN-DEC)      # */X  : run every X minutes/every X hours/every X days/every X months
+    #        │  │  └─────── day of month (1-31)          # A,B,C: run when minute/hour/day/month = A, B, or C
+    #        │  └────────── hour (0-23) (UTC/GMT+0)
+    #        └───────────── minute (0-59)
   push:
     paths:
       - "**/*requirements*.txt"
@@ -25,7 +31,7 @@ env:
         type: string
         default: "**/*requirements*.txt"
         description: "File mask for requirements*.txt file(s)"
-  workflow_dispatch:
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
     inputs:
       # checkov:skip=CKV_GHA_7
       mask:
