@@ -3,20 +3,31 @@
 # EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
 # $schema https://json.schemastore.org/github-workflow.json
 
-name: dependabot
+name: Dependabot auto-merge
 
-"on": # quotes required by linter
-  # schedule:
-  #  # run every day at 16:00 UTC (09:00 PDT)
-  #  - cron: "0 16 * * *"
+on: # yamllint disable-line rule:truthy
+  # See https://stackoverflow.com/a/74959635
   pull_request_target:
+  workflow_call: # Required so this workflow can be called from another workflow
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 
-permissions: write-all
+permissions:
+  pull-requests: write
+  contents: write
 
 jobs:
-  dependabot:
-    name: USES rasa/workflows/.github/workflows/dependabot.yml@main
-    uses: rasa/workflows/.github/workflows/dependabot.yml@main
-    secrets: inherit
+  job:
+    runs-on: ubuntu-latest
+    # See https://github.com/dependabot/fetch-metadata?tab=readme-ov-file#enabling-auto-merge
+    if: startsWith(github.event.pull_request.user.login, 'dependabot')
+    steps:
+      - name: Dependabot metadata
+        id: dependabot-metadata
+        uses: dependabot/fetch-metadata@v1.6.0
+      - name: Enable auto-merge for Dependabot PRs
+        # if: steps.dependabot-metadata.outputs.update-type == 'version-update:semver-patch'
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
