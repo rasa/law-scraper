@@ -5,17 +5,39 @@
 
 name: clean-logs
 
-# permissions: write
-
-"on": # quotes required by linter
+on: # yamllint disable-line rule:truthy
+  # schedule:
+  #  - cron: '00 2 * * *'
+  # runs at 2 am UTC every day.
+  workflow_call: # Required so this workflow can be called from another workflow
+    inputs:
+      repository:
+        type: string
+        required: false
+        default: rasa/workflows
+      retain_days:
+        type: string
+        required: false
+        default: "30"
+      keep_minimum_runs:
+        type: string
+        required: false
+        default: "6"
+      delete_workflow_pattern:
+        type: string
+      delete_workflow_by_state_pattern:
+        type: string
+      delete_run_by_conclusion_pattern:
+        type: string
+      dry_run:
+        type: string
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
     inputs:
-      # checkov:skip=CKV_GHA_7:The build output cannot be affected by user parameters...
-      # repository:
-      #   description: 'Name of repository (e.g., user/repo).'
-      #   type: string
-      #   required: true
-      #   default: ${{ github.repository }}
+      repository:
+        description: "Name of repository (e.g., user/repo)."
+        type: string
+        required: false
+        default: rasa/workflows
       retain_days:
         description: "Number of days."
         required: false
@@ -24,7 +46,7 @@ name: clean-logs
       keep_minimum_runs:
         description: "The minimum runs to keep for each workflow."
         required: false
-        default: "2"
+        default: "6"
         type: string
       delete_workflow_pattern:
         description: "The name or filename of the workflow. if not set then it will target all workflows."
@@ -56,22 +78,46 @@ name: clean-logs
       dry_run:
         description: "Only log actions, do not perform any delete operations."
         required: false
+        default: ""
         type: string
+
+concurrency:
+  # Group workflow jobs so new commits cancels in-progress execution triggered by previous commits.
+  # Source: https://mail.python.org/archives/list/pypa-committers@python.org/thread/PCBCQMJF64JGRBOX7E2EE4YLKHT4DI55/
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
 
 jobs:
   clean-logs:
-    uses: rasa/workflows/.github/workflows/clean-logs.yaml@main
-    with:
-      # not needed:
-      # token: ${{ secrets.GITHUB_TOKEN }}
-      # doesn't work:
-      # repository: ${{ github.repository }}
-      retain_days: ${{ inputs.retain_days }}
-      keep_minimum_runs: ${{ inputs.keep_minimum_runs }}
-      delete_workflow_pattern: ${{ inputs.delete_workflow_pattern }}
-      delete_workflow_by_state_pattern: ${{ inputs.delete_workflow_by_state_pattern }}
-      delete_run_by_conclusion_pattern: ${{ inputs.delete_run_by_conclusion_pattern }}
-      dry_run: ${{ inputs.dry_run }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: crazy-max/ghaction-dump-context@v2.1.0
+        uses: crazy-max/ghaction-dump-context@v2.1.0
 
-#
+      - name: On demand Delete workflow runs
+        if: ${{ github.event_name != 'workflow_dispatch' }}
+        uses: Mattraks/delete-workflow-runs@v2.0.4
+        with:
+          repository: ${{ inputs.repository }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          retain_days: ${{ inputs.retain_days }}
+          keep_minimum_runs: ${{ inputs.keep_minimum_runs }}
+          delete_workflow_pattern: ${{ inputs.delete_workflow_pattern }}
+          delete_workflow_by_state_pattern: ${{ inputs.delete_workflow_by_state_pattern }}
+          delete_run_by_conclusion_pattern: ${{ inputs.delete_run_by_conclusion_pattern }}
+          dry_run: ${{ inputs.dry_run }}
 
+      - name: Scheduled Delete workflow runs
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        uses: Mattraks/delete-workflow-runs@v2.0.4
+        with:
+          # ${{ github.event.inputs.repository }}" is empty :(
+          repository: ${{ github.repository }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          retain_days: ${{ github.event.inputs.retain_days }}
+          keep_minimum_runs: ${{ github.event.inputs.keep_minimum_runs }}
+          delete_workflow_pattern: ${{ github.event.inputs.delete_workflow_pattern }}
+          delete_workflow_by_state_pattern: ${{ github.event.inputs.delete_workflow_by_state_pattern }}
+          delete_run_by_conclusion_pattern: ${{ github.event.inputs.delete_run_by_conclusion_pattern }}
+          dry_run: ${{ github.event.inputs.dry_run }}
+
+# cSpell:ignore Mattraks
