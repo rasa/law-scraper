@@ -5,7 +5,7 @@
 
 name: "toc"
 
-"on": # quotes required by linter
+on: # yamllint disable-line rule:truthy
   pull_request:
     branches:
       - main
