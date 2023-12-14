@@ -3,7 +3,9 @@
 # EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
 # yamllint disable rule:line-length
 # $schema https://json.schemastore.org/github-workflow.json
-# _checkov:skip=CKV2_GHA_1:Ensure top-level permissions are not set to write-all
+# checkov:skip=CKV_GHA_7:The build output cannot be affected by user parameters
+#   other than the build entry point and the top-level source location.
+#   GitHub Actions workflow_dispatch inputs MUST be empty.
 
 name: mega-linter
 
