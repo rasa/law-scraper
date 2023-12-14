@@ -1,0 +1,52 @@
+---
+# $schema https://json.schemastore.org/github-workflow.json
+# ./.github/workflows/debug-rasa.yaml
+
+name: debug-rasa
+
+env:
+  WORKFLOW_USER: rasa
+  WORKFLOW_REPO: workflows
+
+on: # yamllint disable-line rule:truthy
+  # push:
+  # pull_request:
+  workflow_call: # Required so this workflow can be called from another workflow
+    inputs:
+      workflow_user:
+        description: "Github user name (default is 'rasa')"
+        required: false
+        type: string
+      workflow_repo:
+        description: "Github repository name (default is 'workflows')"
+        required: false
+        type: string
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+    inputs:
+      workflow_user:
+        description: "Github user name (default is 'rasa')"
+        required: false
+        type: string
+      workflow_repo:
+        description: "Github repository name (default is 'workflows')"
+        required: false
+        type: string
+
+jobs:
+  debug-rasa:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: set vars
+        run: |
+          printf 'WORKFLOW_USER=%s\n' "${{ inputs.workflow_user }}" >> "${GITHUB_ENV}"
+          printf 'WORKFLOW_REPO=%s\n' "${{ inputs.workflow_repo }}" >> "${GITHUB_ENV}"
+      - name: USES crazy-max/ghaction-dump-context@v2.1.0
+        uses: crazy-max/ghaction-dump-context@v2.1.0
+        with:
+          workflow_user: ${{ inputs.workflow_user }}
+          workflow_repo: ${{ inputs.workflow_repo }}
+        env:
+          WORKFLOW_USER: ${{ env.WORKFLOW_USER }}
+          WORKFLOW_REPO: ${{ env.WORKFLOW_REPO }}
+
+# eof
