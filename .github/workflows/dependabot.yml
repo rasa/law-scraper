@@ -11,6 +11,10 @@ on: # yamllint disable-line rule:truthy
   workflow_call: # Required so this workflow can be called from another workflow
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
 permissions:
   pull-requests: write
   contents: write
