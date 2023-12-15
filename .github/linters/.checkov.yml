@@ -1,5 +1,6 @@
 ---
-# ~/.github/linters/.checkov.yml
+# Copied from: rasa/dotfiles/.github/linters/.checkov.yml
+# EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
 # schema see https://github.com/bridgecrewio/checkov/issues/5241
 # Source: https://github.com/oxsecurity/megalinter/blob/main/TEMPLATES/.checkov.yml
 # You can see all available properties here: https://github.com/bridgecrewio/checkov#configuration-using-a-config-file

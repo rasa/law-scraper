@@ -1,5 +1,6 @@
 ---
-# ~/.github/linters/.bandit.yml
+# Copied from: rasa/dotfiles/.github/linters/.bandit.yml
+# EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
 # Docs: https://bandit.readthedocs.io/en/latest/
 # ML:   https://megalinter.io/latest/descriptors/python_bandit/
 # MLT:  https://github.com/oxsecurity/megalinter/blob/main/TEMPLATES/.bandit.yml
