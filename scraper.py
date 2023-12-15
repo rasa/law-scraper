@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
 Copyright (c) 2022-2023, Ross Smith II
+
 SPDX-License-Identifier: MIT
 """
 # pylint: disable=W0703 # Catching too general exception Exception (broad-except)
@@ -101,13 +102,13 @@ class LawScraper:
 
         options = webdriver.ChromeOptions()  # type: ignore
         options.add_experimental_option("prefs", prefs)
-        options.add_argument("--kiosk-printing")
-        options.add_argument("--log-level=3")
+        options.add_argument("--kiosk-printing")  # type: ignore
+        options.add_argument("--log-level=3")  # type: ignore
         if self.ci:
             # see https://github.com/rasa/law-scraper/runs/4740875776?check_suite_focus=true#step:8:8  # noqa
             # see https://stackoverflow.com/a/47887610/1432614
-            options.add_argument("--no-sandbox")
-            options.add_argument("--headless")
+            options.add_argument("--no-sandbox")  # type: ignore
+            options.add_argument("--headless")  # type: ignore
         self.driver = webdriver.Chrome(options=options)  # type: ignore
 
         webdriver.remote.remote_connection.LOGGER.setLevel(logging.CRITICAL)  # type: ignore # github only
