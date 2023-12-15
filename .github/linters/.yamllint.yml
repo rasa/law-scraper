@@ -27,3 +27,5 @@ rules:
     level: warning
     type: unix
   trailing-spaces: disable
+  truthy:
+    check-keys: false
