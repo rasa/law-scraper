@@ -14,47 +14,59 @@ on: # yamllint disable-line rule:truthy
   # runs at 2 am UTC every day.
   workflow_call: # Required so this workflow can be called from another workflow
     inputs:
+      # checkov:skip=CKV_GHA_7
       repository:
         type: string
         required: false
         default: rasa/workflows
+      # checkov:skip=CKV_GHA_7
       retain_days:
         type: string
         required: false
         default: "30"
+      # checkov:skip=CKV_GHA_7
       keep_minimum_runs:
         type: string
         required: false
         default: "6"
+      # checkov:skip=CKV_GHA_7
       delete_workflow_pattern:
         type: string
+      # checkov:skip=CKV_GHA_7
       delete_workflow_by_state_pattern:
         type: string
+      # checkov:skip=CKV_GHA_7
       delete_run_by_conclusion_pattern:
         type: string
+      # checkov:skip=CKV_GHA_7
       dry_run:
         type: string
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
     inputs:
+      # checkov:skip=CKV_GHA_7
       repository:
         description: "Name of repository (e.g., user/repo)."
         type: string
         required: false
         default: rasa/workflows
+      # checkov:skip=CKV_GHA_7
       retain_days:
         description: "Number of days."
         required: false
         default: "30"
         type: string
+      # checkov:skip=CKV_GHA_7
       keep_minimum_runs:
         description: "The minimum runs to keep for each workflow."
         required: false
         default: "6"
         type: string
+      # checkov:skip=CKV_GHA_7
       delete_workflow_pattern:
         description: "The name or filename of the workflow. if not set then it will target all workflows."
         required: false
         type: string
+      # checkov:skip=CKV_GHA_7
       delete_workflow_by_state_pattern:
         description: "Remove workflow by state: active, deleted, disabled_fork, disabled_inactivity, disabled_manually"
         required: false
@@ -66,6 +78,7 @@ on: # yamllint disable-line rule:truthy
           - deleted
           - disabled_inactivity
           - disabled_manually
+      # checkov:skip=CKV_GHA_7
       delete_run_by_conclusion_pattern:
         description: "Remove workflow by conclusion: action_required, cancelled, failure, skipped, success"
         required: false
@@ -78,6 +91,7 @@ on: # yamllint disable-line rule:truthy
           - failure
           - skipped
           - success
+      # checkov:skip=CKV_GHA_7
       dry_run:
         description: "Only log actions, do not perform any delete operations."
         required: false
