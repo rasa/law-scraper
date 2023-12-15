@@ -21,7 +21,7 @@ on: # yamllint disable-line rule:truthy
       - main
       - master
 
-  # <@rasa>
+# <@rasa>
   workflow_call: # Required so this workflow can be called from another workflow
     inputs:
       # checkov:skip=CKV_GHA_7
@@ -49,7 +49,11 @@ on: # yamllint disable-line rule:truthy
           - "false"
           - "true"
         default: "true"
-  # </@rasa>
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+# </@rasa>
 
 # Comment env block if you do not want to apply fixes
 env:
@@ -66,10 +70,6 @@ env:
   # If APPLY_FIXES is used, defines if the fixes are directly committed (commit)
   # or posted in a PR (pull_request)
   APPLY_FIXES_MODE: commit
-
-concurrency:
-  group: ${{ github.ref }}-${{ github.workflow }}
-  cancel-in-progress: true
 
 jobs:
   megalinter:
