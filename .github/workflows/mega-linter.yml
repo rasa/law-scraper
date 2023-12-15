@@ -24,20 +24,24 @@ on: # yamllint disable-line rule:truthy
   # <@rasa>
   workflow_call: # Required so this workflow can be called from another workflow
     inputs:
+      # checkov:skip=CKV_GHA_7
       fetch_depth:
         # description: "Number of commits to fetch. 0 indicates all history for all branches and tags."
         type: string
         default: "1"
+      # checkov:skip=CKV_GHA_7
       validate_all_codebase:
         # description: "Validate the entire code base (enter any value)"
         type: string
         default: "false"
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
     inputs:
+      # checkov:skip=CKV_GHA_7
       fetch_depth:
         description: "Number of commits to fetch. 0 indicates all history for all branches and tags."
         type: string
         default: "1"
+      # checkov:skip=CKV_GHA_7
       validate_all_codebase:
         description: "Validate the entire code base."
         type: choice
