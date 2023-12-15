@@ -3,7 +3,7 @@
 
 name: scraper
 
-# checkov:skip=CKV2_GHA_1:Ensure top-level permissions are not set to write-all"
+# XXXcheckov:skip=CKV2_GHA_1:Ensure top-level permissions are not set to write-all"
 permissions: read-all
 
 env:
@@ -14,8 +14,11 @@ env:
 
 "on": # quotes required to quiet linter
   push:
-  #  branches: [ master, main ] # $default-branch doesn't seem to work
+    branches:
+      - main
   pull_request:
+    branches:
+      - main
   #  types: [opened, synchronize, reopened]
   release:
     types: [published, created, edited]
@@ -24,7 +27,7 @@ env:
   #  - cron: '23 15 * * *'
   workflow_dispatch:
     inputs:
-      log_level: # checkov:skip=CKV_GHA_7
+      log_level: # XXXcheckov:skip=CKV_GHA_7
         description: "Log level"
         type: choice
         default: "info" # doesn't work: ${{ env.log_level }}
@@ -71,8 +74,8 @@ jobs:
           chromedriver --url-base=/wd/hub &
           # sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
 
-      - name: USES actions/checkout@v4
-        uses: actions/checkout@v4
+      - name: USES actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.1
         with:
           show-progress: false
 
@@ -97,14 +100,13 @@ jobs:
             "${{ github.event.inputs.part || env.part }}"
             "${{ github.event.inputs.code || env.code }}"
 
-      - name: USES actions/upload-artifact@v3
-        uses: actions/upload-artifact@v3
+      - name: USES actions/upload-artifact@v4.0.0
+        uses: actions/upload-artifact@v4.0.0
         with:
           name: html and pdf
           path: |
             html
             pdf
             !**/.gitignore
-
 
 # cSpell:ignore awalsh, chromedriver, pdfs, Xvfb
