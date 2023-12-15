@@ -10,14 +10,9 @@ on: # yamllint disable-line rule:truthy
   # pull_request:
   #   branches:
   #     - main
-  #     - master
-  #     - releases/v*
-  # push:
-  #   branches:
-  #     - main
-  #     - master
-  #     - releases/v*
   push:
+    branches:
+      - main
     paths:
       - ".github/scripts/*"
       - ".github/workflows/debug-matrix.yaml"
