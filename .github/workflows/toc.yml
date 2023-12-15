@@ -28,8 +28,8 @@ jobs:
     env:
       GH_TOC_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: USES actions/checkout@v4
-        uses: actions/checkout@v4
+      - name: USES actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.1
         with:
           show-progress: false
 
@@ -45,7 +45,5 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5.0.0
         with:
           commit_message: "docs: auto update table-of-contents in markdown"
-
-#
 
 # cSpell:ignore iname, stefanzweifel
