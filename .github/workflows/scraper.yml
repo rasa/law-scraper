@@ -12,7 +12,7 @@ env:
   part: 4
   log_level: debug
 
-"on": # quotes required to quiet linter
+on: # yamllint disable-line rule:truthy
   push:
     branches:
       - main
@@ -22,10 +22,7 @@ env:
   #  types: [opened, synchronize, reopened]
   release:
     types: [published, created, edited]
-  # schedule:
-  #  # run at 15:23 UTC every day (8:23am PDT/UTC-7)
-  #  - cron: '23 15 * * *'
-  workflow_dispatch:
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
     inputs:
       log_level: # XXXcheckov:skip=CKV_GHA_7
         description: "Log level"
@@ -79,8 +76,8 @@ jobs:
         with:
           show-progress: false
 
-      - name: USES actions/setup-python@v5
-        uses: actions/setup-python@v5
+      - name: USES actions/setup-python@v5.0.0
+        uses: actions/setup-python@v5.0.0
         with:
           python-version: "3.11"
           cache: "pip"
