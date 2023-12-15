@@ -3,7 +3,7 @@
 # EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
 # $schema https://json.schemastore.org/github-workflow.json
 
-name: dependabot-auto-merge
+name: dependabot
 
 on: # yamllint disable-line rule:truthy
   # See https://stackoverflow.com/a/74959635
