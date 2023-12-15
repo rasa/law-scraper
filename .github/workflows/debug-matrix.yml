@@ -171,7 +171,7 @@ jobs:
       #     $ConfigFile | ConvertTo-Json | Out-File $SettingsPath -Encoding utf8 -Force
 
       - name: USES actions/checkout
-        uses: actions/checkout@v3.5.3
+        uses: actions/checkout@v4.1.1
 
       # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsshell
       # - if: contains(fromJSON('["Linux", "macOS"]'), runner.os)
@@ -448,11 +448,10 @@ jobs:
         run: |
           # shell: python3 .github/scripts/dumpvars.py {0}
 
-      # - name: USES actions/checkout@v3.3.0
-      #  uses: actions/checkout@v3.3.0
+      # - name: USES actions/checkout@v4.1.1
+      #  uses: actions/checkout@v4.1.1
       # - name: USES ./.github/workflows/debug.yaml@main
       #  uses: ./.github/workflows/debug.yaml@main
-
 
 # cSpell:ignore bbwe, choco, innounp, iregex, lessmsi, Minoru, msixbundle, pkgs
 # cSpell:ignore pyversion, regextype, Sekine, setuptools, showmanual, wekyb, winget
