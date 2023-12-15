@@ -26,10 +26,12 @@ on: # yamllint disable-line rule:truthy
         type: string
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
     inputs:
+      # checkov:skip=CKV_GHA_7
       workflow_user:
         description: "Github user name (default is 'rasa')"
         required: false
         type: string
+      # checkov:skip=CKV_GHA_7
       workflow_repo:
         description: "Github repository name (default is 'workflows')"
         required: false
