@@ -22,6 +22,8 @@ on: # yamllint disable-line rule:truthy
     #        │  └────────── hour (0-23) (UTC/GMT+0)      # A-B/X: run every X min/hour/day/mon between A and B
     #        └───────────── minute (0-59)                # Ex: '0 9-17/2 * * 1-5' : 9/11/1/3/5 on Mon/Tue/Wed/Thu/Fri
   push:
+    branches:
+      - main
     paths:
       - "**/*requirements*.txt"
   workflow_call:
