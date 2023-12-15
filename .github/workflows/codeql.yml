@@ -5,19 +5,19 @@
 name: codeql
 
 on: # yamllint disable-line rule:truthy
-  push:
-    branches: [master, main]
-  pull_request:
-    branches: [master, main]
-  workflow_dispatch:
-  schedule:
-    - cron: "30 1 * * 0"
-    #        ┬  ┬  ┬  ┬  ┬                               # *    : run every 5 minutes/every 1 hour/every 1 day/every 1 month
-    #        │  │  │  │  └─ day of week (0-6 or SUN-SAT) # */X  : run every X minutes/every X hours/every X days/every X months
-    #        │  │  │  └──── month (1-12 or JAN-DEC)      # A,B  : run when minute/hour/day/month = A or B
-    #        │  │  └─────── day of month (1-31)          # A-B  : run every minute/hour/day/month between A and B
-    #        │  └────────── hour (0-23) (UTC/GMT+0)      # A-B/X: run every X minute/hour/day/month between A and B
-    #        └───────────── minute (0-59)                # Ex: '0 9-17/2 * * 1-5' : 9am/11am/1pm/3pm/5pm on Mon/Tue/Wed/Thu/Fri
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+  # push:
+  #   branches: [master, main]
+  # pull_request:
+  #   branches: [master, main]
+  # schedule:
+  #   - cron: "30 1 * * 0"
+    #        ┬  ┬  ┬  ┬  ┬                               # *    : run every 5 min/every 1 hour/every 1 day/every 1 mon
+    #        │  │  │  │  └─ day of week (0-6 or SUN-SAT) # */X  : run every X min/every X hour/every X day/every X mon
+    #        │  │  │  └──── month (1-12 or JAN-DEC)      # A,B  : run when min/hour/day/mon = A or B
+    #        │  │  └─────── day of month (1-31)          # A-B  : run every min/hour/day/mon between A and B
+    #        │  └────────── hour (0-23) (UTC/GMT+0)      # A-B/X: run every X min/hour/day/mon between A and B
+    #        └───────────── minute (0-59)                # Ex: '0 9-17/2 * * 1-5' : 9/11/1/3/5 on Mon/Tue/Wed/Thu/Fri
 jobs:
   job:
     # CodeQL runs on ubuntu-latest, windows-latest, and macos-latest
