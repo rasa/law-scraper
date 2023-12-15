@@ -14,7 +14,7 @@ env:
 on: # yamllint disable-line rule:truthy
   schedule:
     # run every day at 15:00 UTC (08:00 PDT)
-    - cron: "0 15  *  *  *"
+    - cron: "0 15 * * *"
     #        ┬  ┬  ┬  ┬  ┬
     #        │  │  │  │  └─ day of week (0-6 or SUN-SAT) # *    : run every 5 minutes/every 1 hour/every 1 day/every 1 month
     #        │  │  │  └──── month (1-12 or JAN-DEC)      # */X  : run every X minutes/every X hours/every X days/every X months
@@ -62,8 +62,8 @@ jobs:
           - "3.10"
           - "3.11"
     steps:
-      - name: USES actions/checkout@v4
-        uses: actions/checkout@v4
+      - name: USES actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.1
         with:
           show-progress: false
 
