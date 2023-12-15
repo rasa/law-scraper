@@ -3,7 +3,7 @@
 # EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
 # $schema https://json.schemastore.org/github-workflow.json
 
-name: "toc"
+name: toc
 
 on: # yamllint disable-line rule:truthy
   pull_request:
