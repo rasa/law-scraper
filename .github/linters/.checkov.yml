@@ -7,9 +7,6 @@
 quiet: true
 
 skip-check:
-  # CKV2_GHA_1: "Ensure top-level permissions are not set to write-all"
-  - CKV2_GHA_1
-
   # MegaLinter ignores CKV_DOCKER_2 by default
   # CKV_DOCKER_2: "Ensure that HEALTHCHECK instructions have been added to container images"
   - CKV_DOCKER_2
@@ -17,6 +14,11 @@ skip-check:
   # CKV_DOCKER_7: "Ensure the base image uses a non latest version tag"
   - CKV_DOCKER_7
 
-#
+  # CKV_GHA_7: "The build output cannot be affected by user parameters other than the build entry point and the top-level source
+  # location. GitHub Actions workflow_dispatch inputs MUST be empty.
+  - CKV_GHA_7
+
+  # CKV2_GHA_1: "Ensure top-level permissions are not set to write-all"
+  - CKV2_GHA_1
 
 # cSpell:ignore HEALTHCHECK
