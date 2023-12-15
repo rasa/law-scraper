@@ -24,6 +24,10 @@ on: # yamllint disable-line rule:truthy
   workflow_call: # Required so this workflow can be called from another workflow
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
 jobs:
   debug-matrix:
     runs-on: ${{ matrix.os }}
@@ -453,5 +457,6 @@ jobs:
       # - name: USES ./.github/workflows/debug.yaml@main
       #  uses: ./.github/workflows/debug.yaml@main
 
+# cspell:ignore dumpvars
 # cSpell:ignore bbwe, choco, innounp, iregex, lessmsi, Minoru, msixbundle, pkgs
 # cSpell:ignore pyversion, regextype, Sekine, setuptools, showmanual, wekyb, winget
