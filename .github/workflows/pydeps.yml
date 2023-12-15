@@ -39,6 +39,10 @@ on: # yamllint disable-line rule:truthy
         default: "**/*requirements*.txt"
         description: "File mask for requirements*.txt file(s)"
 
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
 jobs:
   job:
     runs-on: ${{ matrix.os }}
