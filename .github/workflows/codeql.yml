@@ -11,7 +11,7 @@ on: # yamllint disable-line rule:truthy
     branches: [master, main]
   workflow_dispatch:
   schedule:
-    - cron: "30 1  *  *  0"
+    - cron: "30 1 * * 0"
     #        ┬  ┬  ┬  ┬  ┬                               # *    : run every 5 minutes/every 1 hour/every 1 day/every 1 month
     #        │  │  │  │  └─ day of week (0-6 or SUN-SAT) # */X  : run every X minutes/every X hours/every X days/every X months
     #        │  │  │  └──── month (1-12 or JAN-DEC)      # A,B  : run when minute/hour/day/month = A or B
