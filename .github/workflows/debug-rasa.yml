@@ -51,5 +51,3 @@ jobs:
         env:
           WORKFLOW_USER: ${{ env.WORKFLOW_USER }}
           WORKFLOW_REPO: ${{ env.WORKFLOW_REPO }}
-
-# eof
