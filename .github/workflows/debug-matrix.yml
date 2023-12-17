@@ -453,5 +453,6 @@ jobs:
       #  uses: ./.github/workflows/debug.yaml@main
 
 # cspell:ignore dumpvars
-# cSpell:ignore bbwe, choco, innounp, iregex, lessmsi, Minoru, msixbundle, pkgs
-# cSpell:ignore pyversion, regextype, Sekine, setuptools, showmanual, wekyb, winget
+
+# cSpell:ignore bbwe, innounp, iregex, lessmsi, Minoru, msixbundle, pkgs, pyversion
+# cSpell:ignore regextype, Sekine, setuptools, showmanual, wekyb
