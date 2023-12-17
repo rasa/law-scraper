@@ -7,6 +7,7 @@
 
 codeql
 ecrc
+fastify
 grype
 hadolint
 jsonlintrc
@@ -14,5 +15,7 @@ markdownlint
 pydeps
 pylintrc
 pyrightconfig
+rasa
+regen
 shiftleft
 textlintrc
