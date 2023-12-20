@@ -106,4 +106,4 @@ jobs:
             pdf
             !**/.gitignore
 
-# cSpell:ignore awalsh, chromedriver, pdfs, Xvfb
+# cSpell:ignore chromedriver, Xvfb
