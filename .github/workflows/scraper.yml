@@ -36,7 +36,7 @@ on: # yamllint disable-line rule:truthy
       code:
         description: TOC Code
         type: string
-        default: 'DIV' # doesn't work: ${{ env.code }}
+        default: 'CIV' # doesn't work: ${{ env.code }}
       division:
         description: Division
         type: string
