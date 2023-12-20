@@ -108,8 +108,8 @@ indent_style = unset
 insert_final_newline = unset
 trim_trailing_whitespace = unset
 
-# rooted files:
-[/{.docker/*,.fonts.conf,.mylogin.cnf*,.toprc,.vscode/default.code-snippets}]
+# rooted files/directories:
+[/{.docker/*,.fonts.conf,.gitconfig,.mylogin.cnf*,.toprc,.vscode/default.code-snippets}]
 end_of_line = unset
 indent_size = unset
 indent_style = unset
