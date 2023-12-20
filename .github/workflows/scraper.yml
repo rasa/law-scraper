@@ -3,7 +3,6 @@
 
 name: scraper
 
-# XXXcheckov:skip=CKV2_GHA_1:Ensure top-level permissions are not set to write-all"
 permissions: read-all
 
 env:
@@ -24,7 +23,7 @@ on: # yamllint disable-line rule:truthy
     types: [published, created, edited]
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
     inputs:
-      log_level: # XXXcheckov:skip=CKV_GHA_7
+      log_level:
         description: "Log level"
         type: choice
         default: "info" # doesn't work: ${{ env.log_level }}
@@ -50,11 +49,13 @@ on: # yamllint disable-line rule:truthy
 jobs:
   job:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version:
+          - '3.11'
+          - '3.12'
+          - '3.13.0-alpha.2'
     steps:
-      # - name: RUN apt install tidy wkhtmltopdf
-      #   run: |
-      #     sudo apt -y update
-      #     sudo apt -y install tidy wkhtmltopdf
       - name: RUN apt install tidy wkhtmltopdf
         uses: awalsh128/cache-apt-pkgs-action@v1.3.1
         # This action handles caching APT packages, and leaves the option for package configuration scripts to be run if needed,
@@ -79,8 +80,8 @@ jobs:
       - name: USES actions/setup-python@v5.0.0
         uses: actions/setup-python@v5.0.0
         with:
-          python-version: "3.11"
-          cache: "pip"
+          python-version: ${{ matrix.python-version }}
+          cache: pip
 
       - name: RUN pip install -r requirements.txt
         run: |
