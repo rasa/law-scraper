@@ -58,13 +58,13 @@ jobs:
         run: |
           # bash: List installed apt/snap packages (Linux)
           echo "apt --manual-installed:"
-          apt list --manual-installed
+          apt list --manual-installed | sort
           echo "apt list --installed:"
-          apt list --installed
+          apt list --installed | sort
           # echo "apt-mark:"
           # apt-mark showmanual
           echo "snap list:"
-          snap list
+          snap list | sort
 
       - if: runner.os == 'macOS'
         name: List installed pkgutil/brew packages (macOS)
@@ -74,7 +74,7 @@ jobs:
           echo "pkgutil:"
           pkgutil --pkgs | sort
           echo "brew list:"
-          brew list --versions || true
+          brew list --versions | sort || true
 
       - if: runner.os == 'Windows'
         name: USES MinoruSekine/setup-scoop@main
