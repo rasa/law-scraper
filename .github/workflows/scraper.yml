@@ -50,6 +50,12 @@ on: # yamllint disable-line rule:truthy
 jobs:
   job:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version:
+          - '3.11'
+          - '3.12'
+          - '3.13.0-alpha.2'
     steps:
       # - name: RUN apt install tidy wkhtmltopdf
       #   run: |
@@ -79,7 +85,7 @@ jobs:
       - name: USES actions/setup-python@v5.0.0
         uses: actions/setup-python@v5.0.0
         with:
-          python-version: "3.11"
+          python-version: ${{ matrix.python-version }}
           cache: "pip"
 
       - name: RUN pip install -r requirements.txt
@@ -100,7 +106,7 @@ jobs:
       - name: USES actions/upload-artifact@v4.0.0
         uses: actions/upload-artifact@v4.0.0
         with:
-          name: html and pdf
+          name: html-and-pdf-${{ matrix.python-version }}
           path: |
             html
             pdf
