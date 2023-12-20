@@ -129,8 +129,11 @@ dmypy.json
 .pyre/
 
 github_conf
-megalinter-reports
-.cspell-tmp.json
+megalinter-reports/
+
+/err/
+/html/
+/pdf/
 
 # cSpell:ignore celerybeat, Connor, dmypy, htmlcov, ipynb, ipython, mkdocs, nosetests
 # cSpell:ignore pyflow, pypa, pypackages, ropeproject, Spyder, spyderproject
