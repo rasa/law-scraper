@@ -1,7 +1,7 @@
 {
   "$comment": "Copied from: rasa/dotfiles/.github/linters/.bandit.yml",
-  "$comment": "EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!",
-  "Version=2.7.2",
+  "$comment2": "EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!",
+  "Version": "2.7.2",
   "Verbose": false,
   "Debug": false,
   "IgnoreDefaults": false,
