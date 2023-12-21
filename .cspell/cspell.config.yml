@@ -50,6 +50,19 @@ dictionaryDefinitions:
     description: 'Auto-generated list of filenames to assume are correctly spelled until triaged (in .github repo)'
     name: '.github/.cspell/ignore-filenames.txt'
     path: '.github/.cspell/ignore-filenames.txt'
+enableFiletypes:
+  - awk
+  - bat
+  - dockerfile
+  - editorconfig
+  - makefile
+  - pip-requirements
+  - postscript
+  - powershell
+  - reg
+  - shellcheckrc
+  - shellscript
+  - sql
 enableGlobDot: true
 ignorePaths:
   - '**/.git/**'
