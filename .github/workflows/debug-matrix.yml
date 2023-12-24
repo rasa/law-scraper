@@ -14,8 +14,8 @@ on: # yamllint disable-line rule:truthy
     branches:
       - main
     paths:
-      - ".github/scripts/*"
-      - ".github/workflows/debug-matrix.yaml"
+      - .github/scripts/debug-*
+      - .github/workflows/debug-matrix.yaml
   workflow_call: # Required so this workflow can be called from another workflow
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 
@@ -176,6 +176,8 @@ jobs:
 
       - name: USES actions/checkout
         uses: actions/checkout@v4.1.1
+        with:
+          show-progress: false
 
       # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsshell
       # - if: contains(fromJSON('["Linux", "macOS"]'), runner.os)
@@ -498,10 +500,5 @@ jobs:
         continue-on-error: true
         run: |
           # shell: python3 .github/scripts/debug-vars.py {0}
-
-      # - name: USES actions/checkout@v4.1.1
-      #  uses: actions/checkout@v4.1.1
-      # - name: USES ./.github/workflows/debug.yaml@main
-      #  uses: ./.github/workflows/debug.yaml@main
 
 # cspell:ignore
