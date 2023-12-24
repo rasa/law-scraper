@@ -33,7 +33,7 @@ on: # yamllint disable-line rule:truthy
       validate_all_codebase:
         # description: "Validate the entire code base (enter any value)"
         type: string
-        default: "false"
+        default: "true"
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
     inputs:
       # checkov:skip=CKV_GHA_7
