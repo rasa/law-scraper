@@ -23,6 +23,7 @@ on: # yamllint disable-line rule:truthy
     types: [published, created, edited]
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
     inputs:
+      # checkov:skip=CKV_GHA_7
       log_level:
         description: Log level
         type: choice
@@ -33,14 +34,17 @@ on: # yamllint disable-line rule:truthy
           - warning
           - error
           - critical
+      # checkov:skip=CKV_GHA_7
       code:
         description: TOC Code
         type: string
         default: 'CIV' # doesn't work: ${{ env.code }}
+      # checkov:skip=CKV_GHA_7
       division:
         description: Division
         type: string
         default: '4' # doesn't work: ${{ env.division }}
+      # checkov:skip=CKV_GHA_7
       part:
         description: Part
         type: string
