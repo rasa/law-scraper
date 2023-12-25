@@ -8,6 +8,8 @@
 # https://yamllint.readthedocs.io/en/stable/configuration.html#default-configuration
 
 extends: relaxed
+# ignore-from-file: [.gitignore]
+locale: en_US.UTF-8
 rules:
   colons:
     max-spaces-after: -1
