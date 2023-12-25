@@ -7,7 +7,6 @@
 
 codeql
 ecrc
-fastify
 grype
 hadolint
 jsonlintrc

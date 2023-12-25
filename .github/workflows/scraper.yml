@@ -3,7 +3,6 @@
 
 name: scraper
 
-# XXXcheckov:skip=CKV2_GHA_1:Ensure top-level permissions are not set to write-all"
 permissions: read-all
 
 env:
@@ -24,10 +23,10 @@ on: # yamllint disable-line rule:truthy
     types: [published, created, edited]
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
     inputs:
-      log_level: # XXXcheckov:skip=CKV_GHA_7
-        description: "Log level"
+      log_level:
+        description: Log level
         type: choice
-        default: "info" # doesn't work: ${{ env.log_level }}
+        default: 'info' # doesn't work: ${{ env.log_level }}
         options:
           - debug
           - info
@@ -35,30 +34,31 @@ on: # yamllint disable-line rule:truthy
           - error
           - critical
       code:
-        description: "TOC Code"
+        description: TOC Code
         type: string
-        default: "DIV" # doesn't work: ${{ env.code }}
+        default: 'CIV' # doesn't work: ${{ env.code }}
       division:
-        description: "Division"
+        description: Division
         type: string
-        default: "4" # doesn't work: ${{ env.division }}
+        default: '4' # doesn't work: ${{ env.division }}
       part:
-        description: "Part"
+        description: Part
         type: string
-        default: "4" # doesn't work: ${{ env.part }}
+        default: '4' # doesn't work: ${{ env.part }}
 
 jobs:
   job:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version:
+          # - '3.10'
+          # - '3.11'
+          - '3.12'
+          # - '3.13.0-alpha.2'
     steps:
-      # - name: RUN apt install tidy wkhtmltopdf
-      #   run: |
-      #     sudo apt -y update
-      #     sudo apt -y install tidy wkhtmltopdf
-      - name: RUN apt install tidy wkhtmltopdf
+      - name: RUN Install tidy wkhtmltopdf (via awalsh128/cache-apt-pkgs-action@v1.3.1)
         uses: awalsh128/cache-apt-pkgs-action@v1.3.1
-        # This action handles caching APT packages, and leaves the option for package configuration scripts to be run if needed,
-        # saving a boat-load of time, if needed bump the action version.
         with:
           packages: tidy wkhtmltopdf
           version: 1.0
@@ -79,8 +79,8 @@ jobs:
       - name: USES actions/setup-python@v5.0.0
         uses: actions/setup-python@v5.0.0
         with:
-          python-version: "3.11"
-          cache: "pip"
+          python-version: ${{ matrix.python-version }}
+          cache: pip
 
       - name: RUN pip install -r requirements.txt
         run: |
@@ -100,10 +100,10 @@ jobs:
       - name: USES actions/upload-artifact@v4.0.0
         uses: actions/upload-artifact@v4.0.0
         with:
-          name: html and pdf
+          name: html-and-pdf-${{ matrix.python-version }}
           path: |
             html
             pdf
             !**/.gitignore
 
-# cSpell:ignore awalsh, chromedriver, pdfs, Xvfb
+# cSpell:ignore chromedriver, Xvfb

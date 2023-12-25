@@ -8,7 +8,6 @@
 Aftertabs
 Autobuild
 autobuild
-automerge
 awalsh
 bbwe
 checkbashisms
@@ -36,6 +35,7 @@ nullary
 Parens
 pipdeptree
 pkgs
+pullrequest
 pyversion
 regextype
 Sekine
@@ -57,8 +57,6 @@ yadm
 #  ./workflows/codeql.yml: text/plain (3x)
 # autobuild:
 #  ./workflows/codeql.yml: text/plain (1x)
-# automerge:
-#  ./workflows/z-fastify-dependabot.yml: text/plain (1x)
 # awalsh:
 #  ./workflows/shfmt.yml: text/plain (1x)
 # bbwe:
@@ -119,6 +117,8 @@ yadm
 #  ./workflows/pydeps.yml: text/plain (5x)
 # pkgs:
 #  ./workflows/debug-matrix.yml: text/plain (1x)
+# pullrequest:
+#  ./workflows/clean-logs.yml: text/plain (5x)
 # pyversion:
 #  ./workflows/debug-matrix.yml: text/plain (2x)
 # regextype:
