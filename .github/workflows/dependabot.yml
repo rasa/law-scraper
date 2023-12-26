@@ -10,6 +10,11 @@ on: # yamllint disable-line rule:truthy
   pull_request_target:
     branches:
       - main
+      - master
+  push:
+    branches:
+      - main
+      - master
   workflow_call: # Required so this workflow can be called from another workflow
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 
