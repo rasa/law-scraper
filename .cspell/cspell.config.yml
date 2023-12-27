@@ -29,27 +29,27 @@ dictionaryDefinitions:
   - addWords: true
     description: 'Manually curated list of words (and filenames) to treat as correctly spelled (local to this repo)'
     name: '.cspell/correct-words.txt'
-    path: '~/.cspell/correct-words.txt'
+    path: './.cspell/correct-words.txt'
   - addWords: true
     description: 'Auto-generated list of words to assume are correctly spelled until triaged (local to this repo)'
     name: '.cspell/ignore-words.txt'
-    path: '~/.cspell/ignore-words.txt'
+    path: './.cspell/ignore-words.txt'
   - addWords: true
     description: 'Auto-generated list of filenames to assume are correctly spelled until triaged (local to this repo)'
     name: '.cspell/ignore-filenames.txt'
-    path: '~/.cspell/ignore-filenames.txt'
+    path: './.cspell/ignore-filenames.txt'
   - addWords: true
     description: 'Manually curated list of words (and filenames) to treat as correctly spelled (in .github repo)'
     name: '.github/.cspell/correct-words.txt'
-    path: '~/.github/.cspell/correct-words.txt'
+    path: './.github/.cspell/correct-words.txt'
   - addWords: true
     description: 'Auto-generated list of words to assume are correctly spelled until triaged (in .github repo)'
     name: '.github/.cspell/ignore-words.txt'
-    path: '~/.github/.cspell/ignore-words.txt'
+    path: './.github/.cspell/ignore-words.txt'
   - addWords: true
     description: 'Auto-generated list of filenames to assume are correctly spelled until triaged (in .github repo)'
     name: '.github/.cspell/ignore-filenames.txt'
-    path: '~/.github/.cspell/ignore-filenames.txt'
+    path: './.github/.cspell/ignore-filenames.txt'
 enableFiletypes:
   - awk
   - bat
@@ -91,10 +91,10 @@ ignorePaths:
   - '**/*.xlsx'
   - '**/*.xml'
 import:
-  - '~/.cspell/ignore-paths.yml'
-  - '~/.cspell/incorrect-words.yml'
-  - '~/.github/.cspell/ignore-paths.yml'
-  - '~/.github/.cspell/incorrect-words.yml'
+  - './.cspell/ignore-paths.yml'
+  - './.cspell/incorrect-words.yml'
+  - './.github/.cspell/ignore-paths.yml'
+  - './.github/.cspell/incorrect-words.yml'
 language: 'en'
 maxNumberOfProblems: 1000
 noConfigSearch: true
