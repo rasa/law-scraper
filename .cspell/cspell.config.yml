@@ -36,5 +36,5 @@ dictionaryDefinitions:
     path: '../.github/.cspell/ignore-filenames.txt'
 import:
   - 'common-settings.yml'
-  - 'overrides.yml'
   - '../.github/.cspell/overrides.yml'
+  - 'overrides.yml'
