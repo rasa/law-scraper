@@ -243,3 +243,5 @@ jobs:
           commit_user_email: nicolas.vuillamy@ox.security
 
 # cspell:ignore stefanzweifel
+
+# cSpell:ignore noprofile, norc
