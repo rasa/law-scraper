@@ -6,97 +6,35 @@ dictionaries:
   - '.cspell/correct-words.txt' # CORRECT
   - '.cspell/ignore-words.txt' # IGNORE
   - '.cspell/ignore-filenames.txt' # IGNORE
-  - '.github/.cspell/correct-words.txt' # CORRECT
-  - '.github/.cspell/ignore-words.txt' # IGNORE
-  - '.github/.cspell/ignore-filenames.txt' # IGNORE
-  - 'bash'
-  - '!cpp'
-  - '!csharp'
-  - '!css'
-  - 'filetypes'
-  - '!fonts'
-  - '!go'
-  - '!golang'
-  - 'html'
-  - '!latex'
-  - 'makefile'
-  - '!node'
-  - '!php'
-  - 'powershell'
-  - 'python'
-  - '!typescript'
+  - '.github/correct-words.txt' # CORRECT
+  - '.github/ignore-words.txt' # IGNORE
+  - '.github/ignore-filenames.txt' # IGNORE
 dictionaryDefinitions:
   - addWords: true
     description: 'Manually curated list of words (and filenames) to treat as correctly spelled (local to this repo)'
     name: '.cspell/correct-words.txt'
-    path: './.cspell/correct-words.txt'
+    path: 'correct-words.txt'
   - addWords: true
     description: 'Auto-generated list of words to assume are correctly spelled until triaged (local to this repo)'
     name: '.cspell/ignore-words.txt'
-    path: './.cspell/ignore-words.txt'
+    path: 'ignore-words.txt'
   - addWords: true
     description: 'Auto-generated list of filenames to assume are correctly spelled until triaged (local to this repo)'
     name: '.cspell/ignore-filenames.txt'
-    path: './.cspell/ignore-filenames.txt'
+    path: 'ignore-filenames.txt'
   - addWords: true
     description: 'Manually curated list of words (and filenames) to treat as correctly spelled (in .github repo)'
-    name: '.github/.cspell/correct-words.txt'
-    path: './.github/.cspell/correct-words.txt'
+    name: '.github/correct-words.txt'
+    path: 'correct-words.txt'
   - addWords: true
     description: 'Auto-generated list of words to assume are correctly spelled until triaged (in .github repo)'
-    name: '.github/.cspell/ignore-words.txt'
-    path: './.github/.cspell/ignore-words.txt'
+    name: '.github/ignore-words.txt'
+    path: '../.github/.cspell/ignore-words.txt'
   - addWords: true
     description: 'Auto-generated list of filenames to assume are correctly spelled until triaged (in .github repo)'
-    name: '.github/.cspell/ignore-filenames.txt'
-    path: './.github/.cspell/ignore-filenames.txt'
-enableFiletypes:
-  - awk
-  - bat
-  - dockerfile
-  - editorconfig
-  - makefile
-  - pip-requirements
-  - postscript
-  - powershell
-  - reg
-  - shellcheckrc
-  - shellscript
-  - sql
-enableGlobDot: true
-ignorePaths:
-  - '**/.git/**'
-  - '**/.cspell.json'
-  - '**/.cspell/**'
-  - '**/*.csv'
-  - '**/*.db'
-  - '**/*.diff'
-  - '**/*.doc'
-  - '**/*.docx'
-  - '**/*.json'
-  - '**/*.log'
-  - '**/*.lst'
-  - '**/*.orig'
-  - '**/*.patch'
-  - '**/*.pdf'
-  - '**/*.pem'
-  - '**/*.ps'
-  - '**/*.reg'
-  - '**/*.rej'
-  - '**/*.sed'
-  - '**/*.tcl'
-  - '**/*.tsv'
-  - '**/*.wip'
-  - '**/*.xls'
-  - '**/*.xlsx'
-  - '**/*.xml'
+    name: '.github/ignore-filenames.txt'
+    path: '../.github/.cspell/ignore-filenames.txt'
 import:
-  - './.cspell/ignore-paths.yml'
-  - './.cspell/incorrect-words.yml'
-  - './.github/.cspell/ignore-paths.yml'
-  - './.github/.cspell/incorrect-words.yml'
-language: 'en'
-maxNumberOfProblems: 1000
-noConfigSearch: true
-useGitignore: true
-version: '0.2'
+  - 'common-settings.yml'
+  - 'overrides.yml'
+  - '../.github/.cspell/overrides.yml'
