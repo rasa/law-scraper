@@ -1,8 +1,0 @@
----
-## cSpell:disable
-## ~/.cspell/ignore-paths.yml
-## Manually curated list of paths/files to not spellcheck
-
-ignorePaths:
-  - path/to/file1
-  - path/to/file2
