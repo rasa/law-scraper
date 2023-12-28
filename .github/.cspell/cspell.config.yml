@@ -21,5 +21,4 @@ dictionaryDefinitions:
     path: 'ignore-filenames.txt'
 import:
   - '../../.cspell/common-settings.yml'
-  - 'ignore-paths.yml'
-  - 'incorrect-words.yml'
+  - 'overrides.yml'
