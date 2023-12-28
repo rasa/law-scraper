@@ -5,12 +5,6 @@ name: scraper
 
 permissions: read-all
 
-env:
-  code: CIV
-  division: 4
-  part: 4
-  log_level: debug
-
 on: # yamllint disable-line rule:truthy
   push:
     branches:
@@ -49,6 +43,12 @@ on: # yamllint disable-line rule:truthy
         description: Part
         type: string
         default: '4' # doesn't work: ${{ env.part }}
+
+env:
+  INPUT_CODE: ${{ github.event.inputs.code || 'CIV' }}
+  INPUT_DIVISION: ${{ github.event.inputs.division || '4' }}
+  INPUT_PART: ${{ github.event.inputs.part || '4' }}
+  INPUT_LOG_LEVEL: ${{ github.event.inputs.log_level || 'debug' }}
 
 jobs:
   job:
@@ -94,12 +94,18 @@ jobs:
       - name: RUN python scraper.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          INPUT_LOG_LEVEL: ${{ github.event.inputs.log_level || env.log_level }}
+          # uneeded?
+          # INPUT_DIVISION: ${{ env.INPUT_DIVISION }}
+          # INPUT_PART: ${{ env.INPUT_PART }}
+          # INPUT_CODE: ${{ env.INPUT_CODE }}
+          # INPUT_LOG_LEVEL: ${{ env.INPUT_LOG_LEVEL }}
         run:
           python scraper.py
-            "${{ github.event.inputs.division || env.division }}"
-            "${{ github.event.inputs.part || env.part }}"
-            "${{ github.event.inputs.code || env.code }}"
+        # passed in environment:
+        # python scraper.py
+        #  "${{ env.INPUT_DIVISION }}"
+        #  "${{ env.INPUT_PART }}"
+        #  "${{ env.INPUT_CODE }}"
 
       - name: USES actions/upload-artifact@v4.0.0
         uses: actions/upload-artifact@v4.0.0
