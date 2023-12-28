@@ -3,20 +3,20 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
 
 dictionaries:
-  - '.github/correct-words.txt' # CORRECT
-  - '.github/ignore-words.txt' # IGNORE
-  - '.github/ignore-filenames.txt' # IGNORE
+  - '.github/correct-words.txt'
+  - '.github/ignore-words.txt'
+  - '.github/ignore-filenames.txt'
 dictionaryDefinitions:
   - addWords: true
-    description: 'Manually curated list of words (and filenames) to treat as correctly spelled (local to this repo)'
+    description: 'Manually curated list of words (and filenames) to treat as correctly spelled (in .github repo)'
     name: '.github/correct-words.txt'
     path: 'correct-words.txt'
   - addWords: true
-    description: 'Auto-generated list of words to assume are correctly spelled until triaged. (local to this repo)'
+    description: 'Auto-generated list of words to assume are correctly spelled until triaged (in .github repo)'
     name: '.github/ignore-words.txt'
     path: 'ignore-words.txt'
   - addWords: true
-    description: 'Auto-generated list of filenames to assume are correctly spelled until triaged. (local to this repo)'
+    description: 'Auto-generated list of filenames to assume are correctly spelled until triaged (in .github repo)'
     name: '.github/ignore-filenames.txt'
     path: 'ignore-filenames.txt'
 import:
