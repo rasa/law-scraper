@@ -45,6 +45,7 @@ on: # yamllint disable-line rule:truthy
         default: '4' # doesn't work: ${{ env.part }}
 
 env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   INPUT_CODE: ${{ github.event.inputs.code || 'CIV' }}
   INPUT_DIVISION: ${{ github.event.inputs.division || '4' }}
   INPUT_PART: ${{ github.event.inputs.part || '4' }}
@@ -92,20 +93,8 @@ jobs:
           pip install -r requirements.txt
 
       - name: RUN python scraper.py
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # uneeded?
-          # INPUT_DIVISION: ${{ env.INPUT_DIVISION }}
-          # INPUT_PART: ${{ env.INPUT_PART }}
-          # INPUT_CODE: ${{ env.INPUT_CODE }}
-          # INPUT_LOG_LEVEL: ${{ env.INPUT_LOG_LEVEL }}
         run:
           python scraper.py
-        # passed in environment:
-        # python scraper.py
-        #  "${{ env.INPUT_DIVISION }}"
-        #  "${{ env.INPUT_PART }}"
-        #  "${{ env.INPUT_CODE }}"
 
       - name: USES actions/upload-artifact@v4.0.0
         uses: actions/upload-artifact@v4.0.0
