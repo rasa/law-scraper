@@ -215,3 +215,4 @@ jobs:
 
 # cspell:ignore pipreqs
 
+# cSpell:ignore noprofile, norc, pipdeptree, pydeps
