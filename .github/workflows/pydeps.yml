@@ -13,8 +13,8 @@ env:
 
 on: # yamllint disable-line rule:truthy
   schedule:
-    # run every day at 15:00 UTC (08:00 PDT)
-    - cron: "0 15 * * *"
+    # run every day at 15:17 UTC (07:17 PST/08:17 PDT)
+    - cron: "17 15 * * *"
     #        ┬  ┬  ┬  ┬  ┬                               # *    : run every 5 min/every 1 hour/every 1 day/every 1 mon
     #        │  │  │  │  └─ day of week (0-6 or SUN-SAT) # */X  : run every X min/every X hour/every X day/every X mon
     #        │  │  │  └──── month (1-12 or JAN-DEC)      # A,B  : run when min/hour/day/mon = A or B
@@ -62,11 +62,12 @@ jobs:
       matrix:
         os:
           - ubuntu-latest # aka ubuntu-22.04
-          - windows-latest # aka windows-2022
+          # - windows-latest # aka windows-2022
           # - macos-latest # aka macos-12 (macos-13 in beta)
         python-version:
-          - "3.10"
+          # - "3.10"
           - "3.11"
+          # - "3.12"
     steps:
       - name: USES actions/checkout@v4.1.1
         uses: actions/checkout@v4.1.1
