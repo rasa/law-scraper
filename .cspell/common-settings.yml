@@ -1,4 +1,5 @@
 ---
+# cSpell:disable
 # Copied from: rasa/dotfiles/.cspell/common-settings.yml
 # EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
 # yaml-language-server: $schema=https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
@@ -46,6 +47,7 @@ dictionaries:
   - '!go'
   - '!golang'
   # - '!latex'
+  - '!lorem-ipsum'
   - '!makefile' # missing in vscode's extension 3.0.1
   # - '!node'
   # - '!scala'
@@ -59,11 +61,14 @@ enableFiletypes:
   # - 'sql'
   # - 'svelte'
   # our overrides:
+  - 'apacheconf'
+  - 'autoit'
   - 'awk'
   - 'bat'
   - '!dart'
   - 'dockerfile'
   - 'editorconfig'
+  - 'ignore'
   - '!fsharp'
   - '!makefile' # Added after vscode's extension's release
   - 'pip-requirements'
