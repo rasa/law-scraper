@@ -24,6 +24,7 @@ on: # yamllint disable-line rule:truthy
   push:
     branches:
       - main
+      - master # @TODO remove
     paths:
       - "**/*requirements*.txt"
   workflow_call:
