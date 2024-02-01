@@ -17,9 +17,11 @@ on: # yamllint disable-line rule:truthy
   push:
     branches:
       - main
+      - master # @TODO remove
   pull_request:
     branches:
       - main
+      - master # @TODO remove
 
 # <@rasa>
   workflow_call: # Required so this workflow can be called from another workflow
