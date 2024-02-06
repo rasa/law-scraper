@@ -162,8 +162,8 @@ jobs:
               && 'action_required,cancelled,failure,skipped'
               || github.event.inputs.delete_run_by_conclusion_pattern
             }}
-          check_branch_existence: ${{ startsWith(github.event.inputs.check_branch_existence, 'Keep') && 'Y' || '' }}
-          check_pullrequest_exist: ${{ startsWith(github.event.inputs.check_pullrequest_exist, 'Keep') && 'Y' || '' }}
-          dry_run: ${{ github.event.inputs.dry_run && 'Y' || '' }}
+          check_branch_existence: ${{ github.event.inputs.check_branch_existence   == 'Keep' && 'true' || null }}
+          check_pullrequest_exist: ${{ github.event.inputs.check_pullrequest_exist == 'Keep' && 'true' || null }}
+          dry_run: ${{ github.event.inputs.dry_run == true && 'true' || null }}
 
 # cSpell:ignore ghaction, Mattraks, pullrequest
