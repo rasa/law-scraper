@@ -4,27 +4,6 @@
 
 ## Manually curated list of paths/files to not spellcheck
 ignorePaths:
-  - '**/.docs/**'
-  - '**/.toprc'
-  - '**/*.wip/**'
-  - '**/archive/**'
-  - '**/bin/distro/debian/build_ffmpeg.sh'
-  - '**/bin/distro/debian/search-libs.sh'
-  - '**/bin/distro/openwrt/docs/**'
-  - '**/bin/host/**/mounts-sorted.txt'
-  - '**/bin/host/**/mounts.txt'
-  - '**/bin/host/**/remount-all.txt'
-  - '**/bin/host/**/apps/**'
-  - '**/bin/host/**/docs/**'
-  - '**/bin/os/windows/docs/**'
-  - '**/bin/os/windows/setup/docs/**'
-  - '**/bin/os/windows/setup/textpad/**/*.txt'
-  - '**/bin/os/windows/test/echoansi.cmd'
-  - '**/bin/os/windows/win10colors.cmd'
-  - '**/bin/shims/**'
-  - '**/bin/user/lisa/junctions.txt'
-  - '**/requirements.txt'
-  - '**/shellcheck-issues.txt'
 
 # Manually curated list of words to treat as incorrectly spelled
 # flagWords:
