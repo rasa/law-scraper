@@ -38,11 +38,11 @@ on: # yamllint disable-line rule:truthy
       dry_run:
         type: boolean
       check_branch_existence:
-        default: true
-        type: boolean
+        default: "Y"
+        type: string
       check_pullrequest_exist:
-        default: true
-        type: boolean
+        default: "Y"
+        type: string
       repository:
         type: string
   
@@ -94,13 +94,13 @@ on: # yamllint disable-line rule:truthy
       # checkov:skip=CKV_GHA_7
       check_branch_existence:
         description: If the workflow was triggered by a branch, the branch must be deleted before the workflow run is deleted as well.
-        default: true
-        type: boolean
+        default: "Y"
+        type: string
       # checkov:skip=CKV_GHA_7
       check_pullrequest_exist:
         description: If the run is linked to a pull request, the deletion is skipped.
-        default: true
-        type: boolean
+        default: "Y"
+        type: string
       # checkov:skip=CKV_GHA_7
       repository:
         description: Name of repository (e.g., user/repo) (default is current repository).
@@ -121,18 +121,18 @@ jobs:
 
       - name: Scheduled run (github.event_name == 'schedule')
         if: github.event_name == 'schedule'
-        uses: Mattraks/delete-workflow-runs@v2.0.6
+        uses: Mattraks/delete-workflow-runs@main
         with:
           repository: ${{ github.repository }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          retain_days: "1" # default: 30
-          keep_minimum_runs: "1" # default: 6
-          check_branch_existence: true # default: false
-          check_pullrequest_exist: true # default: false
+          retain_days: "30" # default: 30
+          keep_minimum_runs: "6" # default: 6
+          check_branch_existence: "Y" # default: false
+          check_pullrequest_exist: "Y" # default: false
 
       - name: Non-scheduled run (github.event_name != 'schedule')
         if: github.event_name != 'schedule'
-        uses: Mattraks/delete-workflow-runs@v2.0.6
+        uses: Mattraks/delete-workflow-runs@main
         with:
           repository: ${{ github.event.inputs.repository || github.repository }}
           token: ${{ secrets.GITHUB_TOKEN }}
