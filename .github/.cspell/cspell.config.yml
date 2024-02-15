@@ -23,4 +23,4 @@ dictionaryDefinitions:
     path: 'ignore-filenames.txt'
 import:
   - '../../.cspell/common-settings.yml'
-  - 'overrides.yml'
+  - './overrides.yml'
