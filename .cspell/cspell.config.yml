@@ -36,7 +36,7 @@ dictionaryDefinitions:
     name: '.github/ignore-filenames.txt'
     path: '../.github/.cspell/ignore-filenames.txt'
 import:
-  - 'common-settings.yml'
+  - './common-settings.yml'
   - '../.github/.cspell/overrides.yml'
   # include local overrides after shared overrides:
-  - 'overrides.yml'
+  - './overrides.yml'
