@@ -36,7 +36,7 @@ SPELL_LYCHEE_DISABLE_ERRORS: true
 # Could not find a schema to validate: .github/linters/*
 YAML_V8R_DISABLE_ERRORS: true
 
-## COMMAND ARGUMENTS ##
+## COMMAND ARGUMENTS / PRE_COMMANDS / CONFIG_FILEs ##
 
 # https://www.shellcheck.net/wiki/SC2310 :
 # This function is invoked in an 'if' condition so set -e will be disabled. Invoke separately if failures should cause the script to exit.
@@ -77,6 +77,11 @@ REPOSITORY_DEVSKIM_ARGUMENTS:
   ["--ignore-globs", "**/megalinter-reports/**,**/.git/**,**/.mypy_cache/**"]
 # megalinter already passes `--skip-git-ignored-files`:
 # https://github.com/oxsecurity/megalinter/blob/43943881/megalinter/descriptors/repository.megalinter-descriptor.yml#L78
+
+# see https://github.com/oxsecurity/megalinter/issues/2849
+REPOSITORY_DEVSKIM_PRE_COMMANDS:
+  - command: git config --global --add safe.directory '*'
+    cwd: "workspace"
 
 # this appears to have fixed the issue:
 REPOSITORY_GIT_DIFF_ARGUMENTS: "--ignore-space-change" # didn't fix it: --ignore-space-at-eol
