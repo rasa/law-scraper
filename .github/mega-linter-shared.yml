@@ -61,6 +61,11 @@ JSON_JSONLINT_ARGUMENTS: "--mode cjson"
 # Default is ~/.markdownlint.json, but yaml is nicer :)
 MARKDOWN_MARKDOWNLINT_CONFIG_FILE: ".github/linters/.markdownlint.yaml"
 
+# https://megalinter.io/latest/config-precommands/
+PRE_COMMANDS:
+  - command: git config --global --add safe.directory '*'
+    cwd: "workspace"
+
 # Doesn't seem to quiet logs:
 PYTHON_MYPY_ARGUMENTS: "--install-types --non-interactive"
 
@@ -79,9 +84,9 @@ REPOSITORY_DEVSKIM_ARGUMENTS:
 # https://github.com/oxsecurity/megalinter/blob/43943881/megalinter/descriptors/repository.megalinter-descriptor.yml#L78
 
 # see https://github.com/oxsecurity/megalinter/issues/2849
-REPOSITORY_DEVSKIM_PRE_COMMANDS:
-  - command: git config --global --add safe.directory '*'
-    cwd: "workspace"
+# REPOSITORY_DEVSKIM_PRE_COMMANDS:
+#  - command: git config --global --add safe.directory '*'
+#    cwd: "workspace"
 
 # this appears to have fixed the issue:
 REPOSITORY_GIT_DIFF_ARGUMENTS: "--ignore-space-change" # didn't fix it: --ignore-space-at-eol
