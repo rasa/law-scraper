@@ -14,6 +14,7 @@ end_of_line = lf
 indent_size = 2
 indent_style = space
 insert_final_newline = true
+max_line_length = unset
 trim_trailing_whitespace = true
 
 # Batch files require CRLF newlines
@@ -49,13 +50,11 @@ insert_final_newline = unset
 [{Makefile{,.*},makefile{,.*},GNUMakefile{,.*},*.mak,*.mk}]
 indent_style = tab
 max_line_length = 132
-# @TODO max_line_length = 80
 
 # Google Python Style Guide (https://google.github.io/styleguide/pyguide.html)
 [*.py]
 indent_size = 4
 max_line_length = 132
-# @TODO max_line_length = 80
 
 # Google Shell Style Guide (https://google.github.io/styleguide/shellguide.html)
 [*.sh]
@@ -73,12 +72,10 @@ switch_case_indent = true # like -ci
 # --func-next-line
 # function_next_line = true # like -fn
 max_line_length = 132
-# @TODO max_line_length = 80
 
 [*.vbs]
 indent_size = unset
 max_line_length = 132
-# @TODO max_line_length = 80
 
 # json files without .json extension:
 [{.ecrc,.textlintrc}]
