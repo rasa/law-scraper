@@ -1,4 +1,6 @@
 # ~/.github/linters/.gitleaks.toml
+# Copied from: rasa/dotfiles/.github/linters/.gitleaks.toml
+# EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
 # Docs: https://flake8.pycqa.org/en/latest/user/configuration.html
 # ML:   https://megalinter.io/latest/descriptors/repository_gitleaks/#gitleaks-documentation
 # MLT:  https://github.com/oxsecurity/megalinter/blob/main/TEMPLATES/.gitleaks.toml
