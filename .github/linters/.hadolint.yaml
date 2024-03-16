@@ -1,5 +1,7 @@
 ---
 # ~/.github/linters/.hadolint.yaml
+# Copied from: rasa/dotfiles/.github/linters/.hadolint.yaml
+# EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
 
 # failure-threshold: error
 
