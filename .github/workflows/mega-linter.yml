@@ -1,8 +1,8 @@
 ---
 # Copied from: rasa/dotfiles/.github/workflows/mega-linter.yml
 # EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
-# yamllint disable rule:line-length
 # $schema https://json.schemastore.org/github-workflow.json
+# yamllint disable rule:line-length
 # checkov:skip=CKV_GHA_7:The build output cannot be affected by user parameters
 #   other than the build entry point and the top-level source location.
 #   GitHub Actions workflow_dispatch inputs MUST be empty.
