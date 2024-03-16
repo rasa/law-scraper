@@ -1,8 +1,8 @@
 ---
 # Copied from: rasa/dotfiles/.github/workflows/clean-logs.yml
 # EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
-# yamllint disable rule:line-length
 # $schema https://json.schemastore.org/github-workflow.json
+# yamllint disable rule:line-length
 # checkov:skip=CKV_GHA_7:The build output cannot be affected by user parameters
 #   other than the build entry point and the top-level source location.
 #   GitHub Actions workflow_dispatch inputs MUST be empty.
@@ -45,7 +45,7 @@ on: # yamllint disable-line rule:truthy
         type: string
       repository:
         type: string
-  
+
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
     inputs:
       # checkov:skip=CKV_GHA_7
