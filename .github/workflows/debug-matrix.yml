@@ -1,8 +1,10 @@
 ---
-# $schema https://json.schemastore.org/github-workflow.json
 # ./.github/workflows/debug-matrix.yaml
-# https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#preinstalled-software
+# Copied from: rasa/dotfiles/.github/debug-matrix.yaml
+# EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
+# $schema https://json.schemastore.org/github-workflow.json
 # yamllint disable rule:line-length
+# https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#preinstalled-software
 
 name: debug-matrix
 
