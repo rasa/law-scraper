@@ -19,14 +19,14 @@ trim_trailing_whitespace = true
 
 # Batch files require CRLF newlines
 [*.{bat,cmd,BAT,CMD}]
+end_of_line = crlf
 # a la VT102/Televideo 950
 max_line_length = 132
-end_of_line = crlf
 
 # MSVC project files require CRLF newlines
 [*.{dsp,dsw,sln,vcproj,vcprops,DSP,DSW,SLN,VCPROJ,VCPROPS}]
-max_line_length = 132
 end_of_line = crlf
+max_line_length = 132
 
 # Google JavaScript Style Guide (https://google.github.io/styleguide/javascriptguide.xml)
 [*.js]
@@ -113,6 +113,6 @@ indent_style = unset
 insert_final_newline = unset
 trim_trailing_whitespace = unset
 
-# cspell:ignore ecrc, jsonlint, Makefiles, mylogin, sqbpro, textlintrc, toprc
+# cspell:ignore diskpart, ecrc, jsonlint, Makefiles, mylogin, sqbpro, textlintrc, toprc
 
 # cSpell:ignore Televideo, vcproj, VCPROJ, vcprops, VCPROPS
