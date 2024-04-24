@@ -94,7 +94,7 @@ jobs:
     steps:
       # Git Checkout
       - name: Checkout Code
-        uses: actions/checkout@v4.1.3 # was v4, changed by @rasa
+        uses: actions/checkout@v4.1.4 # was v4, changed by @rasa
         with:
           token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
 
