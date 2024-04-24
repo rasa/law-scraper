@@ -94,7 +94,7 @@ jobs:
     steps:
       # Git Checkout
       - name: Checkout Code
-        uses: actions/checkout@v4.1.3 # was v4, changed by @rasa
+        uses: actions/checkout@v4.1.4 # was v4, changed by @rasa
         with:
           token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
 
@@ -116,7 +116,7 @@ jobs:
 
         # You can override MegaLinter flavor used to have faster performances
         # More info at https://megalinter.io/flavors/
-        uses: oxsecurity/megalinter@v7.10.0 # changed from v7 by @rasa
+        uses: oxsecurity/megalinter@v7.11.0 # changed from v7 by @rasa
 
         id: ml
 
