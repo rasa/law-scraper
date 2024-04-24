@@ -30,7 +30,7 @@ jobs:
   job:
     runs-on: ubuntu-latest
     # See https://github.com/dependabot/fetch-metadata?tab=readme-ov-file#enabling-auto-merge
-    if: startsWith(github.event.pull_request.user.login, 'dependabot')
+    # if: startsWith(github.event.pull_request.user.login, 'dependabot')
     steps:
       - name: Dependabot metadata
         id: dependabot-metadata
