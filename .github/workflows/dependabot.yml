@@ -30,11 +30,11 @@ jobs:
   job:
     runs-on: ubuntu-latest
     # See https://github.com/dependabot/fetch-metadata?tab=readme-ov-file#enabling-auto-merge
-    if: startsWith(github.event.pull_request.user.login, 'dependabot')
+    # if: startsWith(github.event.pull_request.user.login, 'dependabot')
     steps:
       - name: Dependabot metadata
         id: dependabot-metadata
-        uses: dependabot/fetch-metadata@v2.0.0
+        uses: dependabot/fetch-metadata@v2.1.0
 
       - name: Enable auto-merge for Dependabot PRs
         # if: steps.dependabot-metadata.outputs.update-type == 'version-update:semver-patch'
