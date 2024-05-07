@@ -178,7 +178,7 @@ jobs:
       #     $ConfigFile | ConvertTo-Json | Out-File $SettingsPath -Encoding utf8 -Force
 
       - name: USES actions/checkout
-        uses: actions/checkout@v4.1.4
+        uses: actions/checkout@v4.1.5
         with:
           show-progress: false
 
