@@ -53,8 +53,10 @@ jobs:
     steps:
       - name: set vars
         run: |
-          printf 'WORKFLOW_USER=%s\n' "${{ inputs.workflow_user }}" >> "${GITHUB_ENV}"
-          printf 'WORKFLOW_REPO=%s\n' "${{ inputs.workflow_repo }}" >> "${GITHUB_ENV}"
+          [[ -n "${{ inputs.workflow_user }}" ]] &&
+            printf 'WORKFLOW_USER=%s\n' "${{ inputs.workflow_user }}" >> "${GITHUB_ENV}"
+          [[ -n "${{ inputs.workflow_repo }}" ]] &&
+            printf 'WORKFLOW_REPO=%s\n' "${{ inputs.workflow_repo }}" >> "${GITHUB_ENV}"
       - name: USES crazy-max/ghaction-dump-context@v2.3.0
         uses: crazy-max/ghaction-dump-context@v2.3.0
         with:
