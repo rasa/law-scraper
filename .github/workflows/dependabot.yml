@@ -11,12 +11,12 @@ on: # yamllint disable-line rule:truthy
     branches:
       - main
       - master # @TODO remove
-  push:
-    branches:
-      - main
-      - master # @TODO remove
-  workflow_call: # Required so this workflow can be called from another workflow
-  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+  # push:
+  #  branches:
+  #    - main
+  #    - master # @TODO remove
+  # workflow_call: # Required so this workflow can be called from another workflow
+  # workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 
 concurrency:
   group: ${{ github.workflow }}
