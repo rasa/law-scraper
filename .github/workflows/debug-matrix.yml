@@ -190,6 +190,7 @@ jobs:
         continue-on-error: true
         run: |
           set +e
+          # shellcheck disable=SC2044 # For loops over find output are fragile. Use find -exec or a while read loop
           for script in $(find ./.github/scripts -name 'debug*.sh'); do
             "${script}" "$0" "$@" || true
           done
@@ -328,7 +329,7 @@ jobs:
             exit 0
           fi
 
-          GET_PIP_URL==https://bootstrap.pypa.io/pip/2.7/get-pip.py
+          GET_PIP_URL=https://bootstrap.pypa.io/pip/2.7/get-pip.py
           curl -s -o get-pip.py "${GET_PIP_URL}"
 
           ${sudo} "${PYTHON}" get-pip.py
