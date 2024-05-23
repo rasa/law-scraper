@@ -1,4 +1,7 @@
---
+---
+# Copied from: rasa/dotfiles/.github/actionlint.yaml
+# EDIT THE ABOVE FILE OR YOUR CHANGES WILL BE LOST!
+
 # https://github.com/rhysd/actionlint/issues/424#issuecomment-2110743431
 self-hosted-runner:
   labels:
