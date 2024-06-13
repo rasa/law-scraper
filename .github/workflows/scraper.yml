@@ -76,8 +76,8 @@ jobs:
           chromedriver --url-base=/wd/hub &
           # sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
 
-      - name: USES actions/checkout@v4.1.6
-        uses: actions/checkout@v4.1.6
+      - name: USES actions/checkout@v4.1.7
+        uses: actions/checkout@v4.1.7
         with:
           show-progress: false
 
