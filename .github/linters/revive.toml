@@ -20,7 +20,7 @@ warningCode = 0
 [rule.var-naming]
 [rule.var-declaration]
 [rule.package-comments]
-  Disabled=true
+  Disabled=true # Added by @rasa
 [rule.range]
 [rule.receiver-naming]
 [rule.time-naming]
@@ -33,3 +33,5 @@ warningCode = 0
 [rule.unreachable-code]
 [rule.redefines-builtin-id]
 https://revive.run/docs#recommended-configuration
+
+# cSpell:ignore errorf
