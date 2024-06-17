@@ -18,7 +18,7 @@ FILTER_REGEX_EXCLUDE: >-
 # Produces too many false positives:
 COPYPASTE_JSCPD_DISABLE_ERRORS: true
 
-# go.mod requires go >= 1.22.2 (running go 1.21.10; GOTOOLCHAIN=local)\n"
+# go.mod requires go >= 1.22.2 (running go 1.21.10; GOTOOLCHAIN=local)
 GO_GOLANGCI_LINT_DISABLE_ERRORS: true
 
 # Fails if schema isn't found:
@@ -178,4 +178,4 @@ SHOW_ELAPSED_TIME: true # default: false
 # cspell:ignore CHECKMAKE, HADOLINT, HEALTHCHECK, MARKDOWNLINT, markdownlint
 # cspell:ignore MYPY, mypy, PYRIGHT, pyright, pyrightconfig
 
-# cSpell:ignore cjson, DEVSKIM, JSONLINT, KICS, TRUFFLEHOG
+# cSpell:ignore cjson, DEVSKIM, JSONLINT, KICS, TRUFFLEHOG, GOLANGCI, GOTOOLCHAIN
