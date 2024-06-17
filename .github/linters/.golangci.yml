@@ -13,3 +13,5 @@ linters:
     - staticcheck
     - typecheck
     - unused
+
+# cSpell:ignore gocritic, gofmt, golangci, gosimple, govet, ineffassign, staticcheck
