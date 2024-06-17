@@ -1,0 +1,15 @@
+---
+# ~/.github/linters/.golangci.yml
+# Source: https://github.com/oxsecurity/megalinter/blob/main/TEMPLATES/.golangci.yml
+
+linters:
+  # disable-all: true
+  enable:
+    - gofmt
+    - gocritic
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - typecheck
+    - unused
