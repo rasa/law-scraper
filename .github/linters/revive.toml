@@ -1,4 +1,9 @@
-# ~/.github/linters/revive.toml
+---
+# Copied from: rasa/dotfiles/.github/linters/revive.toml
+# EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
+# Docs: https://revive.run/docs/#custom-configuration
+# ML:   https://megalinter.io/latest/descriptors/go_revive/
+# MLT:  none
 # Source: https://revive.run/docs#recommended-configuration
 
 ignoreGeneratedHeader = false
