@@ -7,6 +7,7 @@
 
 codeql
 ecrc
+golangci
 grype
 hadolint
 jsonlintrc
