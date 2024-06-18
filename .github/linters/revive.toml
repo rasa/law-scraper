@@ -36,6 +36,5 @@ warningCode = 0
 [rule.unused-parameter]
 [rule.unreachable-code]
 [rule.redefines-builtin-id]
-https://revive.run/docs#recommended-configuration
 
 # cSpell:ignore errorf
