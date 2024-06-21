@@ -5,6 +5,8 @@
 # ML:   https://megalinter.io/latest/descriptors/go_golangci_lint/
 # MLT:  https://github.com/oxsecurity/megalinter/blob/main/TEMPLATES/.golangci.yml
 
+deadline: 5m
+
 linters:
   # disable-all: true
   enable:
