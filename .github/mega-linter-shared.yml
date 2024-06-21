@@ -4,7 +4,7 @@
 # yamllint disable rule:line-length
 # $schema https://raw.githubusercontent.com/megalinter/megalinter/main/megalinter/descriptors/schemas/megalinter-configuration.jsonschema.json
 
-## FILTERS ##
+##### FILTERS #####
 
 FILTER_REGEX_EXCLUDE: >-
   (?ix)(
@@ -13,7 +13,7 @@ FILTER_REGEX_EXCLUDE: >-
     \.git/
   )
 
-## CONVERT ERRORS TO WARNINGS ##
+##### CONVERT ERRORS TO WARNINGS #####
 
 # Produces too many false positives:
 COPYPASTE_JSCPD_DISABLE_ERRORS: true
@@ -42,7 +42,25 @@ SPELL_LYCHEE_DISABLE_ERRORS: true
 # Could not find a schema to validate: .github/linters/*
 YAML_V8R_DISABLE_ERRORS: true
 
-## COMMAND ARGUMENTS / PRE_COMMANDS / CONFIG_FILEs ##
+##### PRE_COMMANDS #####
+
+# https://megalinter.io/latest/config-precommands/
+PRE_COMMANDS:
+  - command: git config --global --add safe.directory '*'
+    cwd: "workspace"
+  - command: echo "@community https://dl-cdn.alpinelinux.org/alpine/edge/community" | tee -a /etc/apk/repositories 
+    cwd: "workspace"
+  - command: apk del go
+    cwd: "workspace" 
+  - command: apk add go@community
+    cwd: "workspace"
+
+# see https://github.com/oxsecurity/megalinter/issues/2849
+# REPOSITORY_DEVSKIM_PRE_COMMANDS:
+#  - command: git config --global --add safe.directory '*'
+#    cwd: "workspace"
+
+##### COMMAND ARGUMENTS #####
 
 # https://www.shellcheck.net/wiki/SC2310 :
 # This function is invoked in an 'if' condition so set -e will be disabled. Invoke separately if failures should cause the script to exit.
@@ -61,22 +79,13 @@ BASH_SHFMT_ARGUMENTS: "-bn -ci -i 2"
 # DL3018 warning: Pin versions in apk add. Instead of apk add <package> use apk add <package>=<version>.
 DOCKERFILE_HADOLINT_ARGUMENTS: "--style DL3006 --style DL3018" # --failure-threshold error
 
+GO_GOLANGCI_LINT_ARGUMENTS: "--timeout 5m"
+
 # Allow for comments in json files:
 JSON_JSONLINT_ARGUMENTS: "--mode cjson"
 
 # Default is ~/.markdownlint.json, but yaml is nicer :)
 MARKDOWN_MARKDOWNLINT_CONFIG_FILE: ".github/linters/.markdownlint.yaml"
-
-# https://megalinter.io/latest/config-precommands/
-PRE_COMMANDS:
-  - command: git config --global --add safe.directory '*'
-    cwd: "workspace"
-  - command: echo "@community https://dl-cdn.alpinelinux.org/alpine/edge/community" | tee -a /etc/apk/repositories 
-    cwd: "workspace"
-  - command: apk del go
-    cwd: "workspace" 
-  - command: apk add go@community
-    cwd: "workspace"
 
 # Doesn't seem to quiet logs:
 PYTHON_MYPY_ARGUMENTS: "--install-types --non-interactive"
@@ -94,11 +103,6 @@ REPOSITORY_DEVSKIM_ARGUMENTS:
   ["--ignore-globs", "**/megalinter-reports/**,**/.git/**,**/.mypy_cache/**"]
 # megalinter already passes `--skip-git-ignored-files`:
 # https://github.com/oxsecurity/megalinter/blob/43943881/megalinter/descriptors/repository.megalinter-descriptor.yml#L78
-
-# see https://github.com/oxsecurity/megalinter/issues/2849
-# REPOSITORY_DEVSKIM_PRE_COMMANDS:
-#  - command: git config --global --add safe.directory '*'
-#    cwd: "workspace"
 
 # this appears to have fixed the issue:
 REPOSITORY_GIT_DIFF_ARGUMENTS: "--ignore-space-change" # didn't fix it: --ignore-space-at-eol
@@ -122,7 +126,7 @@ YAML_V8R_FILTER_REGEX_EXCLUDE: >-
     \.trivyignore
   )
 
-## GLOBAL SETTINGS ##
+##### GLOBAL SETTINGS #####
 
 # When active, APPLY_FIXES must also be defined as environment variable (in github/workflows/mega-linter.yml or other CI)
 APPLY_FIXES: all # default: none
