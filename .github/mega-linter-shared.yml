@@ -71,6 +71,12 @@ MARKDOWN_MARKDOWNLINT_CONFIG_FILE: ".github/linters/.markdownlint.yaml"
 PRE_COMMANDS:
   - command: git config --global --add safe.directory '*'
     cwd: "workspace"
+  - command: echo "@community https://dl-cdn.alpinelinux.org/alpine/edge/community" | tee -a /etc/apk/repositories 
+    cwd: "workspace"
+  - command: apk del go
+    cwd: "workspace" 
+  - command: apk add go@community
+    cwd: "workspace"
 
 # Doesn't seem to quiet logs:
 PYTHON_MYPY_ARGUMENTS: "--install-types --non-interactive"
