@@ -126,6 +126,8 @@ concurrency:
   # Source: https://mail.python.org/archives/list/pypa-committers@python.org/thread/PCBCQMJF64JGRBOX7E2EE4YLKHT4DI55/
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
 
+permissions: write-all
+
 jobs:
   clean-logs:
     runs-on: ubuntu-latest
