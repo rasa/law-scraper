@@ -76,7 +76,7 @@ env:
 jobs:
   megalinter:
     name: MegaLinter
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     # <@rasa>
     # defaults:
