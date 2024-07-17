@@ -62,7 +62,7 @@ jobs:
       # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
       matrix:
         os:
-          - ubuntu-latest # aka ubuntu-22.04
+          - ubuntu-24.04 # was ubuntu-22.04
           # - windows-latest # aka windows-2022
           # - macos-latest # aka macos-12 (macos-13 in beta)
         python-version:
