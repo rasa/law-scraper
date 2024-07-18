@@ -81,8 +81,8 @@ jobs:
         with:
           show-progress: false
 
-      - name: USES actions/setup-python@v5.1.0
-        uses: actions/setup-python@v5.1.0
+      - name: USES actions/setup-python@v5.1.1
+        uses: actions/setup-python@v5.1.1
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip

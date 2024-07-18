@@ -16,7 +16,7 @@ on: # yamllint disable-line rule:truthy
 jobs:
   job:
     # CodeQL runs on ubuntu-latest, windows-latest, and macos-latest
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     permissions:
       # required for all workflows
