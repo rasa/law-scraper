@@ -30,7 +30,7 @@ max_line_length = 132
 
 [{go.mod,go.sum,*.go}]
 indent_style = tab
-indent_size = unset
+indent_size = 8
 
 # Google JavaScript Style Guide (https://google.github.io/styleguide/javascriptguide.xml)
 [*.js]
@@ -52,6 +52,7 @@ insert_final_newline = unset
 
 # Makefiles require tab indentation
 [{Makefile{,.*},makefile{,.*},GNUMakefile{,.*},*.mak,*.mk}]
+indent_size = 8
 indent_style = tab
 max_line_length = 132
 
