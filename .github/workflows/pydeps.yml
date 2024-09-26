@@ -70,8 +70,8 @@ jobs:
           - "3.11"
           # - "3.12"
     steps:
-      - name: USES actions/checkout@v4.1.7
-        uses: actions/checkout@v4.1.7
+      - name: USES actions/checkout@v4.2.0
+        uses: actions/checkout@v4.2.0
         with:
           show-progress: false
 
