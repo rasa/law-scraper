@@ -1,6 +1,6 @@
 ---
-# ~/.github/linters/.markdown-lint.yaml
-# Copied from: rasa/dotfiles/.github/linters/.markdown-lint.yaml
+# ~/.github/linters/.markdownlint.yaml
+# Copied from: rasa/dotfiles/.github/linters/.markdownlint.yaml
 # EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
 # Docs: https://github.com/DavidAnson/markdownlint
 # ML:   https://megalinter.io/latest/descriptors/markdown_markdownlint/

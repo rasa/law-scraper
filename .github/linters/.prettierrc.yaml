@@ -1,4 +1,5 @@
 ---
+# ~/.github/linters/.prettierrc.yaml
 # Copied from: rasa/dotfiles/linters/.prettierrc.yaml
 # EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
 
