@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-Copyright (c) 2022-2023, Ross Smith II
-
+SPDX-FileCopyrightText: © 2022 Ross Smith II <ross@smithii.com>
 SPDX-License-Identifier: MIT
 """
 # pylint: disable=W0703 # Catching too general exception Exception (broad-except)
