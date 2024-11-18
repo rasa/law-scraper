@@ -21,7 +21,7 @@ from subprocess import PIPE, Popen  # nosec
 from typing import Any
 
 import pdfkit  # type: ignore
-from pypdf import PdfMerger, PdfReader  # type: ignore
+from pypdf import PdfWriter, PdfReader  # type: ignore
 
 # from PyPDF2 import PdfMerger, PdfReader  # type: ignore
 from selenium import webdriver  # type: ignore
@@ -451,7 +451,7 @@ class LawScraper:
         if not self.toc_code or not self.division or not self.part:
             self.usage()
         self.init_driver()
-        self.merger = PdfMerger()
+        self.merger = PdfWriter()
         logging.info(
             "Generating PDFs for code %s, division %s, part %s",
             self.toc_code.upper(),
