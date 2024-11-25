@@ -48,10 +48,10 @@ YAML_V8R_DISABLE_ERRORS: true
 PRE_COMMANDS:
   - command: git config --global --add safe.directory '*'
     cwd: "workspace"
-  - command: echo "@community https://dl-cdn.alpinelinux.org/alpine/edge/community" | tee -a /etc/apk/repositories 
+  - command: echo "@community https://dl-cdn.alpinelinux.org/alpine/edge/community" | tee -a /etc/apk/repositories
     cwd: "workspace"
   - command: apk del go
-    cwd: "workspace" 
+    cwd: "workspace"
   - command: apk add go@community
     cwd: "workspace"
 
