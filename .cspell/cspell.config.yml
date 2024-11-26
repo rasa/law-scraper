@@ -3,13 +3,13 @@
 # Copied from: rasa/dotfiles/.cspell/cspell.config.yml
 # EDIT THE ABOVE FILE, NOT THIS COPY, OR YOUR CHANGES WILL BE LOST!
 # yaml-language-server: $schema=https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
-dictionaries:
-  - '.cspell/correct-words.txt'
-  - '.cspell/ignore-words.txt'
-  - '.cspell/ignore-filenames.txt'
-  - '.github/correct-words.txt'
-  - '.github/ignore-words.txt'
-  - '.github/ignore-filenames.txt'
+# dictionaries:
+#   - '.cspell/correct-words.txt'
+#   - '.cspell/ignore-words.txt'
+#   - '.cspell/ignore-filenames.txt'
+#   - '.github/.cspell/correct-words.txt'
+#   - '.github/.cspell/ignore-words.txt'
+#   - '.github/.cspell/ignore-filenames.txt'
 dictionaryDefinitions:
   - addWords: true
     description: 'Manually curated list of words (and filenames) to treat as correctly spelled (local to this repo)'
