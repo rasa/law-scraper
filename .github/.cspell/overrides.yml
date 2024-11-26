@@ -4,7 +4,7 @@
 # EDIT THE ABOVE FILE OR YOUR CHANGES WILL BE LOST!
 
 # Manually curated list of paths/files to not spellcheck
-ignorePaths:
+# ignorePaths:
 #   - '**/path/to/file1'
 #   - '**/path/to/file2'
 
