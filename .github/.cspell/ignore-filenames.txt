@@ -5,17 +5,13 @@
 ## See https://cspell.org/docs/dictionaries-custom/
 ##
 
-codeql
 ecrc
 golangci
 grype
-hadolint
 jsonlintrc
 markdownlint
 pydeps
 pylintrc
-pyrightconfig
 rasa
 regen
-shiftleft
 textlintrc
