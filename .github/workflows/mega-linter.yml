@@ -30,7 +30,7 @@ on: # yamllint disable-line rule:truthy
       fetch_depth:
         # description: "Number of commits to fetch. 0 indicates all history for all branches and tags."
         type: string
-        default: "1"
+        default: "0"
       # checkov:skip=CKV_GHA_7
       validate_all_codebase:
         # description: "Validate the entire code base (enter any value)"
@@ -42,7 +42,7 @@ on: # yamllint disable-line rule:truthy
       fetch_depth:
         description: "Number of commits to fetch. 0 indicates all history for all branches and tags."
         type: string
-        default: "1"
+        default: "0"
       # checkov:skip=CKV_GHA_7
       validate_all_codebase:
         description: "Validate the entire code base."
