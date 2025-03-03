@@ -61,10 +61,10 @@ jobs:
         python-version:
           # - '3.10'
           # - '3.11'
-          - '3.12'
-          # - '3.13.0-alpha.2'
+          # - '3.12'
+          - '3.13'
     steps:
-      - name: RUN Install tidy wkhtmltopdf (via awalsh128/cache-apt-pkgs-action@v1.3.1)
+      - name: RUN apt install tidy wkhtmltopdf (via awalsh128/cache-apt-pkgs-action)
         uses: awalsh128/cache-apt-pkgs-action@v1.4.3
         with:
           packages: tidy wkhtmltopdf
@@ -78,12 +78,12 @@ jobs:
           chromedriver --url-base=/wd/hub &
           # sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
 
-      - name: USES actions/checkout@v4.2.2
+      - name: USE actions/checkout@v4.2.2
         uses: actions/checkout@v4.2.2
         with:
           show-progress: false
 
-      - name: USES actions/setup-python@v5.4.0
+      - name: USE actions/setup-python@v5.4.0
         uses: actions/setup-python@v5.4.0
         with:
           python-version: ${{ matrix.python-version }}
@@ -98,7 +98,7 @@ jobs:
         run:
           python scraper.py
 
-      - name: USES actions/upload-artifact@v4.6.1
+      - name: USE actions/upload-artifact@v4.6.1
         uses: actions/upload-artifact@v4.6.1
         with:
           name: html-and-pdf-${{ matrix.python-version }}
