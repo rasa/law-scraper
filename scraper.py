@@ -15,6 +15,7 @@ import shlex
 import shutil
 import sys
 import time
+import urllib3
 from enum import IntEnum
 from subprocess import PIPE, Popen  # nosec
 from typing import Any
@@ -161,7 +162,20 @@ class LawScraper:
             return True
         self.url = url
         logging.debug("Retrieving %s", url)
-        self.driver.get(url)
+        tries = 5
+        wait = 1
+        while tries:
+            try:
+                self.driver.get(url)
+                break
+            except urllib3.exceptions.ReadTimeoutError as exc:
+                logging.info(exc)
+                time.sleep(wait)
+                wait *= 2
+                tries -= 1
+        if not tries:
+            os.exit(1)
+
         return True
 
     @staticmethod
