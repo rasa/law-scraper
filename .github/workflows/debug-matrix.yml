@@ -534,6 +534,11 @@ jobs:
         run: |
           # shell: python3 .github/scripts/debug-vars.py {0}
 
+      - run: wmic.exe logicaldisk get DeviceID, VolumeName, Description, ProviderName, FileSystem, DriveType
+        if: runner.os == 'Windows'
+        shell: cmd
+        continue-on-error: true
+
       - run: dir /o:n /q /r /s d:\
         if: runner.os == 'Windows'
         shell: cmd
