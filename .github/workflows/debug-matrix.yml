@@ -534,6 +534,20 @@ jobs:
         run: |
           # shell: python3 .github/scripts/debug-vars.py {0}
 
+      - run: ./.github/scripts/create-ramdisk.ps1
+        if: runner.os == 'Windows'
+        continue-on-error: true
+
+      - run: mountvol.exe
+        if: runner.os == 'Windows'
+        shell: cmd
+        continue-on-error: true
+
+      - run: fsutil.exe fsinfo drives
+        if: runner.os == 'Windows'
+        shell: cmd
+        continue-on-error: true
+
       - run: wmic.exe logicaldisk get DeviceID, VolumeName, Description, ProviderName, FileSystem, DriveType
         if: runner.os == 'Windows'
         shell: cmd
