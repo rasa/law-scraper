@@ -536,6 +536,8 @@ jobs:
 
       - run: ./.github/scripts/create-ramdisk.ps1
         if: runner.os == 'Windows'
+        # default is bash
+        shell: pwsh
         continue-on-error: true
 
       - run: mountvol.exe
