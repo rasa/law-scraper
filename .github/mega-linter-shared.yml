@@ -19,7 +19,7 @@ FILTER_REGEX_EXCLUDE: >-
 COPYPASTE_JSCPD_DISABLE_ERRORS: true
 
 # go.mod requires go >= 1.22.2 (running go 1.21.10; GOTOOLCHAIN=local)
-GO_GOLANGCI_LINT_DISABLE_ERRORS: true
+# GO_GOLANGCI_LINT_DISABLE_ERRORS: true
 
 # Fails if schema isn't found:
 JSON_V8R_DISABLE_ERRORS: true
@@ -45,15 +45,15 @@ YAML_V8R_DISABLE_ERRORS: true
 ##### PRE_COMMANDS #####
 
 # https://megalinter.io/latest/config-precommands/
-PRE_COMMANDS:
-  - command: git config --global --add safe.directory '*'
-    cwd: "workspace"
-  - command: echo "@community https://dl-cdn.alpinelinux.org/alpine/edge/community" | tee -a /etc/apk/repositories
-    cwd: "workspace"
-  - command: apk del go
-    cwd: "workspace"
-  - command: apk add go@community
-    cwd: "workspace"
+# PRE_COMMANDS:
+#  - command: git config --global --add safe.directory '*'
+#    cwd: "workspace"
+#  - command: echo "@community https://dl-cdn.alpinelinux.org/alpine/edge/community" | tee -a /etc/apk/repositories
+#    cwd: "workspace"
+#  - command: apk del go
+#    cwd: "workspace"
+#  - command: apk add go@community
+#    cwd: "workspace"
 
 # see https://github.com/oxsecurity/megalinter/issues/2849
 # REPOSITORY_DEVSKIM_PRE_COMMANDS:
@@ -184,6 +184,3 @@ SHOW_ELAPSED_TIME: true # default: false
 # PYRIGHT_PYTHON_FORCE_VERSION: 'latest'
 
 # REPORT_OUTPUT_FOLDER: '${GITHUB_WORKSPACE}/.cache/mega-linter'
-#
-# cspell:ignore CHECKMAKE, HADOLINT, HEALTHCHECK, MARKDOWNLINT, markdownlint
-# cspell:ignore MYPY, mypy, PYRIGHT, pyright, pyrightconfig
