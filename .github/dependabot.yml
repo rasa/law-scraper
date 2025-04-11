@@ -53,3 +53,15 @@ updates:
       - "rasa"
     commit-message:
       prefix: "[gomod] "
+
+  - package-ecosystem: "gitsubmodule"
+     directoryies:
+       - "/**/*"
+     schedule:
+      interval: "daily"
+      time: "08:00"
+      timezone: "America/Los_Angeles"
+    reviewers:
+      - "rasa"
+    commit-message:
+      prefix: "[gitsubmodule] "
