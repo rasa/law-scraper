@@ -39,6 +39,9 @@ REPOSITORY_TRUFFLEHOG_DISABLE_ERRORS: true
 # Don't fail if a site is down, or their cert has expired:
 SPELL_LYCHEE_DISABLE_ERRORS: true
 
+# SQL files are sqlite, not TSQL.
+SQL_TSQLLINT_DISABLE_ERRORS: true
+
 # Could not find a schema to validate: .github/linters/*
 YAML_V8R_DISABLE_ERRORS: true
 
@@ -113,6 +116,9 @@ REPOSITORY_TRUFFLEHOG_ARGUMENTS: "--exclude-paths=.git/"
 # Only show misspelled words, and the filename
 # See https://github.com/streetsidesoftware/cspell-cli?tab=readme-ov-file#lint
 SPELL_CSPELL_ARGUMENTS: "--no-color --quiet"
+
+# otherwise, it won't see it.
+SQL_SQLFLUFF_CONFIG_FILE: ".github/linters/.sqlfluff"
 
 # Use yaml, default is ~/.prettierrc.json
 TYPESCRIPT_PRETTIER_CONFIG_FILE: ".github/linters/.prettierrc.yaml"
