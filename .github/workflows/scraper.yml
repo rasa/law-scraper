@@ -65,7 +65,7 @@ jobs:
           - '3.13'
     steps:
       - name: RUN apt install tidy wkhtmltopdf (via awalsh128/cache-apt-pkgs-action)
-        uses: awalsh128/cache-apt-pkgs-action@v1.5.1
+        uses: awalsh128/cache-apt-pkgs-action@v1.5.3
         with:
           packages: tidy wkhtmltopdf
           version: 1.0
@@ -78,8 +78,8 @@ jobs:
           chromedriver --url-base=/wd/hub &
           # sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
 
-      - name: USE actions/checkout@v4.2.2
-        uses: actions/checkout@v4.2.2
+      - name: USE actions/checkout@v5.0.0
+        uses: actions/checkout@v5.0.0
         with:
           show-progress: false
 
