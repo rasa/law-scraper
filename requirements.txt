@@ -1,7 +1,7 @@
 # ~/requirements.txt
 
 pdfkit==1.0.0
-pypdf==5.9.0
+pypdf==6.0.0
 # PyPDF2==3.0.1
 selenium==4.34.2 # pinned == 4.9.1 # selenium 4.15.2 fails with: ImportError: cannot import name 'DEFAULT_EXECUTABLE_PATH' from 'selenium.webdriver.chrome.service'
 
