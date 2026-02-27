@@ -3,6 +3,6 @@
 pdfkit==1.0.0
 pypdf==6.7.3
 # PyPDF2==3.0.1
-selenium==4.40.0 # pinned == 4.9.1 # selenium 4.15.2 fails with: ImportError: cannot import name 'DEFAULT_EXECUTABLE_PATH' from 'selenium.webdriver.chrome.service'
+selenium==4.41.0 # pinned == 4.9.1 # selenium 4.15.2 fails with: ImportError: cannot import name 'DEFAULT_EXECUTABLE_PATH' from 'selenium.webdriver.chrome.service'
 
 # cspell:ignore pdfkit, pypdf
