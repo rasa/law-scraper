@@ -84,7 +84,7 @@ jobs:
           show-progress: false
 
       - name: USE actions/setup-python@v7.0.0
-        uses: actions/setup-python@v7.0.0
+        uses: actions/setup-python@v7.1.0
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
