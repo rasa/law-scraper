@@ -63,8 +63,8 @@ jobs:
           # - '3.11'
           # - '3.12'
           - '3.13'
-          - '3.14'
-          - '3.15'
+          # - '3.14'
+          # - '3.15'
     steps:
       - name: RUN apt install tidy wkhtmltopdf (via awalsh128/cache-apt-pkgs-action)
         uses: awalsh128/cache-apt-pkgs-action@v1
