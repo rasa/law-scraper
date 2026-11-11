@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """
 SPDX-FileCopyrightText: © 2022 Ross Smith II <ross@smithii.com>
+
 SPDX-License-Identifier: MIT
 """
+
 # pylint: disable=W0703 # Catching too general exception Exception (broad-except)
 # C0209: Formatting a regular string which could be a f-string (consider-using-f-string)
 
@@ -15,17 +17,17 @@ import shlex
 import shutil
 import sys
 import time
-import urllib3
 from enum import IntEnum
 from subprocess import PIPE, Popen  # nosec
 from typing import Any
 
 import pdfkit  # type: ignore
+import urllib3
 from pypdf import PdfWriter, PdfReader  # type: ignore
-
-# from PyPDF2 import PdfMerger, PdfReader  # type: ignore
 from selenium import webdriver  # type: ignore
 from selenium.webdriver.common.by import By  # type: ignore
+
+# from PyPDF2 import PdfMerger, PdfReader  # type: ignore
 
 DEFAULT_TOC_CODE = "CIV"
 
@@ -174,7 +176,7 @@ class LawScraper:
                 wait *= 2
                 tries -= 1
         if not tries:
-            os.exit(1)
+            sys.exit(1)
 
         return True
 
@@ -194,7 +196,7 @@ class LawScraper:
         prefix = ""
         for section in reversed(SECTION_NAMES):
             if numbers[section]:
-                if re.match(section, filename, re.I) is None:
+                if re.match(section, filename, re.IGNORECASE) is None:
                     prefix = numbers[section] + "_" + prefix
 
         filename = self.toc_code.lower() + "_" + prefix + filename
@@ -296,7 +298,7 @@ class LawScraper:
             if full_path:
                 args[0] = full_path
         with Popen(args, stdout=PIPE, stderr=PIPE) as process:  # nosec
-            (out, err) = process.communicate()
+            out, err = process.communicate()
             rv = process.wait()
         return (rv, out, err)
 
@@ -309,7 +311,7 @@ class LawScraper:
         elem = None
         try:
             elem = self.driver.find_element(By.XPATH, xpath)
-        except Exception:  # nosec
+        except Exception:  # nosec  # noqa: S110
             pass
 
         if not elem:
@@ -388,7 +390,7 @@ class LawScraper:
         try:
             logging.debug("Tidying %s", html)
             cmd = f'tidy -config config.tidy --write-back yes "{html}"'
-            (rv, _, err) = self.run(cmd)
+            rv, _, err = self.run(cmd)
             if rv != 0:
                 logging.warning("Tidy returned error %s processing %s: %s", rv, html, err)
                 return False
@@ -418,19 +420,19 @@ class LawScraper:
 
     def version(self) -> None:
         """doc me"""
-        (rv, _tag_sha, _) = self.run("git rev-list --tags --max-count=1")
+        rv, _tag_sha, _ = self.run("git rev-list --tags --max-count=1")
         if rv != 0 or not _tag_sha:
             return
         tag_sha = _tag_sha.decode("utf-8")
         tag_sha = re.sub(r"\s+", "", tag_sha)
 
-        (rv, _tag, _) = self.run(f"git describe --tags {tag_sha}")
+        rv, _tag, _ = self.run(f"git describe --tags {tag_sha}")
         if rv != 0 or not _tag:
             return
         tag = _tag.decode("utf-8")
         tag = re.sub(r"\s+", "", tag)
 
-        (rv, _head_sha, _) = self.run("git rev-parse HEAD")
+        rv, _head_sha, _ = self.run("git rev-parse HEAD")
         if rv != 0 or not _head_sha:
             return
         head_sha = _head_sha.decode("utf-8")
@@ -554,6 +556,31 @@ class LawScraper:
                 if merge:
                     logging.warning("Skipping merging as %s failed", url)
                 merge = False
+
+        if merge and (not self.pdfs or not self.output_pdf):
+            title = self.driver.title
+            source = self.driver.page_source
+            if not self.pdfs:
+                reason = "No PDFs were generated; the expected law content may be missing"
+            else:
+                reason = "No output filename was determined from the law page"
+
+            logging.error(
+                "%s. URL: %s; page title: %r",
+                reason,
+                self.driver.current_url,
+                title,
+            )
+
+            error_html = os.path.join(ERR_DIR, "failed-page.html")
+            try:
+                with open(error_html, "w", encoding="utf-8") as fd:
+                    fd.write(source)
+                logging.error("Saved received page to %s", error_html)
+            except OSError as exc:
+                logging.error("Cannot save received page: %s", exc)
+
+            return False
 
         if merge:
             # if os.path.exists(self.output_pdf):
