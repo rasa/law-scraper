@@ -560,7 +560,16 @@ class LawScraper:
         if merge and (not self.pdfs or not self.output_pdf):
             title = self.driver.title
             source = self.driver.page_source
-            if not self.pdfs:
+
+            cloudflare = (
+                title.strip().lower().startswith("just a moment")
+                or "/cdn-cgi/challenge-platform/" in source
+                or "cf-chl-" in source
+            )
+
+            if cloudflare:
+                reason = "Cloudflare blocked access with a browser verification challenge"
+            elif not self.pdfs:
                 reason = "No PDFs were generated; the expected law content may be missing"
             else:
                 reason = "No output filename was determined from the law page"
