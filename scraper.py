@@ -110,7 +110,7 @@ class LawScraper:
             # see https://github.com/rasa/law-scraper/runs/4740875776?check_suite_focus=true#step:8:8  # noqa
             # see https://stackoverflow.com/a/47887610/1432614
             options.add_argument("--no-sandbox")  # type: ignore
-            options.add_argument("--headless")  # type: ignore
+            # options.add_argument("--headless")  # type: ignore
         self.driver = webdriver.Chrome(options=options)  # type: ignore
 
         webdriver.remote.remote_connection.LOGGER.setLevel(logging.CRITICAL)  # type: ignore # github only

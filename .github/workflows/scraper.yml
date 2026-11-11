@@ -66,19 +66,19 @@ jobs:
           # - '3.14'
           # - '3.15'
     steps:
-      - name: RUN apt install tidy wkhtmltopdf (via awalsh128/cache-apt-pkgs-action)
+      - name: RUN apt install tidy wkhtmltopdf xvfb (via awalsh128/cache-apt-pkgs-action)
         uses: awalsh128/cache-apt-pkgs-action@v1
         with:
-          packages: tidy wkhtmltopdf
-          version: 1.0
+          packages: chromedriver tidy wkhtmltopdf xvfb
+          version: 1.2
           # Bump me ^ if you have added any new packages
 
-      - name: RUN chromedriver
-        run: |
-          echo chromedriver --url-base=/wd/hub
-          export DISPLAY=:99
-          chromedriver --url-base=/wd/hub &
-          # sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
+      # - name: RUN chromedriver
+      #   run: |
+      #     echo chromedriver --url-base=/wd/hub
+      #     export DISPLAY=:99
+      #     chromedriver --url-base=/wd/hub &
+      #     sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1
 
       - name: USE actions/checkout@v7
         uses: actions/checkout@v7
@@ -98,7 +98,7 @@ jobs:
 
       - name: RUN python scraper.py
         run:
-          python scraper.py
+          xvfb-run -a python scraper.py
 
       - name: USE actions/upload-artifact@v7
         uses: actions/upload-artifact@v7
